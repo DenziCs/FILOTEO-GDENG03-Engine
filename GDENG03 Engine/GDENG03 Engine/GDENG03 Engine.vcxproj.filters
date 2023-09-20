@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="App">
+      <UniqueIdentifier>{713f32c2-fb41-4068-b99c-095802221b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{c7407e12-69c8-49f3-add5-99825891a5b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Windowing">
+      <UniqueIdentifier>{c0bcaaf6-ecd4-4fae-bbc0-663066075a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics">
+      <UniqueIdentifier>{2014021f-1a7d-4a12-919f-b199197475e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\SwapChain">
+      <UniqueIdentifier>{e6de36d4-512a-45fb-87bd-784595b6c793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\DeviceContext">
+      <UniqueIdentifier>{18c76d2f-266a-44dc-9f39-6bd202dea3ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\VertexBuffer">
+      <UniqueIdentifier>{a821a17c-97fa-496b-8f1a-7c1f7f9dd6b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Primitives">
+      <UniqueIdentifier>{aa7a78b7-0c23-42c2-885a-6859240863f5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="AppWindow.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="AWindow.cpp">
+      <Filter>Engine\Windowing</Filter>
+    </ClCompile>
+    <ClCompile Include="AGraphicsEngine.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ASwapChain.cpp">
+      <Filter>Engine\Graphics\SwapChain</Filter>
+    </ClCompile>
+    <ClCompile Include="ADeviceContext.cpp">
+      <Filter>Engine\Graphics\DeviceContext</Filter>
+    </ClCompile>
+    <ClCompile Include="AVertexBuffer.cpp">
+      <Filter>Engine\Graphics\VertexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="APrimitive.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="ATriangle.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="AQuad.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AppWindow.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="AWindow.h">
+      <Filter>Engine\Windowing</Filter>
+    </ClInclude>
+    <ClInclude Include="AGraphicsEngine.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ASwapChain.h">
+      <Filter>Engine\Graphics\SwapChain</Filter>
+    </ClInclude>
+    <ClInclude Include="ADeviceContext.h">
+      <Filter>Engine\Graphics\DeviceContext</Filter>
+    </ClInclude>
+    <ClInclude Include="AVertexBuffer.h">
+      <Filter>Engine\Graphics\VertexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="APrimitive.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="ATriangle.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="AQuad.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
