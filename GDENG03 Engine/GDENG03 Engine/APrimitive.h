@@ -1,7 +1,7 @@
 #pragma once
 #include<vector>
 #include"Vertex.h"
-#include"AVertexBuffer.h"
+#include<d3d11.h>
 
 class APrimitive
 {
