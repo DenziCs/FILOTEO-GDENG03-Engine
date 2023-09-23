@@ -133,6 +133,7 @@
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="APrimitive.cpp" />
     <ClCompile Include="AQuad.cpp" />
+    <ClCompile Include="AShape.cpp" />
     <ClCompile Include="ASwapChain.cpp" />
     <ClCompile Include="ATriangle.cpp" />
     <ClCompile Include="AVertexBuffer.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="AVertexShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADeviceContext.h" />
@@ -147,12 +149,23 @@
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="APrimitive.h" />
     <ClInclude Include="AQuad.h" />
+    <ClInclude Include="AShape.h" />
     <ClInclude Include="ASwapChain.h" />
     <ClInclude Include="ATriangle.h" />
     <ClInclude Include="AVertexBuffer.h" />
     <ClInclude Include="AWindow.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="AVertexShader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="VertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

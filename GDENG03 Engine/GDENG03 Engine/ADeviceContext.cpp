@@ -1,6 +1,7 @@
 #include"ADeviceContext.h"
 #include"ASwapChain.h"
 #include"AVertexBuffer.h"
+#include"AVertexShader.h"
 
 ADeviceContext::ADeviceContext(ID3D11DeviceContext* device_context) {
 	mDeviceContext = device_context;
@@ -30,6 +31,10 @@ void ADeviceContext::setViewportSize(UINT width, UINT height) {
 	mDeviceContext->RSSetViewports(1, &viewport);
 }
 
+void ADeviceContext::setVertexShader(AVertexShader* vertex_shader) {
+	mDeviceContext->VSSetShader(vertex_shader->mVertexShader, nullptr, 0);
+}
+
 void ADeviceContext::drawTriangleList(UINT vertex_count, UINT initial_vertex_index) {
 	mDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	mDeviceContext->Draw(vertex_count, initial_vertex_index);
@@ -37,6 +42,11 @@ void ADeviceContext::drawTriangleList(UINT vertex_count, UINT initial_vertex_ind
 
 void ADeviceContext::drawTriangleStrip(UINT vertex_count, UINT initial_vertex_index) {
 	mDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	mDeviceContext->Draw(vertex_count, initial_vertex_index);
+}
+
+void ADeviceContext::drawShape(D3D_PRIMITIVE_TOPOLOGY topology_type, UINT vertex_count, UINT initial_vertex_index) {
+	mDeviceContext->IASetPrimitiveTopology(topology_type);
 	mDeviceContext->Draw(vertex_count, initial_vertex_index);
 }
 

@@ -46,7 +46,7 @@ bool AWindow::initialize() {
 	mWindowHandle = ::CreateWindowEx(
 		WS_EX_OVERLAPPEDWINDOW,
 		L"AWindowClass",
-		L"FILOTEO HO -- Rendering Multiple Quads",
+		L"FILOTEO HO -- Exploring the Pixel Shader and Basic Animation with the Constant Buffer",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,

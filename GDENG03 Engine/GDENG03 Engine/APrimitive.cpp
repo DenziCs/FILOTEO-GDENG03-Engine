@@ -1,5 +1,4 @@
 #include"APrimitive.h"
-#include<iostream>
 
 APrimitive::APrimitive() {}
 

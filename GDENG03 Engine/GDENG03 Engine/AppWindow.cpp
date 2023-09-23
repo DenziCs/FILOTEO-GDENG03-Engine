@@ -40,9 +40,10 @@ void AppWindow::onCreate() {
 
 	mVertexBuffer = AGraphicsEngine::getInstance()->createVertexBuffer();
 	void* shaderByteCode = nullptr;
-	UINT shaderSize;
+	size_t shaderSize;
 	AGraphicsEngine::getInstance()->createShaders();
-	AGraphicsEngine::getInstance()->getShaderBufferAndSize(&shaderByteCode, &shaderSize);
+	AGraphicsEngine::getInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &shaderSize);
+	mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
 
 	std::vector<Vertex> vertexVector;
 	Vertex* currentSet = nullptr;
@@ -51,6 +52,7 @@ void AppWindow::onCreate() {
 
 	for (int i = 0; i < mPrimitiveList.size(); i++) {
 		currentSet = mPrimitiveList[i]->getVertexList(&currentCount);
+		// currentCount = mShapeList[i]->getVertexCount();
 		for (int j = 0; j < currentCount; j++) {
 			vertexVector.push_back(currentSet[j]);
 		}
@@ -62,6 +64,8 @@ void AppWindow::onCreate() {
 
 	mVertexBuffer->load(fullVertexList, sizeof(Vertex), totalCount, shaderByteCode, shaderSize);
 	delete[] fullVertexList;
+
+	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
 }
 
 void AppWindow::onUpdate() {
@@ -74,13 +78,26 @@ void AppWindow::onUpdate() {
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
 
 	AGraphicsEngine::getInstance()->setShaders();
+	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexShader(mVertexShader);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexBuffer(mVertexBuffer);
 	// AGraphicsEngine::getInstance()->getImmediateDeviceContext()->drawTriangleList(mVertexBuffer->getVertexCount(), 0);
 
 	UINT vertexIndex = 0;
+
 	for (int i = 0; i < mPrimitiveList.size(); i++) {
 		mPrimitiveList[i]->drawShape(&vertexIndex);
 	}
+
+	/*
+	for (int i = 0; i < mShapeList.size(); i++) {
+		AGraphicsEngine::getInstance()->getImmediateDeviceContext()->drawShape(
+			mShapeList[i]->getTopology(),
+			mShapeList[i]->getVertexCount(),
+			vertexIndex
+		);
+		vertexIndex += mShapeList[i]->getVertexCount();
+	}
+	*/
 
 	mSwapChain->present(false);
 }

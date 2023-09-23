@@ -1,6 +1,7 @@
 #include"AGraphicsEngine.h"
 #include"ASwapChain.h"
 #include"AVertexBuffer.h"
+#include"AVertexShader.h"
 #include"ADeviceContext.h"
 
 AGraphicsEngine::AGraphicsEngine() {
@@ -69,22 +70,59 @@ AVertexBuffer* AGraphicsEngine::createVertexBuffer() {
 	return new AVertexBuffer();
 }
 
+AVertexShader* AGraphicsEngine::createVertexShader(const void* shader_byte_code, size_t byte_code_size) {
+	AVertexShader* vertexShader = new AVertexShader();
+	if (!vertexShader->initialize(shader_byte_code, byte_code_size)) {
+		vertexShader->release();
+		return nullptr;
+	}
+
+	return vertexShader;
+}
+
 ADeviceContext* AGraphicsEngine::getImmediateDeviceContext() {
 	return mImmediateContext;
 }
 
+bool AGraphicsEngine::compileVertexShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size) {
+	ID3DBlob* errorBlob = nullptr;
+	HRESULT result = ::D3DCompileFromFile(
+		file_name,
+		nullptr,
+		nullptr,
+		entry_point_name,
+		"vs_5_0",
+		0,
+		0,
+		&mCustomVertexBlob,
+		&errorBlob
+	);
+	if (FAILED(result)) {
+		if (errorBlob) errorBlob->Release();
+		return false;
+	}
+
+	*shader_byte_code = mCustomVertexBlob->GetBufferPointer();
+	*byte_code_size = mCustomVertexBlob->GetBufferSize();
+	return true;
+}
+
+void AGraphicsEngine::releaseCompiledVertexShader() {
+	if (mCustomVertexBlob) mCustomVertexBlob->Release();
+}
+
 bool AGraphicsEngine::createShaders() {
 	ID3DBlob* errblob = nullptr;
-	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "vsmain", "vs_5_0", NULL, NULL, &mVertexBlob, &errblob);
+	// D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "vsmain", "vs_5_0", NULL, NULL, &mVertexBlob, &errblob);
 	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "psmain", "ps_5_0", NULL, NULL, &mPixelBlob, &errblob);
-	mDevice->CreateVertexShader(mVertexBlob->GetBufferPointer(), mVertexBlob->GetBufferSize(), nullptr, &mVertexShader);
+	// mDevice->CreateVertexShader(mVertexBlob->GetBufferPointer(), mVertexBlob->GetBufferSize(), nullptr, &mVertexShader);
 	mDevice->CreatePixelShader(mPixelBlob->GetBufferPointer(), mPixelBlob->GetBufferSize(), nullptr, &mPixelShader);
 
 	return true;
 }
 
 bool AGraphicsEngine::setShaders() {
-	mInnerImmContext->VSSetShader(mVertexShader, nullptr, 0);
+	// mInnerImmContext->VSSetShader(mVertexShader, nullptr, 0);
 	mInnerImmContext->PSSetShader(mPixelShader, nullptr, 0);
 
 	return true;

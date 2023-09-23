@@ -4,6 +4,8 @@
 #include"ASwapChain.h"
 #include"ADeviceContext.h"
 #include"AVertexBuffer.h"
+#include"AVertexShader.h"
+#include"AShape.h"
 #include"APrimitive.h"
 #include"ATriangle.h"
 #include"AQuad.h"
@@ -23,6 +25,8 @@ public:
 private:
 	ASwapChain* mSwapChain;
 	AVertexBuffer* mVertexBuffer;
+	AVertexShader* mVertexShader;
 
 	std::vector<APrimitive*> mPrimitiveList;
+	// std::vector<AShape*> mShapeList;
 };

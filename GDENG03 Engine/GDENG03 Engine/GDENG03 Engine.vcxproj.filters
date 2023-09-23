@@ -25,6 +25,9 @@
     <Filter Include="Engine\Graphics\Primitives">
       <UniqueIdentifier>{aa7a78b7-0c23-42c2-885a-6859240863f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Graphics\VertexShader">
+      <UniqueIdentifier>{778d3297-f48a-4273-8aea-713e8b4f15b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,6 +66,12 @@
     <ClCompile Include="AQuad.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClCompile>
+    <ClCompile Include="AVertexShader.cpp">
+      <Filter>Engine\Graphics\VertexShader</Filter>
+    </ClCompile>
+    <ClCompile Include="AShape.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -98,5 +107,16 @@
     <ClInclude Include="AQuad.h">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
+    <ClInclude Include="AVertexShader.h">
+      <Filter>Engine\Graphics\VertexShader</Filter>
+    </ClInclude>
+    <ClInclude Include="AShape.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>App</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

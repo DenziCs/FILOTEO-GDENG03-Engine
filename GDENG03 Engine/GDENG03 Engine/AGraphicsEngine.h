@@ -5,6 +5,7 @@
 class ASwapChain;
 class ADeviceContext;
 class AVertexBuffer;
+class AVertexShader;
 
 class AGraphicsEngine
 {
@@ -17,7 +18,11 @@ public:
 
 	ASwapChain* createSwapChain();
 	AVertexBuffer* createVertexBuffer();
+	AVertexShader* createVertexShader(const void* shader_byte_code, size_t byte_code_size);
 	ADeviceContext* getImmediateDeviceContext();
+
+	bool compileVertexShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size);
+	void releaseCompiledVertexShader();
 
 	bool createShaders();
 	bool setShaders();
@@ -41,6 +46,10 @@ protected:
 	ID3D11VertexShader* mVertexShader = nullptr;
 	ID3D11PixelShader* mPixelShader = nullptr;
 
+	ID3DBlob* mCustomVertexBlob = nullptr;
+	ID3DBlob* mCustomPixelBlob = nullptr;
+
 	friend class ASwapChain;
 	friend class AVertexBuffer;
+	friend class AVertexShader;
 };
