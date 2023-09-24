@@ -24,22 +24,26 @@ void AppWindow::onCreate() {
 
 	currentVertexList[0] = Vertex(
 		Vector3(-0.75f, 0.75f, 0.f),
-		Vector3(-0.5f, 0.85f, 0.f), 
+		Vector3(-0.5f, 0.85f, 0.f),
+		Vector3(1.f, 0.f, 0.f),
 		Vector3((34.f / 256.f), (214.f / 256.f), (34.f / 256.f))
 	);
 	currentVertexList[1] = Vertex(
 		Vector3(-0.25f, 0.75f, 0.f),
 		Vector3(-0.15f, 0.85f, 0.f),
+		Vector3(0.f, 1.f, 0.f),
 		Vector3((251.f / 256.f), (54.f / 256.f), (255.f / 256.f))
 	);
 	currentVertexList[2] = Vertex(
 		Vector3(-0.75f, 0.25f, 0.f),
 		Vector3(-0.5f, 0.15f, 0.f),
+		Vector3(0.f, 0.f, 1.f),
 		Vector3((0.f / 256.f), (0.f / 256.f), (120.f / 256.f))
 	);
 	currentVertexList[3] = Vertex(
 		Vector3(-0.25f, 0.25f, 0.f),
 		Vector3(-0.15f, 0.5f, 0.f),
+		Vector3(1.f, 1.f, 0.f),
 		Vector3((158.f / 256.f), (83.f / 256.f), (0.f / 256.f))
 	);
 	AShape* quadA = new AShape(currentVertexList, 4, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);

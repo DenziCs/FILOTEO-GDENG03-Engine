@@ -8,9 +8,11 @@ public:
 	Vertex(float x, float y, float z);
 	Vertex(Vector3 vertex_position, Vector3 vertex_color);
 	Vertex(Vector3 vertex_position_0, Vector3 vertex_position_1, Vector3 vertex_color);
+	Vertex(Vector3 vertex_position_0, Vector3 vertex_position_1, Vector3 vertex_color_0, Vector3 vertex_color_1);
 	~Vertex();
 
 	Vector3 position;
 	Vector3 position1;
 	Vector3 color;
+	Vector3 color1;
 };
