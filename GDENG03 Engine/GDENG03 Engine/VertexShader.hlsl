@@ -8,6 +8,10 @@ struct VS_OUTPUT {
 	float3 color: COLOR;
 };
 
+cbuffer constant: register(b0) {
+	unsigned int time;
+};
+
 VS_OUTPUT vsmain(VS_INPUT input) {
 	VS_OUTPUT output = (VS_OUTPUT)0;
 

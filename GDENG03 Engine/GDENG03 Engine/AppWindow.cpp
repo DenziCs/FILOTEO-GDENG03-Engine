@@ -1,4 +1,5 @@
 #include"AppWindow.h"
+#include<Windows.h>
 
 __declspec(align(16))
 struct constant {
@@ -89,6 +90,13 @@ void AppWindow::onUpdate() {
 	UINT width = windowRect.right - windowRect.left;
 	UINT height = windowRect.bottom - windowRect.top;
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
+
+	constant clockCount;
+	clockCount.time = ::GetTickCount();
+
+	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &clockCount);
+	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, mVertexShader);
+	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, mPixelShader);
 
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexShader(mVertexShader);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setPixelShader(mPixelShader);
