@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AConstantBuffer.cpp" />
     <ClCompile Include="ADeviceContext.cpp" />
     <ClCompile Include="AGraphicsEngine.cpp" />
     <ClCompile Include="APixelShader.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="AVertexShader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AConstantBuffer.h" />
     <ClInclude Include="ADeviceContext.h" />
     <ClInclude Include="AGraphicsEngine.h" />
     <ClInclude Include="APixelShader.h" />

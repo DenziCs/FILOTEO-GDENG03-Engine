@@ -5,6 +5,7 @@
 class ASwapChain;
 class ADeviceContext;
 class AVertexBuffer;
+class AConstantBuffer;
 class AVertexShader;
 class APixelShader;
 
@@ -19,14 +20,16 @@ public:
 
 	ASwapChain* createSwapChain();
 	AVertexBuffer* createVertexBuffer();
+	AConstantBuffer* createConstantBuffer();
 	AVertexShader* createVertexShader(const void* shader_byte_code, size_t byte_code_size);
 	APixelShader* createPixelShader(const void* shader_byte_code, size_t byte_code_size);
-	ADeviceContext* getImmediateDeviceContext();
 
 	bool compileVertexShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size);
 	bool compilePixelShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size);
 	void releaseCompiledVertexShader();
 	void releaseCompiledPixelShader();
+
+	ADeviceContext* getImmediateDeviceContext();
 
 public:
 	static AGraphicsEngine* getInstance();
@@ -51,6 +54,7 @@ protected:
 
 	friend class ASwapChain;
 	friend class AVertexBuffer;
+	friend class AConstantBuffer;
 	friend class AVertexShader;
 	friend class APixelShader;
 };
