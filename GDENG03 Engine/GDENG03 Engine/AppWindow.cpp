@@ -14,45 +14,31 @@ void AppWindow::onCreate() {
 	UINT height = windowRect.bottom - windowRect.top;
 	mSwapChain->initialize(this->mWindowHandle, width, height);
 
-	AQuad* quadA = new AQuad(
-		Vertex(-0.75f, 0.75f, 0.f),
-		Vertex(-0.25f, 0.75f, 0.f),
-		Vertex(-0.75f, 0.25f, 0.f),
-		Vertex(-0.25f, 0.25f, 0.f)
-	);
-	mPrimitiveList.push_back(quadA);
+	Vertex* currentVertexList = new Vertex[4];
 
-	AQuad* quadB = new AQuad(
-		Vertex(0.25f, 0.75f, 0.f),
-		Vertex(0.75f, 0.75f, 0.f),
-		Vertex(0.25f, 0.25f, 0.f),
-		Vertex(0.75f, 0.25f, 0.f)
-	);
-	mPrimitiveList.push_back(quadB);
+	currentVertexList[0] = Vertex(Vector3(-0.75f, 0.75f, 0.f), Vector3(1.f, 0.f, 0.f));
+	currentVertexList[1] = Vertex(Vector3(-0.25f, 0.75f, 0.f), Vector3(0.f, 1.f, 0.f));
+	currentVertexList[2] = Vertex(Vector3(-0.75f, 0.25f, 0.f), Vector3(0.f, 0.f, 1.f));
+	currentVertexList[3] = Vertex(Vector3(-0.25f, 0.25f, 0.f), Vector3(1.f, 1.f, 0.f));
+	AShape* quadA = new AShape(currentVertexList, 4, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	mShapeList.push_back(quadA);
 
-	AQuad* quadC = new AQuad(
-		Vertex(-0.75f, -0.25f, 0.f),
-		Vertex(-0.25f, -0.25f, 0.f),
-		Vertex(-0.75f, -0.75f, 0.f),
-		Vertex(-0.25f, -0.75f, 0.f)
-	);
-	mPrimitiveList.push_back(quadC);
+	delete[] currentVertexList;
 
 	mVertexBuffer = AGraphicsEngine::getInstance()->createVertexBuffer();
 	void* shaderByteCode = nullptr;
 	size_t shaderSize;
-	AGraphicsEngine::getInstance()->createShaders();
 	AGraphicsEngine::getInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &shaderSize);
 	mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
 
 	std::vector<Vertex> vertexVector;
 	Vertex* currentSet = nullptr;
-	int currentCount = 0;
-	int totalCount = 0;
+	UINT currentCount = 0;
+	UINT totalCount = 0;
 
-	for (int i = 0; i < mPrimitiveList.size(); i++) {
-		currentSet = mPrimitiveList[i]->getVertexList(&currentCount);
-		// currentCount = mShapeList[i]->getVertexCount();
+	for (int i = 0; i < mShapeList.size(); i++) {
+		currentSet = mShapeList[i]->getVertexList();
+		currentCount = mShapeList[i]->getVertexCount();
 		for (int j = 0; j < currentCount; j++) {
 			vertexVector.push_back(currentSet[j]);
 		}
@@ -66,6 +52,10 @@ void AppWindow::onCreate() {
 	delete[] fullVertexList;
 
 	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
+
+	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
+	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
+	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
 }
 
 void AppWindow::onUpdate() {
@@ -77,18 +67,12 @@ void AppWindow::onUpdate() {
 	UINT height = windowRect.bottom - windowRect.top;
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	AGraphicsEngine::getInstance()->setShaders();
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexShader(mVertexShader);
+	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setPixelShader(mPixelShader);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexBuffer(mVertexBuffer);
-	// AGraphicsEngine::getInstance()->getImmediateDeviceContext()->drawTriangleList(mVertexBuffer->getVertexCount(), 0);
 
 	UINT vertexIndex = 0;
 
-	for (int i = 0; i < mPrimitiveList.size(); i++) {
-		mPrimitiveList[i]->drawShape(&vertexIndex);
-	}
-
-	/*
 	for (int i = 0; i < mShapeList.size(); i++) {
 		AGraphicsEngine::getInstance()->getImmediateDeviceContext()->drawShape(
 			mShapeList[i]->getTopology(),
@@ -97,7 +81,6 @@ void AppWindow::onUpdate() {
 		);
 		vertexIndex += mShapeList[i]->getVertexCount();
 	}
-	*/
 
 	mSwapChain->present(false);
 }
@@ -107,9 +90,12 @@ void AppWindow::onDestroy() {
 	mVertexBuffer->release();
 	mSwapChain->release();
 
-	for (int i = 0; i < mPrimitiveList.size(); i++) {
-		delete mPrimitiveList[i];
+	for (int i = 0; i < mShapeList.size(); i++) {
+		delete mShapeList[i];
 	}
+
+	mVertexShader->release();
+	mPixelShader->release();
 
 	AGraphicsEngine::getInstance()->release();
 }

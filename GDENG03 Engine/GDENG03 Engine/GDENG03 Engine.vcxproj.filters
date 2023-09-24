@@ -28,6 +28,9 @@
     <Filter Include="Engine\Graphics\VertexShader">
       <UniqueIdentifier>{778d3297-f48a-4273-8aea-713e8b4f15b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Graphics\PixelShader">
+      <UniqueIdentifier>{55ecefc9-8f9f-4287-8776-80563bb210d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,19 +54,10 @@
     <ClCompile Include="AVertexBuffer.cpp">
       <Filter>Engine\Graphics\VertexBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="APrimitive.cpp">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="ATriangle.cpp">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClCompile>
     <ClCompile Include="Vertex.cpp">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="AQuad.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClCompile>
     <ClCompile Include="AVertexShader.cpp">
@@ -71,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="AShape.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="APixelShader.cpp">
+      <Filter>Engine\Graphics\PixelShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,19 +89,10 @@
     <ClInclude Include="AVertexBuffer.h">
       <Filter>Engine\Graphics\VertexBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="APrimitive.h">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="ATriangle.h">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="AQuad.h">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="AVertexShader.h">
@@ -113,9 +101,15 @@
     <ClInclude Include="AShape.h">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
+    <ClInclude Include="APixelShader.h">
+      <Filter>Engine\Graphics\PixelShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
+      <Filter>App</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
       <Filter>App</Filter>
     </FxCompile>
   </ItemGroup>

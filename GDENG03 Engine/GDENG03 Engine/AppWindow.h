@@ -5,10 +5,8 @@
 #include"ADeviceContext.h"
 #include"AVertexBuffer.h"
 #include"AVertexShader.h"
+#include"APixelShader.h"
 #include"AShape.h"
-#include"APrimitive.h"
-#include"ATriangle.h"
-#include"AQuad.h"
 #include"Vertex.h"
 #include<vector>
 
@@ -26,7 +24,7 @@ private:
 	ASwapChain* mSwapChain;
 	AVertexBuffer* mVertexBuffer;
 	AVertexShader* mVertexShader;
+	APixelShader* mPixelShader;
 
-	std::vector<APrimitive*> mPrimitiveList;
-	// std::vector<AShape*> mShapeList;
+	std::vector<AShape*> mShapeList;
 };

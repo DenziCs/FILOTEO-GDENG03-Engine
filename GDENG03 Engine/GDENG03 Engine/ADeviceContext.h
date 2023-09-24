@@ -4,6 +4,7 @@
 class ASwapChain;
 class AVertexBuffer;
 class AVertexShader;
+class APixelShader;
 
 class ADeviceContext
 {
@@ -15,6 +16,7 @@ public:
 	void setVertexBuffer(AVertexBuffer* vertex_buffer);
 	void setViewportSize(UINT width, UINT height);
 	void setVertexShader(AVertexShader* vertex_shader);
+	void setPixelShader(APixelShader* pixel_shader);
 
 	void drawTriangleList(UINT vertex_count, UINT initial_vertex_index);
 	void drawTriangleStrip(UINT vertex_count, UINT initial_vertex_index);

@@ -2,6 +2,7 @@
 #include"ASwapChain.h"
 #include"AVertexBuffer.h"
 #include"AVertexShader.h"
+#include"APixelShader.h"
 
 ADeviceContext::ADeviceContext(ID3D11DeviceContext* device_context) {
 	mDeviceContext = device_context;
@@ -33,6 +34,10 @@ void ADeviceContext::setViewportSize(UINT width, UINT height) {
 
 void ADeviceContext::setVertexShader(AVertexShader* vertex_shader) {
 	mDeviceContext->VSSetShader(vertex_shader->mVertexShader, nullptr, 0);
+}
+
+void ADeviceContext::setPixelShader(APixelShader* pixel_shader) {
+	mDeviceContext->PSSetShader(pixel_shader->mPixelShader, nullptr, 0);
 }
 
 void ADeviceContext::drawTriangleList(UINT vertex_count, UINT initial_vertex_index) {
