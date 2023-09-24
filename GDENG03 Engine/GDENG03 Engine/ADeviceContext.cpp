@@ -1,6 +1,7 @@
 #include"ADeviceContext.h"
 #include"ASwapChain.h"
 #include"AVertexBuffer.h"
+#include"AConstantBuffer.h"
 #include"AVertexShader.h"
 #include"APixelShader.h"
 
@@ -38,6 +39,14 @@ void ADeviceContext::setVertexShader(AVertexShader* vertex_shader) {
 
 void ADeviceContext::setPixelShader(APixelShader* pixel_shader) {
 	mDeviceContext->PSSetShader(pixel_shader->mPixelShader, nullptr, 0);
+}
+
+void ADeviceContext::setConstantBuffer(AConstantBuffer* constant_buffer, AVertexShader* vertex_shader) {
+	mDeviceContext->VSSetConstantBuffers(0, 1, &constant_buffer->mBuffer);
+}
+
+void ADeviceContext::setConstantBuffer(AConstantBuffer* constant_buffer, APixelShader* pixel_shader) {
+	mDeviceContext->PSSetConstantBuffers(0, 1, &constant_buffer->mBuffer);
 }
 
 void ADeviceContext::drawTriangleList(UINT vertex_count, UINT initial_vertex_index) {

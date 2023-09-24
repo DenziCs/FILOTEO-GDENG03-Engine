@@ -37,11 +37,31 @@ bool AVertexBuffer::load(void* vertex_list, UINT vertex_size, UINT vertex_count,
 		},
 
 		{
+			"POSITION",
+			1,
+			DXGI_FORMAT_R32G32B32_FLOAT,
+			0,
+			sizeof(Vector3),
+			D3D11_INPUT_PER_VERTEX_DATA,
+			0
+		},
+
+		{
 			"COLOR",
 			0,
 			DXGI_FORMAT_R32G32B32_FLOAT,
 			0,
-			sizeof(Vector3),
+			(sizeof(Vector3) * 2),
+			D3D11_INPUT_PER_VERTEX_DATA,
+			0
+		},
+
+		{
+			"COLOR",
+			1,
+			DXGI_FORMAT_R32G32B32_FLOAT,
+			0,
+			(sizeof(Vector3) * 3),
 			D3D11_INPUT_PER_VERTEX_DATA,
 			0
 		}

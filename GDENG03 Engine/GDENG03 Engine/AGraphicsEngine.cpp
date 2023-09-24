@@ -1,6 +1,7 @@
 #include"AGraphicsEngine.h"
 #include"ASwapChain.h"
 #include"AVertexBuffer.h"
+#include"AConstantBuffer.h"
 #include"AVertexShader.h"
 #include"APixelShader.h"
 #include"ADeviceContext.h"
@@ -69,6 +70,10 @@ ASwapChain* AGraphicsEngine::createSwapChain() {
 
 AVertexBuffer* AGraphicsEngine::createVertexBuffer() {
 	return new AVertexBuffer();
+}
+
+AConstantBuffer* AGraphicsEngine::createConstantBuffer() {
+	return new AConstantBuffer();
 }
 
 AVertexShader* AGraphicsEngine::createVertexShader(const void* shader_byte_code, size_t byte_code_size) {
