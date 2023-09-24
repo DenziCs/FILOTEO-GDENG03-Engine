@@ -1,5 +1,10 @@
 #include"AppWindow.h"
 
+__declspec(align(16))
+struct constant {
+	unsigned int time;
+};
+
 AppWindow::AppWindow() {}
 
 AppWindow::~AppWindow() {}
@@ -16,10 +21,10 @@ void AppWindow::onCreate() {
 
 	Vertex* currentVertexList = new Vertex[4];
 
-	currentVertexList[0] = Vertex(Vector3(-0.75f, 0.75f, 0.f), Vector3(1.f, 0.f, 0.f));
-	currentVertexList[1] = Vertex(Vector3(-0.25f, 0.75f, 0.f), Vector3(0.f, 1.f, 0.f));
-	currentVertexList[2] = Vertex(Vector3(-0.75f, 0.25f, 0.f), Vector3(0.f, 0.f, 1.f));
-	currentVertexList[3] = Vertex(Vector3(-0.25f, 0.25f, 0.f), Vector3(1.f, 1.f, 0.f));
+	currentVertexList[0] = Vertex(Vector3(-0.75f, 0.75f, 0.f), Vector3((34.f / 256.f), (214.f / 256.f), (34.f / 256.f)));
+	currentVertexList[1] = Vertex(Vector3(-0.25f, 0.75f, 0.f), Vector3((251.f / 256.f), (54.f / 256.f), (255.f / 256.f)));
+	currentVertexList[2] = Vertex(Vector3(-0.75f, 0.25f, 0.f), Vector3((0.f / 256.f), (0.f / 256.f), (120.f / 256.f)));
+	currentVertexList[3] = Vertex(Vector3(-0.25f, 0.25f, 0.f), Vector3((158.f / 256.f), (83.f / 256.f), (0.f / 256.f)));
 	AShape* quadA = new AShape(currentVertexList, 4, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 	mShapeList.push_back(quadA);
 
@@ -56,6 +61,12 @@ void AppWindow::onCreate() {
 	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
 	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
+
+	constant clockCount;
+	clockCount.time = 0;
+
+	mConstantBuffer = AGraphicsEngine::getInstance()->createConstantBuffer();
+	mConstantBuffer->load(&clockCount, sizeof(constant));
 }
 
 void AppWindow::onUpdate() {
@@ -88,6 +99,7 @@ void AppWindow::onUpdate() {
 void AppWindow::onDestroy() {
 	AWindow::onDestroy();
 	mVertexBuffer->release();
+	mConstantBuffer->release();
 	mSwapChain->release();
 
 	for (int i = 0; i < mShapeList.size(); i++) {
