@@ -26,13 +26,25 @@ bool AVertexBuffer::load(void* vertex_list, UINT vertex_size, UINT vertex_count,
 	if (FAILED(result)) return false;
 
 	D3D11_INPUT_ELEMENT_DESC layout[] = {
-		"POSITION",
-		0,
-		DXGI_FORMAT_R32G32B32_FLOAT,
-		0,
-		0,
-		D3D11_INPUT_PER_VERTEX_DATA,
-		0
+		{
+			"POSITION",
+			0,
+			DXGI_FORMAT_R32G32B32_FLOAT,
+			0,
+			0,
+			D3D11_INPUT_PER_VERTEX_DATA,
+			0
+		},
+
+		{
+			"COLOR",
+			0,
+			DXGI_FORMAT_R32G32B32_FLOAT,
+			0,
+			sizeof(Vector3),
+			D3D11_INPUT_PER_VERTEX_DATA,
+			0
+		}
 	};
 	UINT layoutSize = ARRAYSIZE(layout);
 	result = AGraphicsEngine::getInstance()->mDevice->CreateInputLayout(layout, layoutSize, shader_byte_code, shader_byte_size, &mLayout);

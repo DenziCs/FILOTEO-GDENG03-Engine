@@ -2,6 +2,7 @@
 #include"ASwapChain.h"
 #include"AVertexBuffer.h"
 #include"AVertexShader.h"
+#include"APixelShader.h"
 #include"ADeviceContext.h"
 
 AGraphicsEngine::AGraphicsEngine() {
@@ -80,6 +81,16 @@ AVertexShader* AGraphicsEngine::createVertexShader(const void* shader_byte_code,
 	return vertexShader;
 }
 
+APixelShader* AGraphicsEngine::createPixelShader(const void* shader_byte_code, size_t byte_code_size) {
+	APixelShader* pixelShader = new APixelShader();
+	if (!pixelShader->initialize(shader_byte_code, byte_code_size)) {
+		pixelShader->release();
+		return nullptr;
+	}
+
+	return pixelShader;
+}
+
 ADeviceContext* AGraphicsEngine::getImmediateDeviceContext() {
 	return mImmediateContext;
 }
@@ -107,30 +118,35 @@ bool AGraphicsEngine::compileVertexShader(const wchar_t* file_name, const char* 
 	return true;
 }
 
+bool AGraphicsEngine::compilePixelShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size) {
+	ID3DBlob* errorBlob = nullptr;
+	HRESULT result = ::D3DCompileFromFile(
+		file_name,
+		nullptr,
+		nullptr,
+		entry_point_name,
+		"ps_5_0",
+		0,
+		0,
+		&mCustomPixelBlob,
+		&errorBlob
+	);
+	if (FAILED(result)) {
+		if (errorBlob) errorBlob->Release();
+		return false;
+	}
+
+	*shader_byte_code = mCustomPixelBlob->GetBufferPointer();
+	*byte_code_size = mCustomPixelBlob->GetBufferSize();
+	return true;
+}
+
 void AGraphicsEngine::releaseCompiledVertexShader() {
 	if (mCustomVertexBlob) mCustomVertexBlob->Release();
 }
 
-bool AGraphicsEngine::createShaders() {
-	ID3DBlob* errblob = nullptr;
-	// D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "vsmain", "vs_5_0", NULL, NULL, &mVertexBlob, &errblob);
-	D3DCompileFromFile(L"shader.fx", nullptr, nullptr, "psmain", "ps_5_0", NULL, NULL, &mPixelBlob, &errblob);
-	// mDevice->CreateVertexShader(mVertexBlob->GetBufferPointer(), mVertexBlob->GetBufferSize(), nullptr, &mVertexShader);
-	mDevice->CreatePixelShader(mPixelBlob->GetBufferPointer(), mPixelBlob->GetBufferSize(), nullptr, &mPixelShader);
-
-	return true;
-}
-
-bool AGraphicsEngine::setShaders() {
-	// mInnerImmContext->VSSetShader(mVertexShader, nullptr, 0);
-	mInnerImmContext->PSSetShader(mPixelShader, nullptr, 0);
-
-	return true;
-}
-
-void AGraphicsEngine::getShaderBufferAndSize(void** bytecode, UINT* size) {
-	*bytecode = this->mVertexBlob->GetBufferPointer();
-	*size = (UINT)this->mVertexBlob->GetBufferSize();
+void AGraphicsEngine::releaseCompiledPixelShader() {
+	if (mCustomPixelBlob) mCustomPixelBlob->Release();
 }
 
 AGraphicsEngine* AGraphicsEngine::getInstance() {
