@@ -14,29 +14,30 @@ void AppWindow::onCreate() {
 	UINT height = windowRect.bottom - windowRect.top;
 	mSwapChain->initialize(this->mWindowHandle, width, height);
 
-	AQuad* quadA = new AQuad(
-		Vertex(-0.75f, 0.75f, 0.f),
-		Vertex(-0.25f, 0.75f, 0.f),
-		Vertex(-0.75f, 0.25f, 0.f),
-		Vertex(-0.25f, 0.25f, 0.f)
-	);
-	mPrimitiveList.push_back(quadA);
+	Vertex* currentVertexList = new Vertex[4];
 
-	AQuad* quadB = new AQuad(
-		Vertex(0.25f, 0.75f, 0.f),
-		Vertex(0.75f, 0.75f, 0.f),
-		Vertex(0.25f, 0.25f, 0.f),
-		Vertex(0.75f, 0.25f, 0.f)
-	);
-	mPrimitiveList.push_back(quadB);
+	currentVertexList[0] = Vertex(-0.75f, 0.75f, 0.f);
+	currentVertexList[1] = Vertex(-0.25f, 0.75f, 0.f);
+	currentVertexList[2] = Vertex(-0.75f, 0.25f, 0.f);
+	currentVertexList[3] = Vertex(-0.25f, 0.25f, 0.f);
+	AShape* quadA = new AShape(currentVertexList, 4, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	mShapeList.push_back(quadA);
 
-	AQuad* quadC = new AQuad(
-		Vertex(-0.75f, -0.25f, 0.f),
-		Vertex(-0.25f, -0.25f, 0.f),
-		Vertex(-0.75f, -0.75f, 0.f),
-		Vertex(-0.25f, -0.75f, 0.f)
-	);
-	mPrimitiveList.push_back(quadC);
+	currentVertexList[0] = Vertex(0.25f, 0.75f, 0.f);
+	currentVertexList[1] = Vertex(0.75f, 0.75f, 0.f);
+	currentVertexList[2] = Vertex(0.25f, 0.25f, 0.f);
+	currentVertexList[3] = Vertex(0.75f, 0.25f, 0.f);
+	AShape* quadB = new AShape(currentVertexList, 4, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	mShapeList.push_back(quadB);
+
+	currentVertexList[0] = Vertex(-0.75f, -0.25f, 0.f);
+	currentVertexList[1] = Vertex(-0.25f, -0.25f, 0.f);
+	currentVertexList[2] = Vertex(-0.75f, -0.75f, 0.f);
+	currentVertexList[3] = Vertex(-0.25f, -0.75f, 0.f);
+	AShape* quadC = new AShape(currentVertexList, 4, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	mShapeList.push_back(quadC);
+
+	delete[] currentVertexList;
 
 	mVertexBuffer = AGraphicsEngine::getInstance()->createVertexBuffer();
 	void* shaderByteCode = nullptr;
@@ -47,12 +48,12 @@ void AppWindow::onCreate() {
 
 	std::vector<Vertex> vertexVector;
 	Vertex* currentSet = nullptr;
-	int currentCount = 0;
-	int totalCount = 0;
+	UINT currentCount = 0;
+	UINT totalCount = 0;
 
-	for (int i = 0; i < mPrimitiveList.size(); i++) {
-		currentSet = mPrimitiveList[i]->getVertexList(&currentCount);
-		// currentCount = mShapeList[i]->getVertexCount();
+	for (int i = 0; i < mShapeList.size(); i++) {
+		currentSet = mShapeList[i]->getVertexList();
+		currentCount = mShapeList[i]->getVertexCount();
 		for (int j = 0; j < currentCount; j++) {
 			vertexVector.push_back(currentSet[j]);
 		}
@@ -80,15 +81,9 @@ void AppWindow::onUpdate() {
 	AGraphicsEngine::getInstance()->setShaders();
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexShader(mVertexShader);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexBuffer(mVertexBuffer);
-	// AGraphicsEngine::getInstance()->getImmediateDeviceContext()->drawTriangleList(mVertexBuffer->getVertexCount(), 0);
 
 	UINT vertexIndex = 0;
 
-	for (int i = 0; i < mPrimitiveList.size(); i++) {
-		mPrimitiveList[i]->drawShape(&vertexIndex);
-	}
-
-	/*
 	for (int i = 0; i < mShapeList.size(); i++) {
 		AGraphicsEngine::getInstance()->getImmediateDeviceContext()->drawShape(
 			mShapeList[i]->getTopology(),
@@ -97,7 +92,6 @@ void AppWindow::onUpdate() {
 		);
 		vertexIndex += mShapeList[i]->getVertexCount();
 	}
-	*/
 
 	mSwapChain->present(false);
 }
@@ -107,8 +101,8 @@ void AppWindow::onDestroy() {
 	mVertexBuffer->release();
 	mSwapChain->release();
 
-	for (int i = 0; i < mPrimitiveList.size(); i++) {
-		delete mPrimitiveList[i];
+	for (int i = 0; i < mShapeList.size(); i++) {
+		delete mShapeList[i];
 	}
 
 	AGraphicsEngine::getInstance()->release();

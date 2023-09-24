@@ -51,19 +51,10 @@
     <ClCompile Include="AVertexBuffer.cpp">
       <Filter>Engine\Graphics\VertexBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="APrimitive.cpp">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="ATriangle.cpp">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClCompile>
     <ClCompile Include="Vertex.cpp">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="AQuad.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClCompile>
     <ClCompile Include="AVertexShader.cpp">
@@ -92,19 +83,10 @@
     <ClInclude Include="AVertexBuffer.h">
       <Filter>Engine\Graphics\VertexBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="APrimitive.h">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="ATriangle.h">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="AQuad.h">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="AVertexShader.h">

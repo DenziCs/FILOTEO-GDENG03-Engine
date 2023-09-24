@@ -1,6 +1,6 @@
 #include "AShape.h"
 
-AShape::AShape(Vertex* vertex_list, int vertex_count, D3D_PRIMITIVE_TOPOLOGY primitive_topology) {
+AShape::AShape(Vertex* vertex_list, UINT vertex_count, D3D_PRIMITIVE_TOPOLOGY primitive_topology) {
 	mVertexList = new Vertex[vertex_count];
 	mVertexCount = vertex_count;
 	mTopology = primitive_topology;
@@ -18,7 +18,7 @@ Vertex* AShape::getVertexList() {
 	return mVertexList;
 }
 
-int AShape::getVertexCount() {
+UINT AShape::getVertexCount() {
 	return mVertexCount;
 }
 

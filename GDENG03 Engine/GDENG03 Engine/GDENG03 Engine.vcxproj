@@ -131,11 +131,8 @@
     <ClCompile Include="ADeviceContext.cpp" />
     <ClCompile Include="AGraphicsEngine.cpp" />
     <ClCompile Include="AppWindow.cpp" />
-    <ClCompile Include="APrimitive.cpp" />
-    <ClCompile Include="AQuad.cpp" />
     <ClCompile Include="AShape.cpp" />
     <ClCompile Include="ASwapChain.cpp" />
-    <ClCompile Include="ATriangle.cpp" />
     <ClCompile Include="AVertexBuffer.cpp" />
     <ClCompile Include="AWindow.cpp" />
     <ClCompile Include="main.cpp" />
@@ -147,11 +144,8 @@
     <ClInclude Include="ADeviceContext.h" />
     <ClInclude Include="AGraphicsEngine.h" />
     <ClInclude Include="AppWindow.h" />
-    <ClInclude Include="APrimitive.h" />
-    <ClInclude Include="AQuad.h" />
     <ClInclude Include="AShape.h" />
     <ClInclude Include="ASwapChain.h" />
-    <ClInclude Include="ATriangle.h" />
     <ClInclude Include="AVertexBuffer.h" />
     <ClInclude Include="AWindow.h" />
     <ClInclude Include="Vector3.h" />
