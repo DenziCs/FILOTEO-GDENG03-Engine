@@ -49,3 +49,4 @@
 *.idb
 *.vcxproj
 *.sqlite
+*.json
