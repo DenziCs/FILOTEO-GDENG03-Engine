@@ -1,7 +1,7 @@
 /*
 Nathaniel Francis S. Filoteo
 GDENG03 X22
-HO -- Exploring the Pixel Shader and Basic Animation with the Constant Buffer
+HO -- Engine Time Animation
 */
 
 #include"AppWindow.h"

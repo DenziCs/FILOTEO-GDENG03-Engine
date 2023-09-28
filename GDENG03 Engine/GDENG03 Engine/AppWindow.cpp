@@ -1,9 +1,10 @@
 #include"AppWindow.h"
 #include<Windows.h>
+#include<iostream>
 
 __declspec(align(16))
 struct constant {
-	unsigned int time;
+	float coefficient;
 };
 
 AppWindow::AppWindow() {}
@@ -23,26 +24,26 @@ void AppWindow::onCreate() {
 	Vertex* currentVertexList = new Vertex[4];
 
 	currentVertexList[0] = Vertex(
-		Vector3(-0.75f, 0.75f, 0.f),
-		Vector3(-0.5f, 0.85f, 0.f),
+		Vector3(-0.5f, 0.5f, 0.f),
+		Vector3(-0.25f, 0.75f, 0.f),
 		Vector3(1.f, 0.f, 0.f),
 		Vector3((34.f / 256.f), (214.f / 256.f), (34.f / 256.f))
 	);
 	currentVertexList[1] = Vertex(
-		Vector3(-0.25f, 0.75f, 0.f),
-		Vector3(-0.15f, 0.85f, 0.f),
+		Vector3(0.5f, 0.5f, 0.f),
+		Vector3(0.25f, 0.75f, 0.f),
 		Vector3(0.f, 1.f, 0.f),
 		Vector3((251.f / 256.f), (54.f / 256.f), (255.f / 256.f))
 	);
 	currentVertexList[2] = Vertex(
-		Vector3(-0.75f, 0.25f, 0.f),
-		Vector3(-0.5f, 0.15f, 0.f),
+		Vector3(-0.5f, -0.5f, 0.f),
+		Vector3(-0.25f, -0.25f, 0.f),
 		Vector3(0.f, 0.f, 1.f),
 		Vector3((0.f / 256.f), (0.f / 256.f), (120.f / 256.f))
 	);
 	currentVertexList[3] = Vertex(
-		Vector3(-0.25f, 0.25f, 0.f),
-		Vector3(-0.15f, 0.5f, 0.f),
+		Vector3(0.5f, -0.5f, 0.f),
+		Vector3(0.25f, -0.75f, 0.f),
 		Vector3(1.f, 1.f, 0.f),
 		Vector3((158.f / 256.f), (83.f / 256.f), (0.f / 256.f))
 	);
@@ -84,7 +85,7 @@ void AppWindow::onCreate() {
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
 
 	constant clockCount;
-	clockCount.time = 0;
+	clockCount.coefficient = 0.f;
 
 	mConstantBuffer = AGraphicsEngine::getInstance()->createConstantBuffer();
 	mConstantBuffer->load(&clockCount, sizeof(constant));
@@ -99,10 +100,30 @@ void AppWindow::onUpdate() {
 	UINT height = windowRect.bottom - windowRect.top;
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	constant clockCount;
-	clockCount.time = ::GetTickCount();
+	constant deltaTime;
+	mAcceleration += mAccelerationSign * 5000.f * TimeManager::getDeltaTime();
+	if (mAcceleration >= 4.f) {
+		mAccelerationSign = -1.f;
+		mAcceleration = 4.f;
+	}
+	if (mAcceleration <= 0.5f) {
+		mAccelerationSign = 1.f;
+		mAcceleration = 0.5f;
+	}
 
-	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &clockCount);
+	mMovementSpeed += mMovementSign * mAcceleration * 10000.f * TimeManager::getDeltaTime();
+	if (mMovementSpeed >= 1.f) {
+		mMovementSign = -1.f;
+		mMovementSpeed = 1.f;
+	}
+	if (mMovementSpeed <= 0.f) {
+		mMovementSign = 1.f;
+		mMovementSpeed = 0.f;
+	}
+	std::cout << TimeManager::getDeltaTime() << std::endl;
+	deltaTime.coefficient = mMovementSpeed;
+
+	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &deltaTime);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, mVertexShader);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, mPixelShader);
 

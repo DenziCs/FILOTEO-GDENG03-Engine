@@ -13,9 +13,7 @@ double TimeManager::getDeltaTime() {
 
 TimeManager::TimeManager() {}
 
-TimeManager::~TimeManager() {
-	delete instance;
-}
+TimeManager::~TimeManager() {}
 
 void TimeManager::logFrameStart() {
 	instance->start = std::chrono::system_clock::now();

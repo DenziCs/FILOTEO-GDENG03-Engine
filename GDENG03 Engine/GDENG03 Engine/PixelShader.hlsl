@@ -5,9 +5,9 @@ struct PS_INPUT {
 };
 
 cbuffer constant: register(b0) {
-	unsigned int time;
+	float coefficient;
 };
 
 float4 psmain(PS_INPUT input) : SV_TARGET {
-	return float4(lerp(input.color, input.color1, (sin(time * 0.002f) + 1.f) * 0.5f), 1.0f);
+	return float4(lerp(input.color, input.color1, coefficient), 1.0f);
 }
