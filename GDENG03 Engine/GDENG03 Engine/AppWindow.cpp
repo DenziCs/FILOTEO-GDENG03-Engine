@@ -23,30 +23,60 @@ void AppWindow::onCreate() {
 
 	Vertex* currentVertexList = new Vertex[4];
 
-	currentVertexList[0] = Vertex(
-		Vector3(-0.5f, 0.5f, 0.f),
-		Vector3(-0.25f, 0.75f, 0.f),
-		Vector3(1.f, 0.f, 0.f),
-		Vector3((34.f / 256.f), (214.f / 256.f), (34.f / 256.f))
-	);
+	
 	currentVertexList[1] = Vertex(
-		Vector3(0.5f, 0.5f, 0.f),
-		Vector3(0.25f, 0.75f, 0.f),
-		Vector3(0.f, 1.f, 0.f),
-		Vector3((251.f / 256.f), (54.f / 256.f), (255.f / 256.f))
-	);
-	currentVertexList[2] = Vertex(
-		Vector3(-0.5f, -0.5f, 0.f),
-		Vector3(-0.25f, -0.25f, 0.f),
-		Vector3(0.f, 0.f, 1.f),
-		Vector3((0.f / 256.f), (0.f / 256.f), (120.f / 256.f))
+		Vector3(-0.1f, 0.8f, 0.f),
+		Vector3(-0.9f, 0.1f, 0.f),
+		Vector3(1.f, 0.f, 0.f),
+		Vector3(0.f, 1.f, 1.f)
 	);
 	currentVertexList[3] = Vertex(
-		Vector3(0.5f, -0.5f, 0.f),
-		Vector3(0.25f, -0.75f, 0.f),
-		Vector3(1.f, 1.f, 0.f),
-		Vector3((158.f / 256.f), (83.f / 256.f), (0.f / 256.f))
+		Vector3(0.75f, 0.75f, 0.f),
+		Vector3(-0.83f, -0.4f, 0.f),
+		Vector3(0.f, 1.f, 0.f),
+		Vector3(1.f, 0.f, 1.f)
 	);
+	currentVertexList[0] = Vertex(
+		Vector3(-0.25f, -0.1f, 0.f),
+		Vector3(-0.75f, -0.9f, 0.f),
+		Vector3(0.f, 0.f, 1.f),
+		Vector3(1.f, 1.f, 0.f)
+	);
+	currentVertexList[2] = Vertex(
+		Vector3(0.1f, -0.8f, 0.f),
+		Vector3(1.f, -0.25f, 0.f),
+		Vector3(1.f, 1.f, 1.f),
+		Vector3(0.f, 0.f, 0.f)
+	);
+	
+	
+	/*
+	currentVertexList[0] = Vertex(
+		Vector3(-0.9f, 0.2f, 0.f),
+		Vector3(-0.1f, 0.8f, 0.f),
+		Vector3(1.f, 0.f, 0.f),
+		Vector3(0.f, 1.f, 1.f)
+	);
+	currentVertexList[1] = Vertex(
+		Vector3(0.1f, 0.2f, 0.f),
+		Vector3(0.9f, 0.8f, 0.f),
+		Vector3(0.f, 1.f, 0.f),
+		Vector3(1.f, 0.f, 1.f)
+	);
+	currentVertexList[2] = Vertex(
+		Vector3(-0.75f, -0.9f, 0.f),
+		Vector3(-0.3f, -0.2f, 0.f),
+		Vector3(0.f, 0.f, 1.f),
+		Vector3(1.f, 1.f, 0.f)
+	);
+	currentVertexList[3] = Vertex(
+		Vector3(0.25f, -0.25f, 0.f),
+		Vector3(0.75f, -0.75f, 0.f),
+		Vector3(1.f, 1.f, 1.f),
+		Vector3(0.f, 0.f, 0.f)
+	);
+	*/
+
 	AShape* quadA = new AShape(currentVertexList, 4, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 	mShapeList.push_back(quadA);
 
@@ -101,17 +131,20 @@ void AppWindow::onUpdate() {
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
 
 	constant deltaTime;
-	mAcceleration += mAccelerationSign * 5000.f * TimeManager::getDeltaTime();
-	if (mAcceleration >= 4.f) {
+	/*
+	mAcceleration += mAccelerationSign * 3000.f * TimeManager::getDeltaTime();
+	if (mAcceleration >= 3.f) {
 		mAccelerationSign = -1.f;
-		mAcceleration = 4.f;
+		mAcceleration = 3.f;
 	}
-	if (mAcceleration <= 0.5f) {
+	if (mAcceleration <= 0.f) {
 		mAccelerationSign = 1.f;
-		mAcceleration = 0.5f;
+		mAcceleration = 0.f;
 	}
+	*/
 
-	mMovementSpeed += mMovementSign * mAcceleration * 10000.f * TimeManager::getDeltaTime();
+	mMovementSpeed += mMovementSign * 3500.f * TimeManager::getDeltaTime();
+	// mMovementSpeed += mMovementSign * mAcceleration * 10000.f * TimeManager::getDeltaTime();
 	if (mMovementSpeed >= 1.f) {
 		mMovementSign = -1.f;
 		mMovementSpeed = 1.f;
@@ -120,7 +153,6 @@ void AppWindow::onUpdate() {
 		mMovementSign = 1.f;
 		mMovementSpeed = 0.f;
 	}
-	std::cout << TimeManager::getDeltaTime() << std::endl;
 	deltaTime.coefficient = mMovementSpeed;
 
 	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &deltaTime);
