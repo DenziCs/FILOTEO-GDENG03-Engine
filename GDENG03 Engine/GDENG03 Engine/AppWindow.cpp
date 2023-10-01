@@ -140,10 +140,10 @@ void AppWindow::onUpdate() {
 
 	constant clockCount;
 	/*
-	mAcceleration += mAccelerationSign * TimeManager::getDeltaTime();
-	if (mAcceleration >= 3.f) {
+	mAcceleration += mAccelerationSign * 0.5f * TimeManager::getDeltaTime();
+	if (mAcceleration >= 4.f) {
 		mAccelerationSign = -1.f;
-		mAcceleration = 3.f;
+		mAcceleration = 4.f;
 	}
 	if (mAcceleration <= 0.f) {
 		mAccelerationSign = 1.f;

@@ -31,9 +31,9 @@ private:
 	std::vector<AShape*> mShapeList;
 
 	float mMovementSpeed = 0.f;
-	float mAcceleration = 1.5f;
+	float mAcceleration = 0.5f;
 	float mMovementSign = 1.f;
-	float mAccelerationSign = -1.f;
+	float mAccelerationSign = 1.f;
 
 	float mElapsedTime = 0.f;
 };
