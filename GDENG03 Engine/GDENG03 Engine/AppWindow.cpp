@@ -164,7 +164,7 @@ void AppWindow::onUpdate() {
 	clockCount.coefficient = mMovementSpeed;
 
 	/*
-	mElapsedTime = TimeManager::getDeltaTime();
+	mElapsedTime += TimeManager::getDeltaTime();
 	clockCount.time = mElapsedTime;
 	*/
 
