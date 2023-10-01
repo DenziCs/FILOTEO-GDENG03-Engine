@@ -64,6 +64,10 @@ bool AWindow::initialize() {
 	::UpdateWindow(mWindowHandle);
 
 	mIsRunning = true;
+
+	TimeManager::logFrameStart();
+	TimeManager::logFrameEnd();
+
 	return true;
 }
 

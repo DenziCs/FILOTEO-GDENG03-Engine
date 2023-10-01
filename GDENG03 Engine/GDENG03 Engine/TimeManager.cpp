@@ -20,5 +20,5 @@ void TimeManager::logFrameStart() {
 }
 
 void TimeManager::logFrameEnd() {
-	instance->end = std::chrono::system_clock::now();
+	instance->end = instance->start;
 }

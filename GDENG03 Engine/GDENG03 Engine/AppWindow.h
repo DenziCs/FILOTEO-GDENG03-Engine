@@ -33,4 +33,5 @@ private:
 	float mAcceleration = 1.5f;
 	float mMovementSign = 1.f;
 	float mAccelerationSign = -1.f;
+	float mElapsedTime = 0.f;
 };
