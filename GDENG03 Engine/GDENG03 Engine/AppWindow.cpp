@@ -4,7 +4,7 @@
 
 __declspec(align(16))
 struct constant {
-	float coefficient;
+	float time;
 };
 
 AppWindow::AppWindow() {}
@@ -115,7 +115,8 @@ void AppWindow::onCreate() {
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
 
 	constant clockCount;
-	clockCount.coefficient = 0.f;
+	mElapsedTime = 0.0;
+	clockCount.time = mElapsedTime;
 
 	mConstantBuffer = AGraphicsEngine::getInstance()->createConstantBuffer();
 	mConstantBuffer->load(&clockCount, sizeof(constant));
@@ -131,29 +132,9 @@ void AppWindow::onUpdate() {
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
 
 	constant deltaTime;
-	/*
-	mAcceleration += mAccelerationSign * 3000.f * TimeManager::getDeltaTime();
-	if (mAcceleration >= 3.f) {
-		mAccelerationSign = -1.f;
-		mAcceleration = 3.f;
-	}
-	if (mAcceleration <= 0.f) {
-		mAccelerationSign = 1.f;
-		mAcceleration = 0.f;
-	}
-	*/
-
-	mMovementSpeed += mMovementSign * 3500.f * TimeManager::getDeltaTime();
-	// mMovementSpeed += mMovementSign * mAcceleration * 10000.f * TimeManager::getDeltaTime();
-	if (mMovementSpeed >= 1.f) {
-		mMovementSign = -1.f;
-		mMovementSpeed = 1.f;
-	}
-	if (mMovementSpeed <= 0.f) {
-		mMovementSign = 1.f;
-		mMovementSpeed = 0.f;
-	}
-	deltaTime.coefficient = mMovementSpeed;
+	mElapsedTime += TimeManager::getDeltaTime();
+	std::cout << mElapsedTime << std::endl;
+	deltaTime.time = mElapsedTime;
 
 	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &deltaTime);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, mVertexShader);

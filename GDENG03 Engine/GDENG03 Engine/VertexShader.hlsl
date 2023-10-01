@@ -12,13 +12,13 @@ struct VS_OUTPUT {
 };
 
 cbuffer constant: register(b0) {
-	float coefficient;
+	float time;
 };
 
 VS_OUTPUT vsmain(VS_INPUT input) {
 	VS_OUTPUT output = (VS_OUTPUT)0;
 
-	output.position = lerp(input.position, input.position1, coefficient);
+	output.position = lerp(input.position, input.position1, (sin(time) + 1.f) * 0.5f);
 	output.color = input.color;
 	output.color1 = input.color1;
 	return output;

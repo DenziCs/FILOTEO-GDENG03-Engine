@@ -4,6 +4,7 @@ TimeManager* TimeManager::instance = nullptr;
 
 void TimeManager::initialize() {
 	if (!instance) instance = new TimeManager();
+	instance->end = std::chrono::system_clock::now();
 }
 
 double TimeManager::getDeltaTime() {
@@ -20,5 +21,5 @@ void TimeManager::logFrameStart() {
 }
 
 void TimeManager::logFrameEnd() {
-	instance->end = std::chrono::system_clock::now();
+	instance->end = instance->start;
 }
