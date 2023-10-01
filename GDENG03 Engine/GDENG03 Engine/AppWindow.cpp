@@ -7,6 +7,13 @@ struct constant {
 	float coefficient;
 };
 
+/*
+__declspec(align(16))
+struct constant {
+	float time;
+};
+*/
+
 AppWindow::AppWindow() {}
 
 AppWindow::~AppWindow() {}
@@ -116,6 +123,7 @@ void AppWindow::onCreate() {
 
 	constant clockCount;
 	clockCount.coefficient = 0.f;
+	// clockCount.time = 0.f;
 
 	mConstantBuffer = AGraphicsEngine::getInstance()->createConstantBuffer();
 	mConstantBuffer->load(&clockCount, sizeof(constant));
@@ -130,9 +138,9 @@ void AppWindow::onUpdate() {
 	UINT height = windowRect.bottom - windowRect.top;
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	constant deltaTime;
+	constant clockCount;
 	/*
-	mAcceleration += mAccelerationSign * 3000.f * TimeManager::getDeltaTime();
+	mAcceleration += mAccelerationSign * TimeManager::getDeltaTime();
 	if (mAcceleration >= 3.f) {
 		mAccelerationSign = -1.f;
 		mAcceleration = 3.f;
@@ -143,8 +151,8 @@ void AppWindow::onUpdate() {
 	}
 	*/
 
-	mMovementSpeed += mMovementSign * 3500.f * TimeManager::getDeltaTime();
-	// mMovementSpeed += mMovementSign * mAcceleration * 10000.f * TimeManager::getDeltaTime();
+	mMovementSpeed += mMovementSign * 0.5f * TimeManager::getDeltaTime();
+	// mMovementSpeed += mMovementSign * mAcceleration * TimeManager::getDeltaTime();
 	if (mMovementSpeed >= 1.f) {
 		mMovementSign = -1.f;
 		mMovementSpeed = 1.f;
@@ -153,9 +161,14 @@ void AppWindow::onUpdate() {
 		mMovementSign = 1.f;
 		mMovementSpeed = 0.f;
 	}
-	deltaTime.coefficient = mMovementSpeed;
+	clockCount.coefficient = mMovementSpeed;
 
-	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &deltaTime);
+	/*
+	mElapsedTime = TimeManager::getDeltaTime();
+	clockCount.time = mElapsedTime;
+	*/
+
+	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &clockCount);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, mVertexShader);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, mPixelShader);
 
