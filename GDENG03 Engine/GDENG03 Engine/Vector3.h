@@ -8,6 +8,8 @@ public:
 	Vector3(const Vector3& vector);
 	~Vector3() {}
 
+	static Vector3 lerp(const Vector3& vector_a, const Vector3& vector_b, float coefficient);
+
 	float x;
 	float y;
 	float z;

@@ -17,7 +17,21 @@ AppWindow::~AppWindow() {}
 void AppWindow::updateObjectPosition() {
 	constant shaderNumbers;
 
-	shaderNumbers.worldMatrix.setTranslation(0.f, 0.f, 0.f);
+	mMovementSpeed += 0.1f * TimeManager::getDeltaTime();
+	mMovementSign += 6.65f * TimeManager::getDeltaTime();
+
+	if (mMovementSpeed >= 1.f) {
+		mMovementSpeed = 0.f;
+	}
+
+	shaderNumbers.coefficient = mMovementSpeed;
+
+	shaderNumbers.worldMatrix.setScale(Vector3::lerp(Vector3(1.f, 1.f, 0.f), Vector3(0.5f, 0.5f, 0.f), 0.5f * (sin(mMovementSign) + 1.f)));
+
+	Matrix4x4 transform;
+	transform.setTranslation(Vector3::lerp(Vector3(-1.5f, -1.5f, 0.f), Vector3(1.5f, 1.5f, 0.f), mMovementSpeed));
+	shaderNumbers.worldMatrix *= transform;
+
 	shaderNumbers.viewMatrix.setIdentity();
 	shaderNumbers.projectionMatrix.setOrthoProjection(
 		(this->getWindowRect().right - this->getWindowRect().left) / 400.f,
@@ -25,17 +39,6 @@ void AppWindow::updateObjectPosition() {
 		-4.f,
 		4.f
 	);
-
-	mMovementSpeed += mMovementSign * 0.5f * TimeManager::getDeltaTime();
-	if (mMovementSpeed >= 1.f) {
-		mMovementSign = -1.f;
-		mMovementSpeed = 1.f;
-	}
-	if (mMovementSpeed <= 0.f) {
-		mMovementSign = 1.f;
-		mMovementSpeed = 0.f;
-	}
-	shaderNumbers.coefficient = mMovementSpeed;
 
 	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &shaderNumbers);
 }

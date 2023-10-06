@@ -17,3 +17,13 @@ Vector3::Vector3(const Vector3& vector) {
 	y = vector.y;
 	z = vector.z;
 }
+
+Vector3 Vector3::lerp(const Vector3& vector_a, const Vector3& vector_b, float coefficient) {
+	Vector3 resultVector;
+
+	resultVector.x = vector_a.x * (1.f - coefficient) + vector_b.x * coefficient; 
+	resultVector.y = vector_a.y * (1.f - coefficient) + vector_b.y * coefficient;
+	resultVector.z = vector_a.z * (1.f - coefficient) + vector_b.z * coefficient;
+
+	return resultVector;
+}
