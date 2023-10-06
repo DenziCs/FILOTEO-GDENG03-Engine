@@ -1,7 +1,7 @@
 /*
 Nathaniel Francis S. Filoteo
 GDENG03 X22
-HO -- Engine Time Animation
+HO -- Instantiating Multiple Cubes
 */
 
 #include"AppWindow.h"

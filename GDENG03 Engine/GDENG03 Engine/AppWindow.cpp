@@ -4,19 +4,41 @@
 
 __declspec(align(16))
 struct constant {
+	Matrix4x4 worldMatrix;
+	Matrix4x4 viewMatrix;
+	Matrix4x4 projectionMatrix;
 	float coefficient;
 };
-
-/*
-__declspec(align(16))
-struct constant {
-	float time;
-};
-*/
 
 AppWindow::AppWindow() {}
 
 AppWindow::~AppWindow() {}
+
+void AppWindow::updateObjectPosition() {
+	constant shaderNumbers;
+
+	shaderNumbers.worldMatrix.setTranslation(0.f, 0.f, 0.f);
+	shaderNumbers.viewMatrix.setIdentity();
+	shaderNumbers.projectionMatrix.setOrthoProjection(
+		(this->getWindowRect().right - this->getWindowRect().left) / 400.f,
+		(this->getWindowRect().bottom - this->getWindowRect().top) / 400.f,
+		-4.f,
+		4.f
+	);
+
+	mMovementSpeed += mMovementSign * 0.5f * TimeManager::getDeltaTime();
+	if (mMovementSpeed >= 1.f) {
+		mMovementSign = -1.f;
+		mMovementSpeed = 1.f;
+	}
+	if (mMovementSpeed <= 0.f) {
+		mMovementSign = 1.f;
+		mMovementSpeed = 0.f;
+	}
+	shaderNumbers.coefficient = mMovementSpeed;
+
+	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &shaderNumbers);
+}
 
 void AppWindow::onCreate() {
 	AWindow::onCreate();
@@ -55,34 +77,6 @@ void AppWindow::onCreate() {
 		Vector3(1.f, 1.f, 1.f),
 		Vector3(0.f, 0.f, 0.f)
 	);
-	
-	
-	/*
-	currentVertexList[0] = Vertex(
-		Vector3(-0.9f, 0.2f, 0.f),
-		Vector3(-0.1f, 0.8f, 0.f),
-		Vector3(1.f, 0.f, 0.f),
-		Vector3(0.f, 1.f, 1.f)
-	);
-	currentVertexList[1] = Vertex(
-		Vector3(0.1f, 0.2f, 0.f),
-		Vector3(0.9f, 0.8f, 0.f),
-		Vector3(0.f, 1.f, 0.f),
-		Vector3(1.f, 0.f, 1.f)
-	);
-	currentVertexList[2] = Vertex(
-		Vector3(-0.75f, -0.9f, 0.f),
-		Vector3(-0.3f, -0.2f, 0.f),
-		Vector3(0.f, 0.f, 1.f),
-		Vector3(1.f, 1.f, 0.f)
-	);
-	currentVertexList[3] = Vertex(
-		Vector3(0.25f, -0.25f, 0.f),
-		Vector3(0.75f, -0.75f, 0.f),
-		Vector3(1.f, 1.f, 1.f),
-		Vector3(0.f, 0.f, 0.f)
-	);
-	*/
 
 	AShape* quadA = new AShape(currentVertexList, 4, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 	mShapeList.push_back(quadA);
@@ -123,7 +117,6 @@ void AppWindow::onCreate() {
 
 	constant clockCount;
 	clockCount.coefficient = 0.f;
-	// clockCount.time = 0.f;
 
 	mConstantBuffer = AGraphicsEngine::getInstance()->createConstantBuffer();
 	mConstantBuffer->load(&clockCount, sizeof(constant));
@@ -138,37 +131,8 @@ void AppWindow::onUpdate() {
 	UINT height = windowRect.bottom - windowRect.top;
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
 
-	constant clockCount;
-	/*
-	mAcceleration += mAccelerationSign * 0.5f * TimeManager::getDeltaTime();
-	if (mAcceleration >= 4.f) {
-		mAccelerationSign = -1.f;
-		mAcceleration = 4.f;
-	}
-	if (mAcceleration <= 0.f) {
-		mAccelerationSign = 1.f;
-		mAcceleration = 0.f;
-	}
-	*/
+	updateObjectPosition();
 
-	mMovementSpeed += mMovementSign * 0.5f * TimeManager::getDeltaTime();
-	// mMovementSpeed += mMovementSign * mAcceleration * TimeManager::getDeltaTime();
-	if (mMovementSpeed >= 1.f) {
-		mMovementSign = -1.f;
-		mMovementSpeed = 1.f;
-	}
-	if (mMovementSpeed <= 0.f) {
-		mMovementSign = 1.f;
-		mMovementSpeed = 0.f;
-	}
-	clockCount.coefficient = mMovementSpeed;
-
-	/*
-	mElapsedTime += TimeManager::getDeltaTime();
-	clockCount.time = mElapsedTime;
-	*/
-
-	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &clockCount);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, mVertexShader);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, mPixelShader);
 

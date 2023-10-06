@@ -12,20 +12,18 @@ struct VS_OUTPUT {
 };
 
 cbuffer constant: register(b0) {
+	row_major float4x4 worldMatrix;
+	row_major float4x4 viewMatrix;
+	row_major float4x4 projectionMatrix;
 	float coefficient;
 };
-
-/*
-cbuffer constant: register(b0) {
-	float time;
-};
-*/
 
 VS_OUTPUT vsmain(VS_INPUT input) {
 	VS_OUTPUT output = (VS_OUTPUT)0;
 
-	output.position = lerp(input.position, input.position1, coefficient);
-	// output.position = lerp(input.position, input.position1, 0.5f * (sin(time) + 1.f));
+	output.position = mul(input.position, worldMatrix);
+	output.position = mul(output.position, viewMatrix);
+	output.position = mul(output.position, projectionMatrix);
 	output.color = input.color;
 	output.color1 = input.color1;
 	return output;

@@ -9,6 +9,7 @@
 #include"APixelShader.h"
 #include"AShape.h"
 #include"Vertex.h"
+#include"Matrix4x4.h"
 #include<vector>
 
 class AppWindow : public AWindow
@@ -16,6 +17,8 @@ class AppWindow : public AWindow
 public:
 	AppWindow();
 	~AppWindow();
+
+	void updateObjectPosition();
 
 	virtual void onCreate() override;
 	virtual void onUpdate() override;
