@@ -138,6 +138,7 @@
     <ClCompile Include="AVertexBuffer.cpp" />
     <ClCompile Include="AWindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="AVertexShader.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="ASwapChain.h" />
     <ClInclude Include="AVertexBuffer.h" />
     <ClInclude Include="AWindow.h" />
+    <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="AVertexShader.h" />

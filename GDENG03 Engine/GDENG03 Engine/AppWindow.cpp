@@ -1,10 +1,18 @@
 #include"AppWindow.h"
 #include<Windows.h>
+#include<iostream>
 
 __declspec(align(16))
 struct constant {
-	unsigned int time;
+	float coefficient;
 };
+
+/*
+__declspec(align(16))
+struct constant {
+	float time;
+};
+*/
 
 AppWindow::AppWindow() {}
 
@@ -22,30 +30,60 @@ void AppWindow::onCreate() {
 
 	Vertex* currentVertexList = new Vertex[4];
 
-	currentVertexList[0] = Vertex(
-		Vector3(-0.75f, 0.75f, 0.f),
-		Vector3(-0.5f, 0.85f, 0.f),
-		Vector3(1.f, 0.f, 0.f),
-		Vector3((34.f / 256.f), (214.f / 256.f), (34.f / 256.f))
-	);
+	
 	currentVertexList[1] = Vertex(
-		Vector3(-0.25f, 0.75f, 0.f),
-		Vector3(-0.15f, 0.85f, 0.f),
-		Vector3(0.f, 1.f, 0.f),
-		Vector3((251.f / 256.f), (54.f / 256.f), (255.f / 256.f))
-	);
-	currentVertexList[2] = Vertex(
-		Vector3(-0.75f, 0.25f, 0.f),
-		Vector3(-0.5f, 0.15f, 0.f),
-		Vector3(0.f, 0.f, 1.f),
-		Vector3((0.f / 256.f), (0.f / 256.f), (120.f / 256.f))
+		Vector3(-0.1f, 0.8f, 0.f),
+		Vector3(-0.9f, 0.1f, 0.f),
+		Vector3(1.f, 0.f, 0.f),
+		Vector3(0.f, 1.f, 1.f)
 	);
 	currentVertexList[3] = Vertex(
-		Vector3(-0.25f, 0.25f, 0.f),
-		Vector3(-0.15f, 0.5f, 0.f),
-		Vector3(1.f, 1.f, 0.f),
-		Vector3((158.f / 256.f), (83.f / 256.f), (0.f / 256.f))
+		Vector3(0.75f, 0.75f, 0.f),
+		Vector3(-0.83f, -0.4f, 0.f),
+		Vector3(0.f, 1.f, 0.f),
+		Vector3(1.f, 0.f, 1.f)
 	);
+	currentVertexList[0] = Vertex(
+		Vector3(-0.25f, -0.1f, 0.f),
+		Vector3(-0.75f, -0.9f, 0.f),
+		Vector3(0.f, 0.f, 1.f),
+		Vector3(1.f, 1.f, 0.f)
+	);
+	currentVertexList[2] = Vertex(
+		Vector3(0.1f, -0.8f, 0.f),
+		Vector3(1.f, -0.25f, 0.f),
+		Vector3(1.f, 1.f, 1.f),
+		Vector3(0.f, 0.f, 0.f)
+	);
+	
+	
+	/*
+	currentVertexList[0] = Vertex(
+		Vector3(-0.9f, 0.2f, 0.f),
+		Vector3(-0.1f, 0.8f, 0.f),
+		Vector3(1.f, 0.f, 0.f),
+		Vector3(0.f, 1.f, 1.f)
+	);
+	currentVertexList[1] = Vertex(
+		Vector3(0.1f, 0.2f, 0.f),
+		Vector3(0.9f, 0.8f, 0.f),
+		Vector3(0.f, 1.f, 0.f),
+		Vector3(1.f, 0.f, 1.f)
+	);
+	currentVertexList[2] = Vertex(
+		Vector3(-0.75f, -0.9f, 0.f),
+		Vector3(-0.3f, -0.2f, 0.f),
+		Vector3(0.f, 0.f, 1.f),
+		Vector3(1.f, 1.f, 0.f)
+	);
+	currentVertexList[3] = Vertex(
+		Vector3(0.25f, -0.25f, 0.f),
+		Vector3(0.75f, -0.75f, 0.f),
+		Vector3(1.f, 1.f, 1.f),
+		Vector3(0.f, 0.f, 0.f)
+	);
+	*/
+
 	AShape* quadA = new AShape(currentVertexList, 4, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 	mShapeList.push_back(quadA);
 
@@ -84,7 +122,8 @@ void AppWindow::onCreate() {
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
 
 	constant clockCount;
-	clockCount.time = 0;
+	clockCount.coefficient = 0.f;
+	// clockCount.time = 0.f;
 
 	mConstantBuffer = AGraphicsEngine::getInstance()->createConstantBuffer();
 	mConstantBuffer->load(&clockCount, sizeof(constant));
@@ -100,7 +139,34 @@ void AppWindow::onUpdate() {
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
 
 	constant clockCount;
-	clockCount.time = ::GetTickCount();
+	/*
+	mAcceleration += mAccelerationSign * 0.5f * TimeManager::getDeltaTime();
+	if (mAcceleration >= 4.f) {
+		mAccelerationSign = -1.f;
+		mAcceleration = 4.f;
+	}
+	if (mAcceleration <= 0.f) {
+		mAccelerationSign = 1.f;
+		mAcceleration = 0.f;
+	}
+	*/
+
+	mMovementSpeed += mMovementSign * 0.5f * TimeManager::getDeltaTime();
+	// mMovementSpeed += mMovementSign * mAcceleration * TimeManager::getDeltaTime();
+	if (mMovementSpeed >= 1.f) {
+		mMovementSign = -1.f;
+		mMovementSpeed = 1.f;
+	}
+	if (mMovementSpeed <= 0.f) {
+		mMovementSign = 1.f;
+		mMovementSpeed = 0.f;
+	}
+	clockCount.coefficient = mMovementSpeed;
+
+	/*
+	mElapsedTime += TimeManager::getDeltaTime();
+	clockCount.time = mElapsedTime;
+	*/
 
 	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &clockCount);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, mVertexShader);

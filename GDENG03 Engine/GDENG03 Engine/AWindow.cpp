@@ -25,6 +25,7 @@ LRESULT CALLBACK WndProc(HWND window_handle, UINT msg, WPARAM w_param, LPARAM l_
 }
 
 bool AWindow::initialize() {
+	TimeManager::initialize();
 	WNDCLASSEX wc;
 	wc.cbClsExtra = NULL;
 	wc.cbSize = sizeof(WNDCLASSEX);
@@ -46,7 +47,7 @@ bool AWindow::initialize() {
 	mWindowHandle = ::CreateWindowEx(
 		WS_EX_OVERLAPPEDWINDOW,
 		L"AWindowClass",
-		L"FILOTEO HO -- Exploring the Pixel Shader and Basic Animation with the Constant Buffer",
+		L"FILOTEO HO -- Engine Time Animation",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
@@ -63,10 +64,15 @@ bool AWindow::initialize() {
 	::UpdateWindow(mWindowHandle);
 
 	mIsRunning = true;
+
+	TimeManager::logFrameStart();
+	TimeManager::logFrameEnd();
+
 	return true;
 }
 
 bool AWindow::broadcast() {
+	TimeManager::logFrameStart();
 	window->onUpdate();
 
 	MSG msg;
@@ -77,6 +83,7 @@ bool AWindow::broadcast() {
 	}
 
 	Sleep(1);
+	TimeManager::logFrameEnd();
 
 	return true;
 }
