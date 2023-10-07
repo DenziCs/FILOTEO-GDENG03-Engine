@@ -13,6 +13,9 @@ public:
 	void setTranslation(const Vector3& translate_vector);
 	void setScale(float factor_x, float factor_y, float factor_z);
 	void setScale(const Vector3& scale_vector);
+	void setRotationX(float theta);
+	void setRotationY(float theta);
+	void setRotationZ(float theta);
 	void setOrthoProjection(float width, float height, float near_plane, float far_plane);
 	void setOrthoProjection(float right, float left, float bottom, float top, float near_plane, float far_plane);
 

@@ -28,7 +28,7 @@ public:
 private:
 	ASwapChain* mSwapChain;
 	AVertexBuffer* mVertexBuffer;
-	// AIndexBuffer* mIndexBuffer;
+	AIndexBuffer* mIndexBuffer;
 	AConstantBuffer* mConstantBuffer;
 	AVertexShader* mVertexShader;
 	APixelShader* mPixelShader;
@@ -40,5 +40,5 @@ private:
 	float mMovementSign = 1.f;
 	float mAccelerationSign = 1.f;
 
-	float mElapsedTime = 0.f;
+	float mTheta = 0.f;
 };

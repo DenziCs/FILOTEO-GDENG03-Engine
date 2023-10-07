@@ -46,6 +46,27 @@ void Matrix4x4::setScale(const Vector3& scale_vector) {
 	mMatrix[2][2] = scale_vector.z;
 }
 
+void Matrix4x4::setRotationX(float theta) {
+	mMatrix[1][1] = cos(theta);
+	mMatrix[1][2] = sin(theta);
+	mMatrix[2][1] = -sin(theta);
+	mMatrix[2][2] = cos(theta);
+}
+
+void Matrix4x4::setRotationY(float theta) {
+	mMatrix[0][0] = cos(theta);
+	mMatrix[0][2] = -sin(theta);
+	mMatrix[2][0] = sin(theta);
+	mMatrix[2][2] = cos(theta);
+}
+
+void Matrix4x4::setRotationZ(float theta) {
+	mMatrix[0][0] = cos(theta);
+	mMatrix[0][1] = sin(theta);
+	mMatrix[1][0] = -sin(theta);
+	mMatrix[1][1] = cos(theta);
+}
+
 void Matrix4x4::setOrthoProjection(float width, float height, float near_plane, float far_plane) {
 	setIdentity();
 
