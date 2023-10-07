@@ -34,6 +34,9 @@
     <Filter Include="Engine\Graphics\ConstantBuffer">
       <UniqueIdentifier>{700de0ba-3e3b-4b56-b598-629fe4e2d03e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Math">
+      <UniqueIdentifier>{cd41cba7-f848-4893-ac43-35fd9c701384}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,9 +60,6 @@
     <ClCompile Include="AVertexBuffer.cpp">
       <Filter>Engine\Graphics\VertexBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="Vector3.cpp">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClCompile>
     <ClCompile Include="Vertex.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClCompile>
@@ -77,6 +77,12 @@
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
       <Filter>Engine\Windowing</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4x4.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Engine\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,9 +104,6 @@
     <ClInclude Include="AVertexBuffer.h">
       <Filter>Engine\Graphics\VertexBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3.h">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
@@ -118,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>Engine\Windowing</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4x4.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Engine\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
