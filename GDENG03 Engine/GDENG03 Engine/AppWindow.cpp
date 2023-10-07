@@ -58,25 +58,21 @@ void AppWindow::onCreate() {
 	
 	currentVertexList[1] = Vertex(
 		Vector3(-0.1f, 0.8f, 0.f),
-		Vector3(-0.9f, 0.1f, 0.f),
 		Vector3(1.f, 0.f, 0.f),
 		Vector3(0.f, 1.f, 1.f)
 	);
 	currentVertexList[3] = Vertex(
 		Vector3(0.75f, 0.75f, 0.f),
-		Vector3(-0.83f, -0.4f, 0.f),
 		Vector3(0.f, 1.f, 0.f),
 		Vector3(1.f, 0.f, 1.f)
 	);
 	currentVertexList[0] = Vertex(
 		Vector3(-0.25f, -0.1f, 0.f),
-		Vector3(-0.75f, -0.9f, 0.f),
 		Vector3(0.f, 0.f, 1.f),
 		Vector3(1.f, 1.f, 0.f)
 	);
 	currentVertexList[2] = Vertex(
 		Vector3(0.1f, -0.8f, 0.f),
-		Vector3(1.f, -0.25f, 0.f),
 		Vector3(1.f, 1.f, 1.f),
 		Vector3(0.f, 0.f, 0.f)
 	);
