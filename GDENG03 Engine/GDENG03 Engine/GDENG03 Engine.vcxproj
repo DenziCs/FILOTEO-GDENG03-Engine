@@ -131,6 +131,7 @@
     <ClCompile Include="AConstantBuffer.cpp" />
     <ClCompile Include="ADeviceContext.cpp" />
     <ClCompile Include="AGraphicsEngine.cpp" />
+    <ClCompile Include="AIndexBuffer.cpp" />
     <ClCompile Include="APixelShader.cpp" />
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="AShape.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="AConstantBuffer.h" />
     <ClInclude Include="ADeviceContext.h" />
     <ClInclude Include="AGraphicsEngine.h" />
+    <ClInclude Include="AIndexBuffer.h" />
     <ClInclude Include="APixelShader.h" />
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="AShape.h" />

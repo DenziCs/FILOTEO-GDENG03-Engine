@@ -1,6 +1,7 @@
 #include"ADeviceContext.h"
 #include"ASwapChain.h"
 #include"AVertexBuffer.h"
+#include"AIndexBuffer.h"
 #include"AConstantBuffer.h"
 #include"AVertexShader.h"
 #include"APixelShader.h"
@@ -22,6 +23,10 @@ void ADeviceContext::setVertexBuffer(AVertexBuffer* vertex_buffer) {
 	UINT offset = 0;
 	mDeviceContext->IASetVertexBuffers(0, 1, &(vertex_buffer->mBuffer), &stride, &offset);
 	mDeviceContext->IASetInputLayout(vertex_buffer->mLayout);
+}
+
+void ADeviceContext::setIndexBuffer(AIndexBuffer* index_buffer) {
+	mDeviceContext->IASetIndexBuffer(index_buffer->mBuffer, DXGI_FORMAT_R32_UINT, 0);
 }
 
 void ADeviceContext::setViewportSize(UINT width, UINT height) {

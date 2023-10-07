@@ -92,6 +92,8 @@ void AppWindow::onCreate() {
 	AGraphicsEngine::getInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &shaderSize);
 	mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
 
+	// mIndexBuffer = AGraphicsEngine::getInstance()->createIndexBuffer();
+
 	std::vector<Vertex> vertexVector;
 	Vertex* currentSet = nullptr;
 	UINT currentCount = 0;

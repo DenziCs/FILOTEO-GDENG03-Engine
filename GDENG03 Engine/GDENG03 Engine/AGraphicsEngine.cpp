@@ -1,6 +1,7 @@
 #include"AGraphicsEngine.h"
 #include"ASwapChain.h"
 #include"AVertexBuffer.h"
+#include"AIndexBuffer.h"
 #include"AConstantBuffer.h"
 #include"AVertexShader.h"
 #include"APixelShader.h"
@@ -70,6 +71,10 @@ ASwapChain* AGraphicsEngine::createSwapChain() {
 
 AVertexBuffer* AGraphicsEngine::createVertexBuffer() {
 	return new AVertexBuffer();
+}
+
+AIndexBuffer* AGraphicsEngine::createIndexBuffer() {
+	return new AIndexBuffer();
 }
 
 AConstantBuffer* AGraphicsEngine::createConstantBuffer() {

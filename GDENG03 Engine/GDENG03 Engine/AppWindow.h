@@ -4,6 +4,7 @@
 #include"ASwapChain.h"
 #include"ADeviceContext.h"
 #include"AVertexBuffer.h"
+#include"AIndexBuffer.h"
 #include"AConstantBuffer.h"
 #include"AVertexShader.h"
 #include"APixelShader.h"
@@ -27,6 +28,7 @@ public:
 private:
 	ASwapChain* mSwapChain;
 	AVertexBuffer* mVertexBuffer;
+	// AIndexBuffer* mIndexBuffer;
 	AConstantBuffer* mConstantBuffer;
 	AVertexShader* mVertexShader;
 	APixelShader* mPixelShader;

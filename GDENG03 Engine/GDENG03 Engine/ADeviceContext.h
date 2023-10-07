@@ -3,6 +3,7 @@
 
 class ASwapChain;
 class AVertexBuffer;
+class AIndexBuffer;
 class AConstantBuffer;
 class AVertexShader;
 class APixelShader;
@@ -15,6 +16,7 @@ public:
 
 	void clearRenderTargetColor(ASwapChain* swap_chain, float red, float green, float blue, float alpha);
 	void setVertexBuffer(AVertexBuffer* vertex_buffer);
+	void setIndexBuffer(AIndexBuffer* index_buffer);
 	void setViewportSize(UINT width, UINT height);
 	void setVertexShader(AVertexShader* vertex_shader);
 	void setPixelShader(APixelShader* pixel_shader);

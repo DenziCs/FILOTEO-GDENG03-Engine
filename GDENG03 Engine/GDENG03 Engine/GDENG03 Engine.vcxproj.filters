@@ -87,6 +87,9 @@
     <ClCompile Include="Vector3.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
+    <ClCompile Include="AIndexBuffer.cpp">
+      <Filter>Engine\Graphics\IndexBuffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="AIndexBuffer.h">
+      <Filter>Engine\Graphics\IndexBuffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
