@@ -37,6 +37,9 @@
     <Filter Include="Engine\Math">
       <UniqueIdentifier>{cd41cba7-f848-4893-ac43-35fd9c701384}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Graphics\IndexBuffer">
+      <UniqueIdentifier>{6da49783-2cbe-42a2-be5a-1999900c172a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
