@@ -9,6 +9,8 @@
 #include"AVertexShader.h"
 #include"APixelShader.h"
 #include"AShape.h"
+#include"AGameObject.h"
+#include"ACube.h"
 #include"Vertex.h"
 #include"Matrix4x4.h"
 #include<vector>
@@ -18,8 +20,6 @@ class AppWindow : public AWindow
 public:
 	AppWindow();
 	~AppWindow();
-
-	void updateObjectPosition();
 
 	virtual void onCreate() override;
 	virtual void onUpdate() override;
@@ -33,12 +33,5 @@ private:
 	AVertexShader* mVertexShader;
 	APixelShader* mPixelShader;
 
-	std::vector<AShape*> mShapeList;
-
-	float mMovementSpeed = 0.f;
-	float mAcceleration = 0.5f;
-	float mMovementSign = 1.f;
-	float mAccelerationSign = 1.f;
-
-	float mTheta = 0.f;
+	std::vector<AGameObject*> mObjectList;
 };
