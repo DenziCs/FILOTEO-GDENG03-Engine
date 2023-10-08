@@ -34,6 +34,7 @@ void AppWindow::updateObjectPosition() {
 
 	mTheta += 1.82f * TimeManager::getDeltaTime();
 
+	/*
 	rotator.setIdentity();
 	rotator.setRotationZ(mTheta);
 	shaderNumbers.worldMatrix *= rotator;
@@ -45,6 +46,10 @@ void AppWindow::updateObjectPosition() {
 	rotator.setIdentity();
 	rotator.setRotationX(mTheta);
 	shaderNumbers.worldMatrix *= rotator;
+	*/
+	shaderNumbers.worldMatrix.rotate(2, mTheta);
+	shaderNumbers.worldMatrix.rotate(1, mTheta);
+	shaderNumbers.worldMatrix.rotate(0, mTheta);
 	
 	shaderNumbers.viewMatrix.setIdentity();
 	shaderNumbers.projectionMatrix.setOrthoProjection(

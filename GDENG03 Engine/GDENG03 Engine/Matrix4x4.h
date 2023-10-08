@@ -19,6 +19,12 @@ public:
 	void setOrthoProjection(float width, float height, float near_plane, float far_plane);
 	void setOrthoProjection(float right, float left, float bottom, float top, float near_plane, float far_plane);
 
+	void translate(float delta_x, float delta_y, float delta_z);
+	void translate(const Vector3& translate_vector);
+	void scale(float factor_x, float factor_y, float factor_z);
+	void scale(const Vector3& scale_vector);
+	void rotate(int axis, float theta);
+
 	void operator *=(const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& matrix);
 

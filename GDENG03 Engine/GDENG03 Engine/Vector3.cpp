@@ -27,3 +27,15 @@ Vector3 Vector3::lerp(const Vector3& vector_a, const Vector3& vector_b, float co
 
 	return resultVector;
 }
+
+void Vector3::operator=(const Vector3& vector) {
+	x = vector.x;
+	y = vector.y;
+	z = vector.z;
+}
+
+void Vector3::operator+=(const Vector3& vector) {
+	x += vector.x;
+	y += vector.y;
+	z += vector.z;
+}

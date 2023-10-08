@@ -10,6 +10,9 @@ public:
 
 	static Vector3 lerp(const Vector3& vector_a, const Vector3& vector_b, float coefficient);
 
+	void operator =(const Vector3& vector);
+	void operator +=(const Vector3& vector);
+
 	float x;
 	float y;
 	float z;

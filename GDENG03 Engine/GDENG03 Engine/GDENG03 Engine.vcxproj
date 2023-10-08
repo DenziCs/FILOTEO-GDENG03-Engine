@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="AConstantBuffer.cpp" />
     <ClCompile Include="ADeviceContext.cpp" />
+    <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="AGraphicsEngine.cpp" />
     <ClCompile Include="AIndexBuffer.cpp" />
     <ClCompile Include="APixelShader.cpp" />
@@ -148,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="AConstantBuffer.h" />
     <ClInclude Include="ADeviceContext.h" />
+    <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AGraphicsEngine.h" />
     <ClInclude Include="AIndexBuffer.h" />
     <ClInclude Include="APixelShader.h" />

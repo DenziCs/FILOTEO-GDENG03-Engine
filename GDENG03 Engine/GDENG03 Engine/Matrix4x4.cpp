@@ -87,6 +87,52 @@ void Matrix4x4::setOrthoProjection(float right, float left, float bottom, float 
 	mMatrix[3][2] = -(far_plane + near_plane) / (far_plane - near_plane);
 }
 
+void Matrix4x4::translate(float delta_x, float delta_y, float delta_z) {
+	Matrix4x4 translator;
+	translator.setTranslation(delta_x, delta_y, delta_z);
+	*this *= translator;
+}
+
+void Matrix4x4::translate(const Vector3& translate_vector) {
+	Matrix4x4 translator;
+	translator.setTranslation(translate_vector);
+	*this *= translator;
+}
+
+void Matrix4x4::scale(float factor_x, float factor_y, float factor_z) {
+	Matrix4x4 scaleMatrix;
+	scaleMatrix.setScale(factor_x, factor_y, factor_z);
+	*this *= scaleMatrix;
+}
+
+void Matrix4x4::scale(const Vector3& scale_vector) {
+	Matrix4x4 scaleMatrix;
+	scaleMatrix.setScale(scale_vector);
+	*this *= scaleMatrix;
+}
+
+void Matrix4x4::rotate(int axis, float theta) {
+	Matrix4x4 rotationMatrix;
+	switch (axis) {
+	case 0:
+		rotationMatrix.setIdentity();
+		rotationMatrix.setRotationX(theta);
+		break;
+	case 1:
+		rotationMatrix.setIdentity();
+		rotationMatrix.setRotationY(theta);
+		break;
+	case 2:
+		rotationMatrix.setIdentity();
+		rotationMatrix.setRotationZ(theta);
+		break;
+	default:
+		rotationMatrix.setIdentity();
+	}
+
+	*this *= rotationMatrix;
+}
+
 void Matrix4x4::operator *=(const Matrix4x4& matrix)
 {
 	Matrix4x4 out;

@@ -90,6 +90,9 @@
     <ClCompile Include="AIndexBuffer.cpp">
       <Filter>Engine\Graphics\IndexBuffer</Filter>
     </ClCompile>
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="AIndexBuffer.h">
       <Filter>Engine\Graphics\IndexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="AGameObject.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
