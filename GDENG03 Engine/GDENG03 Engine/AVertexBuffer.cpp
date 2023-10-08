@@ -9,20 +9,20 @@ bool AVertexBuffer::load(void* vertex_list, UINT vertex_size, UINT vertex_count,
 	if (mBuffer) mBuffer->Release();
 	if (mLayout) mLayout->Release();
 
-	D3D11_BUFFER_DESC buffer_desc = {};
-	buffer_desc.Usage = D3D11_USAGE_DEFAULT;
-	buffer_desc.ByteWidth = vertex_size * vertex_count;
-	buffer_desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	buffer_desc.CPUAccessFlags = 0;
-	buffer_desc.MiscFlags = 0;
+	D3D11_BUFFER_DESC bufferDesc = {};
+	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	bufferDesc.ByteWidth = vertex_size * vertex_count;
+	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	bufferDesc.CPUAccessFlags = 0;
+	bufferDesc.MiscFlags = 0;
 
-	D3D11_SUBRESOURCE_DATA init_data = {};
-	init_data.pSysMem = vertex_list;
+	D3D11_SUBRESOURCE_DATA initData = {};
+	initData.pSysMem = vertex_list;
 
 	mVertexSize = vertex_size;
 	mVertexCount = vertex_count;
 	
-	HRESULT result = AGraphicsEngine::getInstance()->mDevice->CreateBuffer(&buffer_desc, &init_data, &mBuffer);
+	HRESULT result = AGraphicsEngine::getInstance()->mDevice->CreateBuffer(&bufferDesc, &initData, &mBuffer);
 	if (FAILED(result)) return false;
 
 	D3D11_INPUT_ELEMENT_DESC layout[] = {
@@ -37,31 +37,21 @@ bool AVertexBuffer::load(void* vertex_list, UINT vertex_size, UINT vertex_count,
 		},
 
 		{
-			"POSITION",
-			1,
+			"COLOR",
+			0,
 			DXGI_FORMAT_R32G32B32_FLOAT,
 			0,
-			sizeof(Vector3),
+			(sizeof(Vector3) * 1),
 			D3D11_INPUT_PER_VERTEX_DATA,
 			0
 		},
 
 		{
 			"COLOR",
-			0,
+			1,
 			DXGI_FORMAT_R32G32B32_FLOAT,
 			0,
 			(sizeof(Vector3) * 2),
-			D3D11_INPUT_PER_VERTEX_DATA,
-			0
-		},
-
-		{
-			"COLOR",
-			1,
-			DXGI_FORMAT_R32G32B32_FLOAT,
-			0,
-			(sizeof(Vector3) * 3),
 			D3D11_INPUT_PER_VERTEX_DATA,
 			0
 		}

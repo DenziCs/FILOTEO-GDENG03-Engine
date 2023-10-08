@@ -129,8 +129,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AConstantBuffer.cpp" />
+    <ClCompile Include="ACube.cpp" />
     <ClCompile Include="ADeviceContext.cpp" />
+    <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="AGraphicsEngine.cpp" />
+    <ClCompile Include="AIndexBuffer.cpp" />
     <ClCompile Include="APixelShader.cpp" />
     <ClCompile Include="AppWindow.cpp" />
     <ClCompile Include="AShape.cpp" />
@@ -138,6 +141,7 @@
     <ClCompile Include="AVertexBuffer.cpp" />
     <ClCompile Include="AWindow.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Vector3.cpp" />
     <ClCompile Include="Vertex.cpp" />
@@ -145,14 +149,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AConstantBuffer.h" />
+    <ClInclude Include="ACube.h" />
     <ClInclude Include="ADeviceContext.h" />
+    <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AGraphicsEngine.h" />
+    <ClInclude Include="AIndexBuffer.h" />
     <ClInclude Include="APixelShader.h" />
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="AShape.h" />
     <ClInclude Include="ASwapChain.h" />
     <ClInclude Include="AVertexBuffer.h" />
     <ClInclude Include="AWindow.h" />
+    <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vertex.h" />

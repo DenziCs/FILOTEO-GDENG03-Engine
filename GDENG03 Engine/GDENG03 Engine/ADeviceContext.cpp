@@ -1,6 +1,7 @@
 #include"ADeviceContext.h"
 #include"ASwapChain.h"
 #include"AVertexBuffer.h"
+#include"AIndexBuffer.h"
 #include"AConstantBuffer.h"
 #include"AVertexShader.h"
 #include"APixelShader.h"
@@ -22,6 +23,10 @@ void ADeviceContext::setVertexBuffer(AVertexBuffer* vertex_buffer) {
 	UINT offset = 0;
 	mDeviceContext->IASetVertexBuffers(0, 1, &(vertex_buffer->mBuffer), &stride, &offset);
 	mDeviceContext->IASetInputLayout(vertex_buffer->mLayout);
+}
+
+void ADeviceContext::setIndexBuffer(AIndexBuffer* index_buffer) {
+	mDeviceContext->IASetIndexBuffer(index_buffer->mBuffer, DXGI_FORMAT_R32_UINT, 0);
 }
 
 void ADeviceContext::setViewportSize(UINT width, UINT height) {
@@ -52,6 +57,11 @@ void ADeviceContext::setConstantBuffer(AConstantBuffer* constant_buffer, APixelS
 void ADeviceContext::drawTriangleList(UINT vertex_count, UINT initial_vertex_index) {
 	mDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	mDeviceContext->Draw(vertex_count, initial_vertex_index);
+}
+
+void ADeviceContext::drawIndexedTriangleList(UINT index_count, UINT start_index_location, UINT base_vertex_location) {
+	mDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	mDeviceContext->DrawIndexed(index_count, start_index_location, base_vertex_location);
 }
 
 void ADeviceContext::drawTriangleStrip(UINT vertex_count, UINT initial_vertex_index) {
