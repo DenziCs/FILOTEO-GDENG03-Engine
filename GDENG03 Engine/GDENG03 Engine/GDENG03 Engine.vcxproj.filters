@@ -40,6 +40,9 @@
     <Filter Include="Engine\Graphics\IndexBuffer">
       <UniqueIdentifier>{6da49783-2cbe-42a2-be5a-1999900c172a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{8af7890f-f336-4a8e-8c9a-97854b22e71f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,6 +96,12 @@
     <ClCompile Include="AGameObject.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClCompile>
+    <ClCompile Include="ACube.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -142,6 +151,15 @@
     </ClInclude>
     <ClInclude Include="AGameObject.h">
       <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="ACube.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="AInputListener.h">
+      <Filter>Engine\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

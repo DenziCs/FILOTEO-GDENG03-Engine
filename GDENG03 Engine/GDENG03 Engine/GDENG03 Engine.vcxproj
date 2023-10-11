@@ -140,6 +140,7 @@
     <ClCompile Include="ASwapChain.cpp" />
     <ClCompile Include="AVertexBuffer.cpp" />
     <ClCompile Include="AWindow.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="TimeManager.cpp" />
@@ -154,12 +155,14 @@
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AGraphicsEngine.h" />
     <ClInclude Include="AIndexBuffer.h" />
+    <ClInclude Include="AInputListener.h" />
     <ClInclude Include="APixelShader.h" />
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="AShape.h" />
     <ClInclude Include="ASwapChain.h" />
     <ClInclude Include="AVertexBuffer.h" />
     <ClInclude Include="AWindow.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Vector3.h" />

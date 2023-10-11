@@ -1,5 +1,6 @@
 #include"ACube.h"
 #include"AGraphicsEngine.h"
+#include"InputManager.h"
 #include"ADeviceContext.h"
 #include<iostream>
 
@@ -83,12 +84,8 @@ ACube::ACube(std::string name, void* shader_byte_code, size_t shader_size) : AGa
 	mConstantBuffer->load(&datablock, sizeof(constant));
 
 	delete[] currentVertexList;
-}
 
-ACube::ACube(std::string name, AVertexBuffer* vertex_buffer, AIndexBuffer* index_buffer, AConstantBuffer* constant_buffer) : AGameObject::AGameObject(name) {
-	mVertexBuffer = vertex_buffer;
-	mIndexBuffer = index_buffer;
-	mConstantBuffer = constant_buffer;
+	InputManager::getInstance()->addListener(this);
 }
 
 ACube::~ACube() {
@@ -99,7 +96,7 @@ ACube::~ACube() {
 
 void ACube::update(float delta_time) {
 	mElapsedTime += delta_time; 
-	mDeltaPosition += mSpeed * delta_time;
+	mDeltaPosition = mSpeed * delta_time;
 }
 
 void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {
@@ -113,9 +110,23 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 	shaderNumbers.worldMatrix.rotate(1, this->getLocalRotation().y);
 	shaderNumbers.worldMatrix.rotate(2, this->getLocalRotation().z);
 
-	shaderNumbers.worldMatrix.rotate(2, mDeltaPosition);
-	shaderNumbers.worldMatrix.rotate(1, mDeltaPosition);
-	shaderNumbers.worldMatrix.rotate(0, mDeltaPosition);
+	if (InputManager::getInstance()->isKeyDown(0x57)) {
+		shaderNumbers.worldMatrix.rotate(2, mDeltaPosition);
+		shaderNumbers.worldMatrix.rotate(1, mDeltaPosition);
+		shaderNumbers.worldMatrix.rotate(0, mDeltaPosition);
+		Vector3 newRotation = this->getLocalRotation();
+		newRotation += Vector3(mDeltaPosition, mDeltaPosition, mDeltaPosition);
+		this->setRotation(newRotation);
+	}
+	
+	if (InputManager::getInstance()->isKeyDown(0x53)) {
+		shaderNumbers.worldMatrix.rotate(2, -mDeltaPosition);
+		shaderNumbers.worldMatrix.rotate(1, -mDeltaPosition);
+		shaderNumbers.worldMatrix.rotate(0, -mDeltaPosition);
+		Vector3 newRotation = this->getLocalRotation();
+		newRotation += Vector3(-mDeltaPosition, -mDeltaPosition, -mDeltaPosition);
+		this->setRotation(newRotation);
+	}
 
 	shaderNumbers.worldMatrix.translate(this->getLocalPosition());
 
@@ -137,4 +148,14 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 
 void ACube::setAnimationSpeed(float speed) {
 	mSpeed = speed;
+}
+
+void ACube::onPress(int key) {
+	if (key == 0x57) std::cout << "W key has been pressed." << std::endl;
+	if (key == 0x53) std::cout << "S key has been pressed." << std::endl;
+}
+
+void ACube::onRelease(int key) {
+	if (key == 0x57) std::cout << "W key has been released." << std::endl;
+	if (key == 0x53) std::cout << "S key has been released." << std::endl;
 }

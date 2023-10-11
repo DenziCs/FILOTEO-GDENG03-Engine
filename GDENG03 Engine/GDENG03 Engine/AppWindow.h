@@ -1,6 +1,7 @@
 #pragma once
 #include"AWindow.h"
 #include"AGraphicsEngine.h"
+#include"InputManager.h"
 #include"ASwapChain.h"
 #include"ADeviceContext.h"
 #include"AVertexBuffer.h"

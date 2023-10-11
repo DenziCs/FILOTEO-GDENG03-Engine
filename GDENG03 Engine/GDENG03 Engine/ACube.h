@@ -1,20 +1,23 @@
 #pragma once
 #include"AGameObject.h"
+#include"AInputListener.h"
 #include"AVertexBuffer.h"
 #include"AIndexBuffer.h"
 #include"AConstantBuffer.h"
 #include"Matrix4x4.h"
 
-class ACube : public AGameObject
+class ACube : public AGameObject, public AInputListener
 {
 public:
 	ACube(std::string name, void* shader_byte_code, size_t shader_size);
-	ACube(std::string name, AVertexBuffer* vertex_buffer, AIndexBuffer* index_buffer, AConstantBuffer* constant_buffer);
 	~ACube();
 
 	void update(float delta_time) override;
 	void draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) override;
 	void setAnimationSpeed(float speed);
+
+	void onPress(int key) override;
+	void onRelease(int key) override;
 
 private:
 	AVertexBuffer* mVertexBuffer;

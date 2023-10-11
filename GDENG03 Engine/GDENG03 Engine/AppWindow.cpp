@@ -96,6 +96,8 @@ void AppWindow::onUpdate() {
 	UINT height = windowRect.bottom - windowRect.top;
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
 
+	InputManager::getInstance()->update();
+
 	for (int i = 0; i < mObjectList.size(); i++) {
 		mObjectList[i]->update(TimeManager::getDeltaTime());
 		mObjectList[i]->draw(width, height, mVertexShader, mPixelShader);
@@ -107,6 +109,8 @@ void AppWindow::onUpdate() {
 void AppWindow::onDestroy() {
 	AWindow::onDestroy();
 	mSwapChain->release();
+
+	InputManager::destroy();
 
 	for (int i = 0; i < mObjectList.size(); i++) {
 		delete mObjectList[i];
