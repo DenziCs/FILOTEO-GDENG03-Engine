@@ -19,6 +19,12 @@ public:
 	void onPress(int key) override;
 	void onRelease(int key) override;
 
+	void onMouseMove(Point delta_position) override;
+	void onLMBPress(Point mouse_position) override;
+	void onLMBRelease(Point mouse_position) override;
+	void onRMBPress(Point mouse_position) override;
+	void onRMBRelease(Point mouse_position) override;
+
 private:
 	AVertexBuffer* mVertexBuffer;
 	AIndexBuffer* mIndexBuffer;

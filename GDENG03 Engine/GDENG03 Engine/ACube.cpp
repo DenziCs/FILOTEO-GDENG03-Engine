@@ -159,3 +159,13 @@ void ACube::onRelease(int key) {
 	if (key == 'W') std::cout << "W key has been released." << std::endl;
 	if (key == 'S') std::cout << "S key has been released." << std::endl;
 }
+
+void ACube::onMouseMove(Point delta_position) {}
+
+void ACube::onLMBPress(Point mouse_position) {}
+
+void ACube::onLMBRelease(Point mouse_position) {}
+
+void ACube::onRMBPress(Point mouse_position) {}
+
+void ACube::onRMBRelease(Point mouse_position) {}

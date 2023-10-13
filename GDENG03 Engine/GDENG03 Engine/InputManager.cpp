@@ -32,10 +32,51 @@ void InputManager::removeListener(AInputListener* listener) {
 }
 
 void InputManager::update() {
+	POINT currMousePosition = {};
+	GetCursorPos(&currMousePosition);
+
+	if (mIsFirstCall) {
+		mPrevMousePosition = Point(currMousePosition.x, currMousePosition.y);
+		mIsFirstCall = false;
+	}
+
+	if (
+		mPrevMousePosition.getX() != currMousePosition.x ||
+		mPrevMousePosition.getY() != currMousePosition.y
+	) {
+		Point deltaPosition = Point(
+			currMousePosition.x - mPrevMousePosition.getX(),
+			currMousePosition.y - mPrevMousePosition.getY()
+		);
+		onMouseMove(deltaPosition);
+	}
+
+	mPrevMousePosition = Point(currMousePosition.x, currMousePosition.y);
+
 	if (GetKeyboardState(mCurrKeyStates)) {
 		for (int i = 0; i < ARRAYSIZE(mCurrKeyStates); i++) {
-			if (mCurrKeyStates[i] & 0x80 && mCurrKeyStates[i] != mPrevKeyStates[i]) onPress(i);
-			else if (mCurrKeyStates[i] != mPrevKeyStates[i]) onRelease(i);
+			if (mCurrKeyStates[i] & 0x80 && mCurrKeyStates[i] != mPrevKeyStates[i]) {
+				if (i == VK_LBUTTON && mCurrKeyStates[i] != mPrevKeyStates[i]) {
+					Point mousePosition = Point(currMousePosition.x, currMousePosition.y);
+					onLMBPress(mousePosition);
+				}
+				else if (i == VK_RBUTTON && mCurrKeyStates[i] != mPrevKeyStates[i]) {
+					Point mousePosition = Point(currMousePosition.x, currMousePosition.y);
+					onRMBPress(mousePosition);
+				}
+				else onPress(i);
+			}
+			else if (mCurrKeyStates[i] != mPrevKeyStates[i]) {
+				if (i == VK_LBUTTON && mCurrKeyStates[i] != mPrevKeyStates[i]) {
+					Point mousePosition = Point(currMousePosition.x, currMousePosition.y);
+					onLMBRelease(mousePosition);
+				}
+				else if (i == VK_RBUTTON && mCurrKeyStates[i] != mPrevKeyStates[i]) {
+					Point mousePosition = Point(currMousePosition.x, currMousePosition.y);
+					onRMBRelease(mousePosition);
+				}
+				else onRelease(i);
+			}
 		}
 	}
 
@@ -60,6 +101,36 @@ void InputManager::onPress(int key) {
 void InputManager::onRelease(int key) {
 	for (int i = 0; i < mListenerList.size(); i++) {
 		mListenerList[i]->onRelease(key);
+	}
+}
+
+void InputManager::onMouseMove(Point delta_position) {
+	for (int i = 0; i < mListenerList.size(); i++) {
+		mListenerList[i]->onMouseMove(delta_position);
+	}
+}
+
+void InputManager::onLMBPress(Point mouse_position) {
+	for (int i = 0; i < mListenerList.size(); i++) {
+		mListenerList[i]->onLMBPress(mouse_position);
+	}
+}
+
+void InputManager::onLMBRelease(Point mouse_position) {
+	for (int i = 0; i < mListenerList.size(); i++) {
+		mListenerList[i]->onLMBRelease(mouse_position);
+	}
+}
+
+void InputManager::onRMBPress(Point mouse_position) {
+	for (int i = 0; i < mListenerList.size(); i++) {
+		mListenerList[i]->onRMBPress(mouse_position);
+	}
+}
+
+void InputManager::onRMBRelease(Point mouse_position) {
+	for (int i = 0; i < mListenerList.size(); i++) {
+		mListenerList[i]->onRMBRelease(mouse_position);
 	}
 }
 

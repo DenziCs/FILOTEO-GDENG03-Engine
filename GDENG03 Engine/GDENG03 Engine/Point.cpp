@@ -14,3 +14,11 @@ Point::Point(const Point* point) {
 	x = point->x;
 	y = point->y;
 }
+
+int Point::getX() const {
+	return x;
+}
+
+int Point::getY() const {
+	return y;
+}
