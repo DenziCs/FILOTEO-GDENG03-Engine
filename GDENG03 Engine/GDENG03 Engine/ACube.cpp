@@ -110,7 +110,7 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 	shaderNumbers.worldMatrix.rotate(1, this->getLocalRotation().y);
 	shaderNumbers.worldMatrix.rotate(2, this->getLocalRotation().z);
 
-	if (InputManager::getInstance()->isKeyDown(0x57)) {
+	if (InputManager::getInstance()->isKeyDown('W')) {
 		shaderNumbers.worldMatrix.rotate(2, mDeltaPosition);
 		shaderNumbers.worldMatrix.rotate(1, mDeltaPosition);
 		shaderNumbers.worldMatrix.rotate(0, mDeltaPosition);
@@ -119,7 +119,7 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 		this->setRotation(newRotation);
 	}
 	
-	if (InputManager::getInstance()->isKeyDown(0x53)) {
+	if (InputManager::getInstance()->isKeyDown('S')) {
 		shaderNumbers.worldMatrix.rotate(2, -mDeltaPosition);
 		shaderNumbers.worldMatrix.rotate(1, -mDeltaPosition);
 		shaderNumbers.worldMatrix.rotate(0, -mDeltaPosition);
@@ -131,7 +131,7 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 	shaderNumbers.worldMatrix.translate(this->getLocalPosition());
 
 	shaderNumbers.viewMatrix.setIdentity();
-	shaderNumbers.projectionMatrix.setOrthoProjection(width / 400.f, height / 400.f, -4.f, 4.f);
+	shaderNumbers.projectionMatrix.setOrthographicProjection(width / 400.f, height / 400.f, -4.f, 4.f);
 
 	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &shaderNumbers);
 
@@ -151,11 +151,11 @@ void ACube::setAnimationSpeed(float speed) {
 }
 
 void ACube::onPress(int key) {
-	if (key == 0x57) std::cout << "W key has been pressed." << std::endl;
-	if (key == 0x53) std::cout << "S key has been pressed." << std::endl;
+	if (key == 'W') std::cout << "W key has been pressed." << std::endl;
+	if (key == 'S') std::cout << "S key has been pressed." << std::endl;
 }
 
 void ACube::onRelease(int key) {
-	if (key == 0x57) std::cout << "W key has been released." << std::endl;
-	if (key == 0x53) std::cout << "S key has been released." << std::endl;
+	if (key == 'W') std::cout << "W key has been released." << std::endl;
+	if (key == 'S') std::cout << "S key has been released." << std::endl;
 }

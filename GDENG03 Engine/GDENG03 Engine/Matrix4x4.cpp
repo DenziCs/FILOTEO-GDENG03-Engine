@@ -67,7 +67,7 @@ void Matrix4x4::setRotationZ(float theta) {
 	mMatrix[1][1] = cos(theta);
 }
 
-void Matrix4x4::setOrthoProjection(float width, float height, float near_plane, float far_plane) {
+void Matrix4x4::setOrthographicProjection(float width, float height, float near_plane, float far_plane) {
 	setIdentity();
 
 	mMatrix[0][0] = 2.f / width;
@@ -76,15 +76,17 @@ void Matrix4x4::setOrthoProjection(float width, float height, float near_plane, 
 	mMatrix[3][2] = -near_plane / (far_plane - near_plane);
 }
 
-void Matrix4x4::setOrthoProjection(float right, float left, float bottom, float top, float near_plane, float far_plane) {
+void Matrix4x4::setPerspectiveProjection(float field_of_view, float aspect, float near_plane, float far_plane) {
 	setIdentity();
 
-	mMatrix[0][0] = 2.f / (right - left);
-	mMatrix[1][1] = 2.f / (top - bottom);
-	mMatrix[2][2] = -2.f / (far_plane - near_plane);
-	mMatrix[3][0] = -(right + left) / (right - left);
-	mMatrix[3][1] = -(top + bottom) / (top - bottom);
-	mMatrix[3][2] = -(far_plane + near_plane) / (far_plane - near_plane);
+	float yScale = 1.f / tan(field_of_view / 2.f);
+	float xScale = yScale / aspect;
+
+	mMatrix[0][0] = xScale;
+	mMatrix[1][1] = yScale;
+	mMatrix[2][2] = far_plane / (far_plane - near_plane);
+	mMatrix[2][3] = 1.f;
+	mMatrix[3][2] = -(far_plane * near_plane) / (far_plane - near_plane);
 }
 
 void Matrix4x4::translate(float delta_x, float delta_y, float delta_z) {

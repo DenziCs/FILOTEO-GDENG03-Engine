@@ -16,8 +16,8 @@ public:
 	void setRotationX(float theta);
 	void setRotationY(float theta);
 	void setRotationZ(float theta);
-	void setOrthoProjection(float width, float height, float near_plane, float far_plane);
-	void setOrthoProjection(float right, float left, float bottom, float top, float near_plane, float far_plane);
+	void setOrthographicProjection(float width, float height, float near_plane, float far_plane);
+	void setPerspectiveProjection(float field_of_view, float aspect, float near_plane, float far_plane);
 
 	void translate(float delta_x, float delta_y, float delta_z);
 	void translate(const Vector3& translate_vector);
