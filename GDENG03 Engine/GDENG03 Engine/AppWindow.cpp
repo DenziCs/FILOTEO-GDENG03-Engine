@@ -2,14 +2,6 @@
 #include<Windows.h>
 #include<iostream>
 
-__declspec(align(16))
-struct constant {
-	Matrix4x4 worldMatrix;
-	Matrix4x4 viewMatrix;
-	Matrix4x4 projectionMatrix;
-	float coefficient;
-};
-
 AppWindow::AppWindow() {}
 
 AppWindow::~AppWindow() {}
@@ -23,6 +15,11 @@ void AppWindow::onCreate() {
 	UINT width = windowRect.right - windowRect.left;
 	UINT height = windowRect.bottom - windowRect.top;
 	mSwapChain->initialize(this->mWindowHandle, width, height);
+
+	ACamera* sceneCamera = new ACamera("UnregisteredHyperCam2");
+	sceneCamera->setPosition(0.f, 0.f, 0.f);
+	sceneCamera->setRotation(0.f, 0.f, 0.f);
+	SceneCameraManager::getInstance()->setSceneCamera(sceneCamera);
 
 	void* shaderByteCode = nullptr;
 	size_t shaderSize;
@@ -104,6 +101,7 @@ void AppWindow::onUpdate() {
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setViewportSize(width, height);
 
 	InputManager::getInstance()->update();
+	SceneCameraManager::getInstance()->update();
 
 	for (int i = 0; i < mObjectList.size(); i++) {
 		mObjectList[i]->update(TimeManager::getDeltaTime());
@@ -118,6 +116,7 @@ void AppWindow::onDestroy() {
 	mSwapChain->release();
 
 	InputManager::destroy();
+	SceneCameraManager::destroy();
 
 	for (int i = 0; i < mObjectList.size(); i++) {
 		delete mObjectList[i];

@@ -2,6 +2,7 @@
 #include"AWindow.h"
 #include"AGraphicsEngine.h"
 #include"InputManager.h"
+#include"SceneCameraManager.h"
 #include"ASwapChain.h"
 #include"ADeviceContext.h"
 #include"AVertexBuffer.h"
@@ -12,6 +13,7 @@
 #include"AShape.h"
 #include"AGameObject.h"
 #include"ACube.h"
+#include"ACamera.h"
 #include"Vertex.h"
 #include"Matrix4x4.h"
 #include<vector>

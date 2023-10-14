@@ -1,7 +1,7 @@
 /*
 Nathaniel Francis S. Filoteo
 GDENG03 X22
-HO -- Instantiating Multiple Cubes
+HO -- Input System and Scene Camera
 */
 
 #include"AppWindow.h"
