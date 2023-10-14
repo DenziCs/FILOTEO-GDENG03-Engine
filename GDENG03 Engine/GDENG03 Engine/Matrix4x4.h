@@ -1,6 +1,7 @@
 #pragma once
 #include<memory>
 #include"Vector3.h"
+#include"Vector4.h"
 
 class Matrix4x4
 {
@@ -27,6 +28,9 @@ public:
 
 	void operator *=(const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& matrix);
+
+	float getDeterminant();
+	void inverse();
 
 	float mMatrix[4][4] = {};
 };

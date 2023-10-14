@@ -154,3 +154,48 @@ void Matrix4x4::operator *=(const Matrix4x4& matrix) {
 void Matrix4x4::setMatrix(const Matrix4x4& matrix) {
 	::memcpy(mMatrix, matrix.mMatrix, sizeof(float) * 16);
 }
+
+float Matrix4x4::getDeterminant() {
+	Vector4 minor, v1, v2, v3;
+	float determinant;
+
+	v1 = Vector4(mMatrix[0][0], mMatrix[1][0], mMatrix[2][0], mMatrix[3][0]);
+	v2 = Vector4(mMatrix[0][1], mMatrix[1][1], mMatrix[2][1], mMatrix[3][1]);
+	v3 = Vector4(mMatrix[0][2], mMatrix[1][2], mMatrix[2][2], mMatrix[3][2]);
+
+
+	minor.cross(v1, v2, v3);
+	determinant = -(mMatrix[0][3] * minor.x + mMatrix[1][3] * minor.y + mMatrix[2][3] * minor.z + mMatrix[3][3] * minor.w);
+	return determinant;
+}
+
+void Matrix4x4::inverse() {
+	int a, i, j;
+	Matrix4x4 out;
+	Vector4 v, vec[3];
+	float determinant = 0.0f;
+
+	determinant = getDeterminant();
+	if (!determinant) return;
+
+	for (i = 0; i < 4; i++) {
+		for (j = 0; j < 4; j++) {
+			if (j != i) {
+				a = j;
+				if (j > i) a = a - 1;
+				vec[a].x = (mMatrix[j][0]);
+				vec[a].y = (mMatrix[j][1]);
+				vec[a].z = (mMatrix[j][2]);
+				vec[a].w = (mMatrix[j][3]);
+			}
+		}
+		v.cross(vec[0], vec[1], vec[2]);
+
+		out.mMatrix[0][i] = pow(-1.f, i) * v.x / determinant;
+		out.mMatrix[1][i] = pow(-1.f, i) * v.y / determinant;
+		out.mMatrix[2][i] = pow(-1.f, i) * v.z / determinant;
+		out.mMatrix[3][i] = pow(-1.f, i) * v.w / determinant;
+	}
+
+	setMatrix(out);
+}
