@@ -135,8 +135,7 @@ void Matrix4x4::rotate(int axis, float theta) {
 	*this *= rotationMatrix;
 }
 
-void Matrix4x4::operator *=(const Matrix4x4& matrix)
-{
+void Matrix4x4::operator *=(const Matrix4x4& matrix) {
 	Matrix4x4 out;
 	for (int i = 0; i < 4; i++)
 	{
@@ -152,7 +151,6 @@ void Matrix4x4::operator *=(const Matrix4x4& matrix)
 	setMatrix(out);
 }
 
-void Matrix4x4::setMatrix(const Matrix4x4& matrix)
-{
+void Matrix4x4::setMatrix(const Matrix4x4& matrix) {
 	::memcpy(mMatrix, matrix.mMatrix, sizeof(float) * 16);
 }
