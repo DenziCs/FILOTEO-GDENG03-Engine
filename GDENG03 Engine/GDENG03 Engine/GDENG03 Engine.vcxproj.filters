@@ -102,6 +102,10 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Engine\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Vector4.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -160,6 +164,10 @@
     </ClInclude>
     <ClInclude Include="AInputListener.h">
       <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Vector4.h">
+      <Filter>Engine\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
