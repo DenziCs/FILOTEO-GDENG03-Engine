@@ -137,7 +137,8 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 	shaderNumbers.worldMatrix.translate(this->getLocalPosition());
 
 	shaderNumbers.viewMatrix.setIdentity();
-	shaderNumbers.projectionMatrix.setOrthographicProjection(width / 400.f, height / 400.f, -4.f, 4.f);
+	// shaderNumbers.projectionMatrix.setOrthographicProjection(width / 400.f, height / 400.f, -4.f, 4.f);
+	shaderNumbers.projectionMatrix.setPerspectiveProjection(1.57f, (float)width / (float)height, 0.1f, 100.f);
 
 	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &shaderNumbers);
 
