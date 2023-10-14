@@ -4,14 +4,6 @@
 #include"ADeviceContext.h"
 #include<iostream>
 
-__declspec(align(16))
-struct constant {
-	Matrix4x4 worldMatrix;
-	Matrix4x4 viewMatrix;
-	Matrix4x4 projectionMatrix;
-	float coefficient;
-};
-
 ACube::ACube(std::string name, void* shader_byte_code, size_t shader_size) : AGameObject::AGameObject(name) {
 	Vertex* currentVertexList = new Vertex[8];
 
@@ -92,6 +84,8 @@ ACube::~ACube() {
 	mVertexBuffer->release();
 	mIndexBuffer->release();
 	mConstantBuffer->release();
+
+	InputManager::getInstance()->removeListener(this);
 }
 
 void ACube::update(float delta_time) {

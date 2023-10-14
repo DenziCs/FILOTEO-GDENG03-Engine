@@ -29,6 +29,10 @@ public:
 	void operator *=(const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& matrix);
 
+	Vector3 getRightVector();
+	Vector3 getUpVector();
+	Vector3 getForwardVector();
+	Vector3 getTranslation();
 	float getDeterminant();
 	void inverse();
 

@@ -1,10 +1,10 @@
 #include"Matrix4x4.h"
 
 Matrix4x4::Matrix4x4() {
+	setIdentity();
 }
 
-Matrix4x4::~Matrix4x4() {
-}
+Matrix4x4::~Matrix4x4() {}
 
 void Matrix4x4::setIdentity() {
 	::memset(mMatrix, 0.f, sizeof(float) * 16);
@@ -153,6 +153,22 @@ void Matrix4x4::operator *=(const Matrix4x4& matrix) {
 
 void Matrix4x4::setMatrix(const Matrix4x4& matrix) {
 	::memcpy(mMatrix, matrix.mMatrix, sizeof(float) * 16);
+}
+
+Vector3 Matrix4x4::getRightVector() {
+	return Vector3(mMatrix[0][0], mMatrix[0][1], mMatrix[0][2]);
+}
+
+Vector3 Matrix4x4::getUpVector() {
+	return Vector3(mMatrix[1][0], mMatrix[1][1], mMatrix[1][2]);
+}
+
+Vector3 Matrix4x4::getForwardVector() {
+	return Vector3(mMatrix[2][0], mMatrix[2][1], mMatrix[2][2]);
+}
+
+Vector3 Matrix4x4::getTranslation() {
+	return Vector3(mMatrix[3][0], mMatrix[3][1], mMatrix[3][2]);
 }
 
 float Matrix4x4::getDeterminant() {

@@ -5,6 +5,7 @@ AGameObject::AGameObject(std::string name) {
 	mLocalPosition = Vector3(0.f, 0.f, 0.f);
 	mLocalRotation = Vector3(0.f, 0.f, 0.f);
 	mLocalScale = Vector3(1.f, 1.f, 1.f);
+	mLocalMatrix.setIdentity();
 }
 
 AGameObject::~AGameObject() {}
