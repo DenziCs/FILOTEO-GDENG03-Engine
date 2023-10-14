@@ -82,6 +82,12 @@ void AppWindow::onCreate() {
 	cubeI->setAnimationSpeed(1.5f);
 	mObjectList.push_back(cubeI);
 
+	ACube* cubeJ = new ACube("CubeJ", shaderByteCode, shaderSize);
+	cubeJ->setPosition(0.9f, 0.5f, -0.35f);
+	cubeJ->setScale(0.25f, 0.25f, 0.25f);
+	cubeJ->setAnimationSpeed(1.25f);
+	mObjectList.push_back(cubeJ);
+
 	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
 	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();

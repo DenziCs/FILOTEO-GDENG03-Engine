@@ -95,7 +95,7 @@ ACube::~ACube() {
 }
 
 void ACube::update(float delta_time) {
-	mElapsedTime += delta_time; 
+	mDeltaTime = delta_time;
 	mDeltaPosition = mSpeed * delta_time;
 }
 
@@ -117,6 +117,9 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 		Vector3 newRotation = this->getLocalRotation();
 		newRotation += Vector3(mDeltaPosition, mDeltaPosition, mDeltaPosition);
 		this->setRotation(newRotation);
+
+		mElapsedTime += mDeltaTime;
+		shaderNumbers.coefficient = 0.5f * (sin(mElapsedTime) + 1.f);
 	}
 	
 	if (InputManager::getInstance()->isKeyDown('S')) {
@@ -126,6 +129,9 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 		Vector3 newRotation = this->getLocalRotation();
 		newRotation += Vector3(-mDeltaPosition, -mDeltaPosition, -mDeltaPosition);
 		this->setRotation(newRotation);
+
+		mElapsedTime -= mDeltaTime;
+		shaderNumbers.coefficient = 0.5f * (sin(mElapsedTime) + 1.f);
 	}
 
 	shaderNumbers.worldMatrix.translate(this->getLocalPosition());
