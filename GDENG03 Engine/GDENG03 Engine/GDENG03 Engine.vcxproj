@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ACamera.cpp" />
     <ClCompile Include="AConstantBuffer.cpp" />
     <ClCompile Include="ACube.cpp" />
     <ClCompile Include="ADeviceContext.cpp" />
@@ -140,29 +141,39 @@
     <ClCompile Include="ASwapChain.cpp" />
     <ClCompile Include="AVertexBuffer.cpp" />
     <ClCompile Include="AWindow.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="SceneCameraManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Vector3.cpp" />
+    <ClCompile Include="Vector4.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="AVertexShader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ACamera.h" />
     <ClInclude Include="AConstantBuffer.h" />
     <ClInclude Include="ACube.h" />
     <ClInclude Include="ADeviceContext.h" />
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="AGraphicsEngine.h" />
     <ClInclude Include="AIndexBuffer.h" />
+    <ClInclude Include="AInputListener.h" />
     <ClInclude Include="APixelShader.h" />
     <ClInclude Include="AppWindow.h" />
     <ClInclude Include="AShape.h" />
     <ClInclude Include="ASwapChain.h" />
     <ClInclude Include="AVertexBuffer.h" />
     <ClInclude Include="AWindow.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Matrix4x4.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="SceneCameraManager.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vector4.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="AVertexShader.h" />
   </ItemGroup>

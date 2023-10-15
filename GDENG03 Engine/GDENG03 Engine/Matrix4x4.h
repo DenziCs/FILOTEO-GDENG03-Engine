@@ -1,6 +1,7 @@
 #pragma once
 #include<memory>
 #include"Vector3.h"
+#include"Vector4.h"
 
 class Matrix4x4
 {
@@ -16,8 +17,8 @@ public:
 	void setRotationX(float theta);
 	void setRotationY(float theta);
 	void setRotationZ(float theta);
-	void setOrthoProjection(float width, float height, float near_plane, float far_plane);
-	void setOrthoProjection(float right, float left, float bottom, float top, float near_plane, float far_plane);
+	void setOrthographicProjection(float width, float height, float near_plane, float far_plane);
+	void setPerspectiveProjection(float field_of_view, float aspect, float near_plane, float far_plane);
 
 	void translate(float delta_x, float delta_y, float delta_z);
 	void translate(const Vector3& translate_vector);
@@ -27,6 +28,13 @@ public:
 
 	void operator *=(const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& matrix);
+
+	Vector3 getRightVector();
+	Vector3 getUpVector();
+	Vector3 getForwardVector();
+	Vector3 getTranslation();
+	float getDeterminant();
+	void inverse();
 
 	float mMatrix[4][4] = {};
 };

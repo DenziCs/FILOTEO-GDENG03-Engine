@@ -40,6 +40,12 @@
     <Filter Include="Engine\Graphics\IndexBuffer">
       <UniqueIdentifier>{6da49783-2cbe-42a2-be5a-1999900c172a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{8af7890f-f336-4a8e-8c9a-97854b22e71f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{1af341cd-0d6d-4239-8bce-7bba3cad34c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,6 +99,24 @@
     <ClCompile Include="AGameObject.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClCompile>
+    <ClCompile Include="ACube.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Engine\Windowing</Filter>
+    </ClCompile>
+    <ClCompile Include="ACamera.cpp">
+      <Filter>Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneCameraManager.cpp">
+      <Filter>Engine\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -142,6 +166,27 @@
     </ClInclude>
     <ClInclude Include="AGameObject.h">
       <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="ACube.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="AInputListener.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Engine\Windowing</Filter>
+    </ClInclude>
+    <ClInclude Include="ACamera.h">
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneCameraManager.h">
+      <Filter>Engine\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -47,7 +47,7 @@ bool AWindow::initialize() {
 	mWindowHandle = ::CreateWindowEx(
 		WS_EX_OVERLAPPEDWINDOW,
 		L"AWindowClass",
-		L"FILOTEO HO -- Instantiating Multiple Cubes",
+		L"FILOTEO HO -- Input System and Scene Camera",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,

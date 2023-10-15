@@ -1,5 +1,6 @@
 #pragma once
 #include"Vector3.h"
+#include"Matrix4x4.h"
 #include<string>
 
 class AVertexShader;
@@ -26,9 +27,18 @@ public:
 	void setRotation(Vector3 rotation);
 	Vector3 getLocalRotation();
 
+	__declspec(align(16))
+		struct constant {
+		Matrix4x4 worldMatrix;
+		Matrix4x4 viewMatrix;
+		Matrix4x4 projectionMatrix;
+		float coefficient;
+	};
+
 protected:
 	std::string mObjectName;
 	Vector3 mLocalPosition;
 	Vector3 mLocalScale;
 	Vector3 mLocalRotation;
+	Matrix4x4 mLocalMatrix;
 };

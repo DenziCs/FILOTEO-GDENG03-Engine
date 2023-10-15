@@ -39,3 +39,11 @@ void Vector3::operator+=(const Vector3& vector) {
 	y += vector.y;
 	z += vector.z;
 }
+
+Vector3 Vector3::operator+(Vector3 vector) {
+	return Vector3(x + vector.x, y + vector.y, z + vector.z);
+}
+
+Vector3 Vector3::operator*(float scalar) {
+	return Vector3(scalar * x, scalar * y, scalar * z);
+}

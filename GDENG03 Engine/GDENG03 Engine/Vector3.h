@@ -12,6 +12,8 @@ public:
 
 	void operator =(const Vector3& vector);
 	void operator +=(const Vector3& vector);
+	Vector3 operator +(Vector3 vector);
+	Vector3 operator *(float scalar);
 
 	float x;
 	float y;
