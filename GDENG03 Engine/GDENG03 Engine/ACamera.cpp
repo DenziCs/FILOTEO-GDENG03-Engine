@@ -49,6 +49,18 @@ Matrix4x4 ACamera::getViewMatrix() {
 	return viewMatrix;
 }
 
+void ACamera::setOrthographicProjectionMatrix(float width, float height, float near_plane, float far_plane) {
+	mProjectionMatrix.setOrthographicProjection(width, height, near_plane, far_plane);
+}
+
+void ACamera::setPerspectiveProjectionMatrix(float field_of_view, float aspect, float near_plane, float far_plane) {
+	mProjectionMatrix.setPerspectiveProjection(field_of_view, aspect, near_plane, far_plane);
+}
+
+Matrix4x4 ACamera::getProjectionMatrix() {
+	return mProjectionMatrix;
+}
+
 void ACamera::onPress(int key) {
 	switch (key) {
 	case VK_UP:

@@ -119,7 +119,7 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 
 	shaderNumbers.worldMatrix = this->getLocalMatrix();
 	shaderNumbers.viewMatrix = SceneCameraManager::getInstance()->getSceneCameraViewMatrix();
-	shaderNumbers.projectionMatrix.setPerspectiveProjection(1.57f, (float)width / (float)height, 0.1f, 100.f);
+	shaderNumbers.projectionMatrix = SceneCameraManager::getInstance()->getSceneCameraProjectionMatrix();
 
 	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &shaderNumbers);
 
