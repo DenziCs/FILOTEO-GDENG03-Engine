@@ -27,6 +27,9 @@ public:
 	void setRotation(Vector3 rotation);
 	Vector3 getLocalRotation();
 
+	void updateLocalMatrix();
+	Matrix4x4 getLocalMatrix();
+
 	__declspec(align(16))
 		struct constant {
 		Matrix4x4 worldMatrix;

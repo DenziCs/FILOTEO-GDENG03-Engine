@@ -99,16 +99,7 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 
 	shaderNumbers.coefficient = 0.5f * (sin(mElapsedTime) + 1.f);
 
-	shaderNumbers.worldMatrix.setIdentity();
-	shaderNumbers.worldMatrix.scale(this->getLocalScale());
-	shaderNumbers.worldMatrix.rotate(0, this->getLocalRotation().x);
-	shaderNumbers.worldMatrix.rotate(1, this->getLocalRotation().y);
-	shaderNumbers.worldMatrix.rotate(2, this->getLocalRotation().z);
-
 	if (InputManager::getInstance()->isKeyDown('W')) {
-		shaderNumbers.worldMatrix.rotate(2, mDeltaPosition);
-		shaderNumbers.worldMatrix.rotate(1, mDeltaPosition);
-		shaderNumbers.worldMatrix.rotate(0, mDeltaPosition);
 		Vector3 newRotation = this->getLocalRotation();
 		newRotation += Vector3(mDeltaPosition, mDeltaPosition, mDeltaPosition);
 		this->setRotation(newRotation);
@@ -118,9 +109,6 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 	}
 	
 	if (InputManager::getInstance()->isKeyDown('S')) {
-		shaderNumbers.worldMatrix.rotate(2, -mDeltaPosition);
-		shaderNumbers.worldMatrix.rotate(1, -mDeltaPosition);
-		shaderNumbers.worldMatrix.rotate(0, -mDeltaPosition);
 		Vector3 newRotation = this->getLocalRotation();
 		newRotation += Vector3(-mDeltaPosition, -mDeltaPosition, -mDeltaPosition);
 		this->setRotation(newRotation);
@@ -129,10 +117,9 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 		shaderNumbers.coefficient = 0.5f * (sin(mElapsedTime) + 1.f);
 	}
 
-	shaderNumbers.worldMatrix.translate(this->getLocalPosition());
-
+	shaderNumbers.worldMatrix = this->getLocalMatrix();
 	shaderNumbers.viewMatrix = SceneCameraManager::getInstance()->getSceneCameraViewMatrix();
-	shaderNumbers.projectionMatrix.setPerspectiveProjection(1.57f, (float)width / (float)height, 0.1f, 100.f);
+	shaderNumbers.projectionMatrix = SceneCameraManager::getInstance()->getSceneCameraProjectionMatrix();
 
 	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &shaderNumbers);
 

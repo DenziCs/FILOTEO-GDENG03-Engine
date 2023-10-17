@@ -19,6 +19,7 @@ void AppWindow::onCreate() {
 	ACamera* sceneCamera = new ACamera("UnregisteredHyperCam2");
 	sceneCamera->setPosition(0.f, 0.f, 0.f);
 	sceneCamera->setRotation(0.f, 0.f, 0.f);
+	sceneCamera->setPerspectiveProjectionMatrix(1.57f, (float)width / (float)height, 0.1f, 100.f);
 	SceneCameraManager::getInstance()->setSceneCamera(sceneCamera);
 
 	void* shaderByteCode = nullptr;
@@ -86,6 +87,7 @@ void AppWindow::onCreate() {
 	cubeJ->setAnimationSpeed(1.25f);
 	mObjectList.push_back(cubeJ);
 
+	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
 	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
 	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();

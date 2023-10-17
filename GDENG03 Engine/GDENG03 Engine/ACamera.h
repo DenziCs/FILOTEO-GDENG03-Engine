@@ -12,6 +12,10 @@ public:
 	void update(float delta_time) override;
 	Matrix4x4 getViewMatrix();
 
+	void setOrthographicProjectionMatrix(float width, float height, float near_plane, float far_plane);
+	void setPerspectiveProjectionMatrix(float field_of_view, float aspect, float near_plane, float far_plane);
+	Matrix4x4 getProjectionMatrix();
+
 	void onPress(int key) override;
 	void onRelease(int key) override;
 	void onMouseMove(const Point delta_position) override;
@@ -23,7 +27,6 @@ public:
 	void draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) override;
 
 private:
-	void updateViewMatrix();
-
+	Matrix4x4 mProjectionMatrix;
 	bool mCameraControlsEnabled = false;
 };
