@@ -87,6 +87,7 @@ void AppWindow::onCreate() {
 	cubeJ->setAnimationSpeed(1.25f);
 	mObjectList.push_back(cubeJ);
 
+	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
 	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
 	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
