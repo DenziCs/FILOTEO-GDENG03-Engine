@@ -21,28 +21,24 @@ void ACamera::update(float delta_time) {
 			movementScalar = delta_time * movementSpeed * 1.f;
 			newPosition += (this->mLocalMatrix.getForwardVector() * movementScalar);
 			this->setPosition(newPosition);
-			updateViewMatrix();
 		}
 
 		else if (InputManager::getInstance()->isKeyDown(VK_DOWN)) {
 			movementScalar = delta_time * movementSpeed * -1.f;
 			newPosition += (this->mLocalMatrix.getForwardVector() * movementScalar);
 			this->setPosition(newPosition);
-			updateViewMatrix();
 		}
 
 		else if (InputManager::getInstance()->isKeyDown(VK_RIGHT)) {
 			movementScalar = delta_time * movementSpeed * 1.f;
 			newPosition += (this->mLocalMatrix.getRightVector() * movementScalar);
 			this->setPosition(newPosition);
-			updateViewMatrix();
 		}
 
 		else if (InputManager::getInstance()->isKeyDown(VK_LEFT)) {
 			movementScalar = delta_time * movementSpeed * -1.f;
 			newPosition += (this->mLocalMatrix.getRightVector() * movementScalar);
 			this->setPosition(newPosition);
-			updateViewMatrix();
 		}
 	}
 }
@@ -93,7 +89,6 @@ void ACamera::onMouseMove(const Point delta_position) {
 		newRotation.y += (float)delta_position.getX() * 0.01f;
 		newRotation.x += (float)delta_position.getY() * 0.01f;
 		this->setRotation(newRotation);
-		updateViewMatrix();
 	}
 }
 
@@ -117,15 +112,3 @@ void ACamera::onRMBRelease(const Point mouse_position) {
 }
 
 void ACamera::draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {}
-
-void ACamera::updateViewMatrix() {
-	Matrix4x4 worldCam;
-	Vector3 localRotation = this->getLocalRotation();
-
-	worldCam.rotate(0, localRotation.x);
-	worldCam.rotate(1, localRotation.y);
-	worldCam.rotate(2, localRotation.z);
-	worldCam.translate(this->getLocalPosition());
-
-	this->mLocalMatrix = worldCam;
-}
