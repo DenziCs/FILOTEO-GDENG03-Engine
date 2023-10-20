@@ -28,5 +28,4 @@ public:
 
 private:
 	Matrix4x4 mProjectionMatrix;
-	bool mCameraControlsEnabled = false;
 };

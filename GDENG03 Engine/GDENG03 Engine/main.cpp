@@ -1,7 +1,7 @@
 /*
 Nathaniel Francis S. Filoteo
 GDENG03 X22
-HO -- Input System and Scene Camera
+MCO -- Rendering System
 */
 
 #include"AppWindow.h"

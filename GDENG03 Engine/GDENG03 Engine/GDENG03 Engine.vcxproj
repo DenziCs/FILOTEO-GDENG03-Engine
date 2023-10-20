@@ -136,8 +136,8 @@
     <ClCompile Include="AGraphicsEngine.cpp" />
     <ClCompile Include="AIndexBuffer.cpp" />
     <ClCompile Include="APixelShader.cpp" />
+    <ClCompile Include="APlane.cpp" />
     <ClCompile Include="AppWindow.cpp" />
-    <ClCompile Include="AShape.cpp" />
     <ClCompile Include="ASwapChain.cpp" />
     <ClCompile Include="AVertexBuffer.cpp" />
     <ClCompile Include="AWindow.cpp" />
@@ -162,8 +162,8 @@
     <ClInclude Include="AIndexBuffer.h" />
     <ClInclude Include="AInputListener.h" />
     <ClInclude Include="APixelShader.h" />
+    <ClInclude Include="APlane.h" />
     <ClInclude Include="AppWindow.h" />
-    <ClInclude Include="AShape.h" />
     <ClInclude Include="ASwapChain.h" />
     <ClInclude Include="AVertexBuffer.h" />
     <ClInclude Include="AWindow.h" />
