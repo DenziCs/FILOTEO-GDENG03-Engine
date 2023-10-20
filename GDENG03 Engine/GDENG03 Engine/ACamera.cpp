@@ -12,32 +12,44 @@ ACamera::~ACamera() {
 }
 
 void ACamera::update(float delta_time) {
-	if (mCameraControlsEnabled) {
+	if (InputManager::getInstance()->isKeyDown(VK_LBUTTON)) {
 		Vector3 newPosition = this->getLocalPosition();
 		float movementSpeed = 5.f;
 		float movementScalar;
 
-		if (InputManager::getInstance()->isKeyDown(VK_UP)) {
+		if (InputManager::getInstance()->isKeyDown('W')) {
 			movementScalar = delta_time * movementSpeed * 1.f;
 			newPosition += (this->mLocalMatrix.getForwardVector() * movementScalar);
 			this->setPosition(newPosition);
 		}
 
-		else if (InputManager::getInstance()->isKeyDown(VK_DOWN)) {
+		else if (InputManager::getInstance()->isKeyDown('S')) {
 			movementScalar = delta_time * movementSpeed * -1.f;
 			newPosition += (this->mLocalMatrix.getForwardVector() * movementScalar);
 			this->setPosition(newPosition);
 		}
 
-		else if (InputManager::getInstance()->isKeyDown(VK_RIGHT)) {
+		else if (InputManager::getInstance()->isKeyDown('D')) {
 			movementScalar = delta_time * movementSpeed * 1.f;
 			newPosition += (this->mLocalMatrix.getRightVector() * movementScalar);
 			this->setPosition(newPosition);
 		}
 
-		else if (InputManager::getInstance()->isKeyDown(VK_LEFT)) {
+		else if (InputManager::getInstance()->isKeyDown('A')) {
 			movementScalar = delta_time * movementSpeed * -1.f;
 			newPosition += (this->mLocalMatrix.getRightVector() * movementScalar);
+			this->setPosition(newPosition);
+		}
+
+		else if (InputManager::getInstance()->isKeyDown('Q')) {
+			movementScalar = delta_time * movementSpeed * 1.f;
+			newPosition += (this->mLocalMatrix.getUpVector() * movementScalar);
+			this->setPosition(newPosition);
+		}
+
+		else if (InputManager::getInstance()->isKeyDown('Z')) {
+			movementScalar = delta_time * movementSpeed * -1.f;
+			newPosition += (this->mLocalMatrix.getUpVector() * movementScalar);
 			this->setPosition(newPosition);
 		}
 	}
@@ -63,40 +75,52 @@ Matrix4x4 ACamera::getProjectionMatrix() {
 
 void ACamera::onPress(int key) {
 	switch (key) {
-	case VK_UP:
-		std::cout << "Up arrow key has been pressed." << std::endl;
+	case 'W':
+		std::cout << "W key has been pressed." << std::endl;
 		break;
-	case VK_DOWN:
-		std::cout << "Down arrow key has been pressed." << std::endl;
+	case 'S':
+		std::cout << "S key has been pressed." << std::endl;
 		break;
-	case VK_RIGHT:
-		std::cout << "Right arrow key has been pressed." << std::endl;
+	case 'D':
+		std::cout << "D key has been pressed." << std::endl;
 		break;
-	case VK_LEFT:
-		std::cout << "Left arrow key has been pressed." << std::endl;
+	case 'A':
+		std::cout << "A key has been pressed." << std::endl;
+		break;
+	case 'Q':
+		std::cout << "Q key has been pressed." << std::endl;
+		break;
+	case 'Z':
+		std::cout << "Z key has been pressed." << std::endl;
 		break;
 	}
 }
 
 void ACamera::onRelease(int key) {
 	switch (key) {
-	case VK_UP:
-		std::cout << "Up arrow key has been released." << std::endl;
+	case 'W':
+		std::cout << "W key has been released." << std::endl;
 		break;
-	case VK_DOWN:
-		std::cout << "Down arrow key has been released." << std::endl;
+	case 'S':
+		std::cout << "S key has been released." << std::endl;
 		break;
-	case VK_RIGHT:
-		std::cout << "Right arrow key has been released." << std::endl;
+	case 'D':
+		std::cout << "D key has been released." << std::endl;
 		break;
-	case VK_LEFT:
-		std::cout << "Left arrow key has been released." << std::endl;
+	case 'A':
+		std::cout << "A key has been released." << std::endl;
+		break;
+	case 'Q':
+		std::cout << "Q key has been released." << std::endl;
+		break;
+	case 'Z':
+		std::cout << "Z key has been released." << std::endl;
 		break;
 	}
 }
 
 void ACamera::onMouseMove(const Point delta_position) {
-	if (mCameraControlsEnabled) {
+	if (InputManager::getInstance()->isKeyDown(VK_LBUTTON)) {
 		Vector3 newRotation = this->getLocalRotation();
 		newRotation.y += (float)delta_position.getX() * 0.01f;
 		newRotation.x += (float)delta_position.getY() * 0.01f;
@@ -113,14 +137,11 @@ void ACamera::onLMBRelease(const Point mouse_position) {
 }
 
 void ACamera::onRMBPress(const Point mouse_position) {
-	std::cout << "Right mouse button has been pressed. Release to toggle camera controls." << std::endl;
+	std::cout << "Right mouse button has been pressed." << std::endl;
 }
 
 void ACamera::onRMBRelease(const Point mouse_position) {
-	std::cout << "Right mouse button has been released. ";
-	mCameraControlsEnabled = !mCameraControlsEnabled;
-	if (mCameraControlsEnabled) std::cout << "Camera controls enabled." << std::endl;
-	else std::cout << "Camera controls disabled." << std::endl;
+	std::cout << "Right mouse button has been released." << std::endl;
 }
 
 void ACamera::draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {}

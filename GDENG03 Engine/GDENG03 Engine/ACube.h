@@ -14,7 +14,9 @@ public:
 
 	void update(float delta_time) override;
 	void draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) override;
-	void setAnimationSpeed(float speed);
+	void setTranslationSpeed(float translation_speed);
+	void setRotationSpeed(float rotation_speed);
+	void setScaleSpeed(float scale_speed);
 
 	void onPress(int key) override;
 	void onRelease(int key) override;
@@ -30,8 +32,7 @@ private:
 	AIndexBuffer* mIndexBuffer;
 	AConstantBuffer* mConstantBuffer;
 
-	float mElapsedTime = 0.f;
-	float mDeltaPosition = 0.f;
-	float mDeltaTime = 0.f;
-	float mSpeed = 10.f;
+	float mTranslationSpeed = 1.f;
+	float mRotationSpeed = 10.f;
+	float mScaleSpeed = 1.f;
 };
