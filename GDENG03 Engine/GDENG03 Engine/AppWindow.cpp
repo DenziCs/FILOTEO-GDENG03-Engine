@@ -29,7 +29,7 @@ void AppWindow::onCreate() {
 
 	ACube* cubeA = new ACube("CubeA", shaderByteCode, shaderSize);
 	cubeA->setPosition(0.0f, 0.0f, 0.f);
-	cubeA->setScaleSpeed(0.8f);
+	cubeA->setScaleSpeed(0.4f);
 	mObjectList.push_back(cubeA);
 
 	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
