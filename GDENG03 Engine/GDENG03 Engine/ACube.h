@@ -35,4 +35,6 @@ private:
 	float mTranslationSpeed = 1.f;
 	float mRotationSpeed = 10.f;
 	float mScaleSpeed = 1.f;
+
+	bool mIsFlattening = false;
 };
