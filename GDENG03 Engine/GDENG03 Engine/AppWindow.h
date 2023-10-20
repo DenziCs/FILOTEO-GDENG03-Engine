@@ -16,6 +16,7 @@
 #include"ACamera.h"
 #include"Vertex.h"
 #include"Matrix4x4.h"
+#include"Randomizer.h"
 #include<vector>
 
 class AppWindow : public AWindow
