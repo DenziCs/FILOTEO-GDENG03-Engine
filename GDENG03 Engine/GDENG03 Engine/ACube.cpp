@@ -10,42 +10,42 @@ ACube::ACube(std::string name, void* shader_byte_code, size_t shader_size) : AGa
 
 	currentVertexList[0] = Vertex(
 		Vector3(-0.5f, -0.5f, -0.5f),
-		Vector3(1.f, 0.f, 0.f),
+		Vector3(1.f, 1.f, 1.f),
 		Vector3(0.2f, 0.f, 0.f)
 	);
 	currentVertexList[1] = Vertex(
 		Vector3(-0.5f, 0.5f, -0.5f),
-		Vector3(0.f, 1.f, 0.f),
+		Vector3(1.f, 1.f, 1.f),
 		Vector3(0.f, 0.2f, 0.f)
 	);
 	currentVertexList[2] = Vertex(
 		Vector3(0.5f, 0.5f, -0.5f),
-		Vector3(0.f, 1.f, 0.f),
+		Vector3(1.f, 1.f, 1.f),
 		Vector3(0.f, 0.2f, 0.f)
 	);
 	currentVertexList[3] = Vertex(
 		Vector3(0.5f, -0.5f, -0.5f),
-		Vector3(1.f, 0.f, 0.f),
+		Vector3(1.f, 1.f, 1.f),
 		Vector3(0.2f, 0.f, 0.f)
 	);
 	currentVertexList[4] = Vertex(
 		Vector3(0.5f, -0.5f, 0.5f),
-		Vector3(0.f, 0.f, 1.f),
+		Vector3(1.f, 1.f, 1.f),
 		Vector3(0.f, 0.f, 0.2f)
 	);
 	currentVertexList[5] = Vertex(
 		Vector3(0.5f, 0.5f, 0.5f),
-		Vector3(1.f, 1.f, 0.f),
+		Vector3(1.f, 1.f, 1.f),
 		Vector3(0.2f, 0.2f, 0.f)
 	);
 	currentVertexList[6] = Vertex(
 		Vector3(-0.5f, 0.5f, 0.5f),
-		Vector3(1.f, 1.f, 0.f),
+		Vector3(1.f, 1.f, 1.f),
 		Vector3(0.2f, 0.2f, 0.f)
 	);
 	currentVertexList[7] = Vertex(
 		Vector3(-0.5f, -0.5f, 0.5f),
-		Vector3(0.f, 0.f, 1.f),
+		Vector3(1.f, 1.f, 1.f),
 		Vector3(0.f, 0.f, 0.2f)
 	);
 
