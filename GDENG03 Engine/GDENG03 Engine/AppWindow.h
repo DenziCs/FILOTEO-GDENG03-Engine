@@ -10,7 +10,6 @@
 #include"AConstantBuffer.h"
 #include"AVertexShader.h"
 #include"APixelShader.h"
-#include"AShape.h"
 #include"AGameObject.h"
 #include"ACube.h"
 #include"ACamera.h"

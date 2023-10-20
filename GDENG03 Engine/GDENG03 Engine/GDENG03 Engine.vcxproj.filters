@@ -75,9 +75,6 @@
     <ClCompile Include="AVertexShader.cpp">
       <Filter>Engine\Graphics\VertexShader</Filter>
     </ClCompile>
-    <ClCompile Include="AShape.cpp">
-      <Filter>Engine\Graphics\Primitives</Filter>
-    </ClCompile>
     <ClCompile Include="APixelShader.cpp">
       <Filter>Engine\Graphics\PixelShader</Filter>
     </ClCompile>
@@ -142,9 +139,6 @@
     </ClInclude>
     <ClInclude Include="AVertexShader.h">
       <Filter>Engine\Graphics\VertexShader</Filter>
-    </ClInclude>
-    <ClInclude Include="AShape.h">
-      <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="APixelShader.h">
       <Filter>Engine\Graphics\PixelShader</Filter>
