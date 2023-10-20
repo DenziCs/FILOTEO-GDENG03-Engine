@@ -87,6 +87,11 @@ void AppWindow::onCreate() {
 	cubeJ->setRotationSpeed(1.25f);
 	mObjectList.push_back(cubeJ);
 
+	APlane* planeA = new APlane("PlaneA", shaderByteCode, shaderSize);
+	planeA->setPosition(0.f, -0.8f, 0.f);
+	planeA->setScale(2.f, 2.f, 2.f);
+	mObjectList.push_back(planeA);
+
 	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
 	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
 	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);

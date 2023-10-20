@@ -12,6 +12,7 @@
 #include"APixelShader.h"
 #include"AGameObject.h"
 #include"ACube.h"
+#include"APlane.h"
 #include"ACamera.h"
 #include"Vertex.h"
 #include"Matrix4x4.h"

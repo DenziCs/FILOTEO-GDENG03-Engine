@@ -114,6 +114,9 @@
     <ClCompile Include="SceneCameraManager.cpp">
       <Filter>Engine\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="APlane.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="SceneCameraManager.h">
       <Filter>Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="APlane.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
