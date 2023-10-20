@@ -46,6 +46,7 @@ APlane::~APlane() {
 }
 
 void APlane::update(float delta_time) {
+	/*
 	if (InputManager::getInstance()->isKeyDown('R')) {
 		if (InputManager::getInstance()->isKeyDown(VK_UP)) {
 			float deltaRotation = mRotationSpeed * delta_time;
@@ -187,6 +188,7 @@ void APlane::update(float delta_time) {
 			if (newScale.z > 0.f) this->setScale(newScale);
 		}
 	}
+	*/
 }
 
 void APlane::draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {
