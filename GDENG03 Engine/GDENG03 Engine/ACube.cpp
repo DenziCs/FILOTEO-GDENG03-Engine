@@ -91,7 +91,21 @@ ACube::~ACube() {
 
 void ACube::update(float delta_time) {
 	if (InputManager::getInstance()->isKeyDown('R')) {
-		if (InputManager::getInstance()->isKeyDown('I')) {
+		if (InputManager::getInstance()->isKeyDown(VK_UP)) {
+			float deltaRotation = mRotationSpeed * delta_time;
+			Vector3 newRotation = this->getLocalRotation();
+			newRotation += Vector3(deltaRotation, deltaRotation, deltaRotation);
+			this->setRotation(newRotation);
+		}
+
+		else if (InputManager::getInstance()->isKeyDown(VK_DOWN)) {
+			float deltaRotation = -mRotationSpeed * delta_time;
+			Vector3 newRotation = this->getLocalRotation();
+			newRotation += Vector3(deltaRotation, deltaRotation, deltaRotation);
+			this->setRotation(newRotation);
+		}
+
+		else if (InputManager::getInstance()->isKeyDown('I')) {
 			Vector3 newRotation = this->getLocalRotation();
 			newRotation += Vector3(mRotationSpeed * delta_time, 0.f, 0.f);
 			this->setRotation(newRotation);
@@ -167,7 +181,21 @@ void ACube::update(float delta_time) {
 	}
 
 	else if (InputManager::getInstance()->isKeyDown('Y')) {
-		if (InputManager::getInstance()->isKeyDown('I')) {
+		if (InputManager::getInstance()->isKeyDown(VK_UP)) {
+			float deltaScale = mScaleSpeed * delta_time;
+			Vector3 newScale = this->getLocalScale();
+			newScale += Vector3(deltaScale, deltaScale, deltaScale);
+			this->setScale(newScale);
+		}
+
+		else if (InputManager::getInstance()->isKeyDown(VK_DOWN)) {
+			float deltaScale = -mScaleSpeed * delta_time;
+			Vector3 newScale = this->getLocalScale();
+			newScale += Vector3(deltaScale, deltaScale, deltaScale);
+			if (newScale.x > 0.f && newScale.y > 0.f && newScale.z > 0.f) this->setScale(newScale);
+		}
+
+		else if (InputManager::getInstance()->isKeyDown('I')) {
 			Vector3 newScale = this->getLocalScale();
 			newScale += Vector3(0.f, mScaleSpeed * delta_time, 0.f);
 			this->setScale(newScale);
