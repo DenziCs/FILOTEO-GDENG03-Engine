@@ -1,5 +1,5 @@
-Nathaniel Francis S. Filoteo
-GDENG03 XX22
+Nathaniel Francis S. Filoteo | 
+GDENG03 XX22 | 
 MCO -- Rendering System
 
 Main Entry Class File:
