@@ -55,6 +55,10 @@ void ADeviceContext::setConstantBuffer(AConstantBuffer* constant_buffer, APixelS
 	mDeviceContext->PSSetConstantBuffers(0, 1, &constant_buffer->mBuffer);
 }
 
+ID3D11DeviceContext* ADeviceContext::getD3DDeviceContext() {
+	return mDeviceContext;
+}
+
 void ADeviceContext::drawTriangleList(UINT vertex_count, UINT initial_vertex_index) {
 	mDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	mDeviceContext->Draw(vertex_count, initial_vertex_index);

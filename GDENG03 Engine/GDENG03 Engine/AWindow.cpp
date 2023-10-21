@@ -1,4 +1,5 @@
 #include"AWindow.h"
+#include"imgui_impl_win32.h"
 
 AWindow* window = nullptr;
 
@@ -6,7 +7,11 @@ AWindow::AWindow() {}
 
 AWindow::~AWindow() {}
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 LRESULT CALLBACK WndProc(HWND window_handle, UINT msg, WPARAM w_param, LPARAM l_param) {
+	if (ImGui_ImplWin32_WndProcHandler(window_handle, msg, w_param, l_param)) return true;
+
 	switch (msg) {
 	case WM_CREATE: {
 		window->setWindowHandle(window_handle);

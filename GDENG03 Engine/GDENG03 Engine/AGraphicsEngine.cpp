@@ -101,6 +101,10 @@ APixelShader* AGraphicsEngine::createPixelShader(const void* shader_byte_code, s
 	return pixelShader;
 }
 
+ID3D11Device* AGraphicsEngine::getD3DDevice() {
+	return mDevice;
+}
+
 ADeviceContext* AGraphicsEngine::getImmediateDeviceContext() {
 	return mImmediateContext;
 }

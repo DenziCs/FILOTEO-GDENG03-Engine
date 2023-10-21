@@ -23,6 +23,8 @@ public:
 	void setConstantBuffer(AConstantBuffer* constant_buffer, AVertexShader* vertex_shader);
 	void setConstantBuffer(AConstantBuffer* constant_buffer, APixelShader* pixel_shader);
 
+	ID3D11DeviceContext* getD3DDeviceContext();
+
 	void drawTriangleList(UINT vertex_count, UINT initial_vertex_index);
 	void drawIndexedTriangleList(UINT index_count, UINT start_index_location, UINT base_vertex_location);
 	void drawTriangleStrip(UINT vertex_count, UINT initial_vertex_index);
