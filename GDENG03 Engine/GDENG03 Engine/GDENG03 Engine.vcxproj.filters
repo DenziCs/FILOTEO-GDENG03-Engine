@@ -117,6 +117,9 @@
     <ClCompile Include="APlane.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
     </ClCompile>
+    <ClCompile Include="Randomizer.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="APlane.h">
       <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Randomizer.h">
+      <Filter>Engine\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
