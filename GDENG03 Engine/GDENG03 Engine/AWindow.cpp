@@ -52,7 +52,7 @@ bool AWindow::initialize() {
 	mWindowHandle = ::CreateWindowEx(
 		WS_EX_OVERLAPPEDWINDOW,
 		L"AWindowClass",
-		L"FILOTEO MCO: Rendering System",
+		L"FILOTEO HO: Dear IMGUI Simple Window",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
