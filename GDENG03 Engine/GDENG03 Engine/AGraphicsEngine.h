@@ -31,6 +31,7 @@ public:
 	void releaseCompiledVertexShader();
 	void releaseCompiledPixelShader();
 
+	ID3D11Device* getD3DDevice();
 	ADeviceContext* getImmediateDeviceContext();
 
 public:

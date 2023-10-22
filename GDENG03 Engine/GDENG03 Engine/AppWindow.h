@@ -38,4 +38,8 @@ private:
 	APixelShader* mPixelShader;
 
 	std::vector<AGameObject*> mObjectList;
+
+	bool mIsDemoWindowOpen = false;
+	bool mAreCubesMoving = true;
+	float mBackgroundColor[3];
 };

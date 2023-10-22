@@ -1,7 +1,7 @@
 /*
 Nathaniel Francis S. Filoteo
 GDENG03 X22
-MCO -- Rendering System
+HO -- Dear IMGUI Simple Window
 */
 
 #include"AppWindow.h"

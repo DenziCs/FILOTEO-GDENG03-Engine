@@ -90,6 +90,15 @@ ACube::~ACube() {
 }
 
 void ACube::update(float delta_time) {
+	mDeltaTime = delta_time;
+	mElapsedTime += mDeltaTime;
+
+	float deltaRotation = mRotationSpeed * mDeltaTime;
+	Vector3 newRotation = this->getLocalRotation();
+	newRotation += Vector3(deltaRotation, deltaRotation, deltaRotation);
+	this->setRotation(newRotation);
+
+	/*
 	if (InputManager::getInstance()->isKeyDown('R')) {
 		if (InputManager::getInstance()->isKeyDown(VK_UP)) {
 			float deltaRotation = mRotationSpeed * delta_time;
@@ -231,6 +240,7 @@ void ACube::update(float delta_time) {
 			if (newScale.z > 0.f) this->setScale(newScale);
 		}
 	}
+	*/
 }
 
 void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {
@@ -239,7 +249,7 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 	shaderNumbers.worldMatrix = this->getLocalMatrix();
 	shaderNumbers.viewMatrix = SceneCameraManager::getInstance()->getSceneCameraViewMatrix();
 	shaderNumbers.projectionMatrix = SceneCameraManager::getInstance()->getSceneCameraProjectionMatrix();
-	shaderNumbers.coefficient = 0.f;
+	shaderNumbers.coefficient = 0.5f * (sin(mElapsedTime) + 1.f);
 
 	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &shaderNumbers);
 
