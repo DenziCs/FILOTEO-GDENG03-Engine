@@ -12,7 +12,7 @@ ACamera::~ACamera() {
 }
 
 void ACamera::update(float delta_time) {
-	if (InputManager::getInstance()->isKeyDown(VK_LBUTTON)) {
+	if (InputManager::getInstance()->isKeyDown(VK_RBUTTON)) {
 		Vector3 newPosition = this->getLocalPosition();
 		float movementSpeed = 5.f;
 		float movementScalar;
@@ -120,7 +120,7 @@ void ACamera::onRelease(int key) {
 }
 
 void ACamera::onMouseMove(const Point delta_position) {
-	if (InputManager::getInstance()->isKeyDown(VK_LBUTTON)) {
+	if (InputManager::getInstance()->isKeyDown(VK_RBUTTON)) {
 		Vector3 newRotation = this->getLocalRotation();
 		newRotation.y += (float)delta_position.getX() * 0.01f;
 		newRotation.x += (float)delta_position.getY() * 0.01f;
