@@ -3,6 +3,7 @@
 #include"AGraphicsEngine.h"
 #include"InputManager.h"
 #include"SceneCameraManager.h"
+#include"UIManager.h"
 #include"ASwapChain.h"
 #include"ADeviceContext.h"
 #include"AVertexBuffer.h"
@@ -38,8 +39,4 @@ private:
 	APixelShader* mPixelShader;
 
 	std::vector<AGameObject*> mObjectList;
-
-	bool mIsDemoWindowOpen = false;
-	bool mAreCubesMoving = true;
-	float mBackgroundColor[3];
 };

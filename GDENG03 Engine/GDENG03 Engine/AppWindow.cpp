@@ -4,6 +4,7 @@
 #include"imgui_impl_dx11.h"
 #include"imgui_impl_win32.h"
 #include"imgui_stdlib.h"
+#include"GlobalProperties.h"
 #include<iostream>
 
 AppWindow::AppWindow() {}
@@ -19,10 +20,6 @@ void AppWindow::onCreate() {
 	UINT width = windowRect.right - windowRect.left;
 	UINT height = windowRect.bottom - windowRect.top;
 	mSwapChain->initialize(this->mWindowHandle, width, height);
-
-	mBackgroundColor[0] = 154.f / 255.f;
-	mBackgroundColor[1] = 216.f / 255.f;
-	mBackgroundColor[2] = 216.f / 255.f;
 
 	ACamera* sceneCamera = new ACamera("UnregisteredHyperCam2");
 	sceneCamera->setPosition(0.f, 0.f, 0.f);
@@ -105,43 +102,19 @@ void AppWindow::onCreate() {
 	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
 
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
-
-	ImGui_ImplWin32_Init(this->mWindowHandle);
-	ImGui_ImplDX11_Init(
-		AGraphicsEngine::getInstance()->getD3DDevice(),
-		AGraphicsEngine::getInstance()->getImmediateDeviceContext()->getD3DDeviceContext()
-	);
+	UIManager::initialize(this->mWindowHandle);
 }
 
 void AppWindow::onUpdate() {
 	AWindow::onUpdate();
 
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-
-	ImGuiWindowFlags windowFlags = 0;
-	windowFlags |= ImGuiWindowFlags_NoResize;
-	ImGui::Begin("Scene Settings", NULL, windowFlags);
-	ImGui::SetWindowSize(ImVec2(400, 120));
-	ImGui::Text("Below are settings for configuring the scene.");
-	ImGui::Checkbox("Show Demo Window", &mIsDemoWindowOpen);
-	ImGui::ColorEdit3("Clear Color", mBackgroundColor);
-	if (mAreCubesMoving) {
-		if (ImGui::Button("Pause Animation")) mAreCubesMoving = false;
-	}
-	else if (ImGui::Button("Resume Animation")) mAreCubesMoving = true;
-
-	ImGui::End();
-
-	if (mIsDemoWindowOpen) ImGui::ShowDemoWindow();
-
-	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->clearRenderTargetColor(mSwapChain, mBackgroundColor[0], mBackgroundColor[1], mBackgroundColor[2], 1.f);
+	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->clearRenderTargetColor(
+		mSwapChain,
+		GlobalProperties::BACKGROUND_COLOR[0],
+		GlobalProperties::BACKGROUND_COLOR[1],
+		GlobalProperties::BACKGROUND_COLOR[2],
+		1.f
+	);
 
 	RECT windowRect = this->getWindowRect();
 	UINT width = windowRect.right - windowRect.left;
@@ -152,13 +125,11 @@ void AppWindow::onUpdate() {
 	SceneCameraManager::getInstance()->update();
 
 	for (int i = 0; i < mObjectList.size(); i++) {
-		if (mAreCubesMoving) mObjectList[i]->update(TimeManager::getDeltaTime());
+		if (GlobalProperties::IS_CUBE_MOVEMENT_ON) mObjectList[i]->update(TimeManager::getDeltaTime());
 		mObjectList[i]->draw(width, height, mVertexShader, mPixelShader);
 	}
 
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
+	UIManager::getInstance()->draw();
 	mSwapChain->present(false);
 }
 
@@ -176,9 +147,6 @@ void AppWindow::onDestroy() {
 	mVertexShader->release();
 	mPixelShader->release();
 
-	ImGui_ImplDX11_Shutdown();
-	ImGui_ImplWin32_Shutdown();
-	ImGui::DestroyContext();
-
+	UIManager::destroy();
 	AGraphicsEngine::getInstance()->release();
 }

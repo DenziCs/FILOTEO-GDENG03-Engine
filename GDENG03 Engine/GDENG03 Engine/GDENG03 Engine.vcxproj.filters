@@ -52,6 +52,9 @@
     <Filter Include="Engine\User Interface">
       <UniqueIdentifier>{bf97a357-263b-412c-a064-3c366a9b36f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Misc">
+      <UniqueIdentifier>{34822e23-8642-480a-b5e6-5762ded37330}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -150,8 +153,14 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="AUIPanel.cpp" />
-    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="AUIPanel.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWindowPanel.cpp" />
+    <ClCompile Include="GlobalProperties.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -253,8 +262,14 @@
     <ClInclude Include="imgui\imstb_truetype.h">
       <Filter>IMGUI</Filter>
     </ClInclude>
-    <ClInclude Include="AUIPanel.h" />
-    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="UIManager.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="AUIPanel.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleWindowPanel.h" />
+    <ClInclude Include="GlobalProperties.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
