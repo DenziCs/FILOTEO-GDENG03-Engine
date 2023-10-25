@@ -1,7 +1,7 @@
 /*
 Nathaniel Francis S. Filoteo
 GDENG03 X22
-HO -- Dear IMGUI Simple Window
+HO -- UI Manager & Game Object Manager
 */
 
 #include"AppWindow.h"
