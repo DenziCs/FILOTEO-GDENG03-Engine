@@ -10,6 +10,10 @@ AGameObject::AGameObject(std::string name) {
 
 AGameObject::~AGameObject() {}
 
+std::string AGameObject::getObjectName() {
+	return mObjectName;
+}
+
 bool AGameObject::isActive() {
 	return mIsActive;
 }

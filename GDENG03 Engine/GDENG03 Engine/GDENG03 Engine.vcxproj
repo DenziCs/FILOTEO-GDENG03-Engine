@@ -143,6 +143,7 @@
     <ClCompile Include="AUIPanel.cpp" />
     <ClCompile Include="AVertexBuffer.cpp" />
     <ClCompile Include="AWindow.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GlobalProperties.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="AUIPanel.h" />
     <ClInclude Include="AVertexBuffer.h" />
     <ClInclude Include="AWindow.h" />
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GlobalProperties.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
