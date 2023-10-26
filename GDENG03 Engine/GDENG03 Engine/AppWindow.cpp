@@ -125,8 +125,11 @@ void AppWindow::onUpdate() {
 	SceneCameraManager::getInstance()->update();
 
 	for (int i = 0; i < mObjectList.size(); i++) {
-		if (GlobalProperties::IS_CUBE_MOVEMENT_ON) mObjectList[i]->update(TimeManager::getDeltaTime());
-		mObjectList[i]->draw(width, height, mVertexShader, mPixelShader);
+		mObjectList[i]->setActive(GlobalProperties::ARE_CUBES_ACTIVE);
+		if (mObjectList[i]->isActive()) {
+			mObjectList[i]->update(TimeManager::getDeltaTime());
+			mObjectList[i]->draw(width, height, mVertexShader, mPixelShader);
+		}
 	}
 
 	UIManager::getInstance()->draw();

@@ -4,6 +4,7 @@
 #include"SceneCameraManager.h"
 #include"ADeviceContext.h"
 #include<iostream>
+#include"GlobalProperties.h"
 
 ACube::ACube(std::string name, void* shader_byte_code, size_t shader_size) : AGameObject::AGameObject(name) {
 	Vertex* currentVertexList = new Vertex[8];
@@ -90,13 +91,15 @@ ACube::~ACube() {
 }
 
 void ACube::update(float delta_time) {
-	mDeltaTime = delta_time;
-	mElapsedTime += mDeltaTime;
+	if (GlobalProperties::IS_CUBE_MOVEMENT_ON) {
+		mDeltaTime = delta_time;
+		mElapsedTime += mDeltaTime;
 
-	float deltaRotation = mRotationSpeed * mDeltaTime;
-	Vector3 newRotation = this->getLocalRotation();
-	newRotation += Vector3(deltaRotation, deltaRotation, deltaRotation);
-	this->setRotation(newRotation);
+		float deltaRotation = mRotationSpeed * mDeltaTime;
+		Vector3 newRotation = this->getLocalRotation();
+		newRotation += Vector3(deltaRotation, deltaRotation, deltaRotation);
+		this->setRotation(newRotation);
+	}
 
 	/*
 	if (InputManager::getInstance()->isKeyDown('R')) {

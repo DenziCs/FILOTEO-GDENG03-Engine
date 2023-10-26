@@ -12,7 +12,7 @@ void SimpleWindowPanel::draw() {
 	ImGuiWindowFlags windowFlags = 0;
 	windowFlags |= ImGuiWindowFlags_NoResize;
 	ImGui::Begin("Scene Settings", NULL, windowFlags);
-	ImGui::SetWindowSize(ImVec2(400, 120));
+	ImGui::SetWindowSize(ImVec2(400, 150));
 	ImGui::Text("Below are settings for configuring the scene.");
 	ImGui::Checkbox("Show Demo Window", &mIsDemoWindowOpen);
 	ImGui::ColorEdit3("Clear Color", mBackgroundColor);
@@ -20,6 +20,11 @@ void SimpleWindowPanel::draw() {
 		if (ImGui::Button("Pause Animation")) GlobalProperties::setActiveCubes(false);
 	}
 	else if (ImGui::Button("Resume Animation")) GlobalProperties::setActiveCubes(true);
+
+	if (GlobalProperties::ARE_CUBES_ACTIVE) {
+		if (ImGui::Button("Disable Cubes")) GlobalProperties::setEnabledCubes(false);
+	}
+	else if (ImGui::Button("Enable Cubes")) GlobalProperties::setEnabledCubes(true);
 
 	ImGui::End();
 
