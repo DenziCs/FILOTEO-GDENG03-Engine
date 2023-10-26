@@ -134,4 +134,6 @@ void InputManager::onRMBRelease(Point mouse_position) {
 	}
 }
 
-InputManager::~InputManager() {}
+InputManager::~InputManager() {
+	delete instance;
+}

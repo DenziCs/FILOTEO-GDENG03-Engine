@@ -159,8 +159,12 @@
     <ClCompile Include="AUIPanel.cpp">
       <Filter>Engine\User Interface</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleWindowPanel.cpp" />
-    <ClCompile Include="GlobalProperties.cpp" />
+    <ClCompile Include="SimpleWindowPanel.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalProperties.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -268,8 +272,12 @@
     <ClInclude Include="AUIPanel.h">
       <Filter>Engine\User Interface</Filter>
     </ClInclude>
-    <ClInclude Include="SimpleWindowPanel.h" />
-    <ClInclude Include="GlobalProperties.h" />
+    <ClInclude Include="SimpleWindowPanel.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalProperties.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
