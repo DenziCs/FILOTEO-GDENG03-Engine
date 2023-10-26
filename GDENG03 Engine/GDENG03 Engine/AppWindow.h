@@ -1,6 +1,7 @@
 #pragma once
 #include"AWindow.h"
 #include"AGraphicsEngine.h"
+#include"GameObjectManager.h"
 #include"InputManager.h"
 #include"SceneCameraManager.h"
 #include"UIManager.h"
@@ -37,6 +38,4 @@ private:
 	AConstantBuffer* mConstantBuffer;
 	AVertexShader* mVertexShader;
 	APixelShader* mPixelShader;
-
-	std::vector<AGameObject*> mObjectList;
 };

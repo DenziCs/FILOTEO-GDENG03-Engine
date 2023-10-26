@@ -1,5 +1,7 @@
 #include"GlobalProperties.h"
 
+int GlobalProperties::WINDOW_WIDTH = 1440;
+int GlobalProperties::WINDOW_HEIGHT = 900;
 bool GlobalProperties::IS_CUBE_MOVEMENT_ON = true;
 bool GlobalProperties::ARE_CUBES_ACTIVE = true;
 float GlobalProperties::BACKGROUND_COLOR[3] = {
