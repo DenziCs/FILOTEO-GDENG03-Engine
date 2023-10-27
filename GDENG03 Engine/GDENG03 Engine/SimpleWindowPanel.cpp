@@ -1,6 +1,5 @@
 #include"SimpleWindowPanel.h"
 #include"GlobalProperties.h"
-#include"imgui.h"
 
 SimpleWindowPanel::SimpleWindowPanel(std::string name) : AUIPanel::AUIPanel(name) {
 	mBackgroundColor[0] = GlobalProperties::BACKGROUND_COLOR[0];

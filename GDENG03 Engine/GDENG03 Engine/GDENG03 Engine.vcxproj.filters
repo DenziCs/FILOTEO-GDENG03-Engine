@@ -177,6 +177,9 @@
     <ClCompile Include="InspectorWindow.cpp">
       <Filter>Engine\User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="SceneOutliner.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -297,6 +300,9 @@
       <Filter>Engine\User Interface</Filter>
     </ClInclude>
     <ClInclude Include="InspectorWindow.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneOutliner.h">
       <Filter>Engine\User Interface</Filter>
     </ClInclude>
   </ItemGroup>

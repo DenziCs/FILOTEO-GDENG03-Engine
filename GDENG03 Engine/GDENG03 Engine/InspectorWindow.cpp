@@ -1,28 +1,34 @@
 #include"InspectorWindow.h"
-#include"imgui.h"
 #include"GlobalProperties.h"
+#include"GameObjectManager.h"
 
-InspectorWindow::InspectorWindow(std::string name) : AUIPanel::AUIPanel(name) {
-}
+InspectorWindow::InspectorWindow(std::string name) : AUIPanel::AUIPanel(name) {}
 
-InspectorWindow::~InspectorWindow() {
-}
+InspectorWindow::~InspectorWindow() {}
 
 void InspectorWindow::draw() {
 	ImGuiWindowFlags windowFlags = 0;
 	windowFlags |= ImGuiWindowFlags_NoResize;
 
-	ImGui::Begin("Scene Settings", NULL, windowFlags);
+	ImGui::Begin("Inspector Window", NULL, windowFlags);
 	ImGui::SetWindowSize(ImVec2(300, GlobalProperties::WINDOW_HEIGHT - 64));
 	ImGui::SetWindowPos(ImVec2(GlobalProperties::WINDOW_WIDTH - 321, 20));
 
-	if (!mSelectedObject) {
+	if (!GameObjectManager::getInstance()->getSelectedObject()) {
 		ImGui::TextWrapped("No object selected. Select an object from the scene.");
 	}
 
-	ImGui::End();
-}
+	else {
+		AGameObject* selectedObject = GameObjectManager::getInstance()->getSelectedObject();
+		// mIsSelectedObjectActive = selectedObject->isActive();
 
-void InspectorWindow::selectObject(AGameObject* game_object) {
-	mSelectedObject = game_object;
+		ImGui::Text("Selected Object:");
+		ImGui::Text(selectedObject->getObjectName().c_str());
+		ImGui::Separator();
+		ImGui::Checkbox("Enabled", &mIsSelectedObjectActive);
+
+		// selectedObject->setActive(mIsSelectedObjectActive);
+	}
+
+	ImGui::End();
 }

@@ -161,6 +161,7 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="SceneCameraManager.cpp" />
+    <ClCompile Include="SceneOutliner.cpp" />
     <ClCompile Include="SimpleWindowPanel.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="UIManager.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="Randomizer.h" />
     <ClInclude Include="SceneCameraManager.h" />
+    <ClInclude Include="SceneOutliner.h" />
     <ClInclude Include="SimpleWindowPanel.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="UIManager.h" />

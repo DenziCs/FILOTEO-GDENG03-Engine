@@ -3,6 +3,7 @@
 #include"ADeviceContext.h"
 #include"MainMenuBar.h"
 #include"InspectorWindow.h"
+#include"SceneOutliner.h"
 
 UIManager* UIManager::instance = nullptr;
 
@@ -52,6 +53,9 @@ UIManager::UIManager(HWND window_handle) {
 
     MainMenuBar* mainMenuBar = new MainMenuBar("Toolbar");
     mListUI.push_back(mainMenuBar);
+
+    SceneOutliner* sceneOutliner = new SceneOutliner("Scene Outliner");
+    mListUI.push_back(sceneOutliner);
 
     InspectorWindow* inspectorWindow = new InspectorWindow("Inspector Window");
     mListUI.push_back(inspectorWindow);
