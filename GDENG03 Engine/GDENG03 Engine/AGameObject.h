@@ -18,6 +18,8 @@ public:
 	std::string getObjectName();
 	bool isActive();
 	void setActive(bool is_object_active);
+	void select();
+	void deselect();
 
 	void setPosition(float x, float y, float z);
 	void setPosition(Vector3 position);
@@ -50,4 +52,5 @@ protected:
 	Matrix4x4 mLocalMatrix;
 
 	bool mIsActive = true;
+	bool mIsSelected = false;
 };

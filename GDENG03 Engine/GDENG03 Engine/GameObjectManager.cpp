@@ -152,16 +152,29 @@ void GameObjectManager::deleteObjectByName(std::string name) {
 }
 
 void GameObjectManager::setSelectedObject(std::string name) {
+	if (mCurrentSelectedObject) mCurrentSelectedObject->deselect();
 	AGameObject* object = findObjectByName(name);
-	if (object) mCurrentSelectedObject = object;
+	if (object) {
+		mCurrentSelectedObject = object;
+		object->select();
+	}
 }
 
 void GameObjectManager::setSelectedObject(AGameObject* game_object) {
+	if (mCurrentSelectedObject) mCurrentSelectedObject->deselect();
 	mCurrentSelectedObject = game_object;
+	game_object->select();
 }
 
 AGameObject* GameObjectManager::getSelectedObject() {
 	return mCurrentSelectedObject;
+}
+
+void GameObjectManager::deselectObject() {
+	if (mCurrentSelectedObject) {
+		mCurrentSelectedObject->deselect();
+		mCurrentSelectedObject = nullptr;
+	}
 }
 
 void GameObjectManager::setVertexShaderProperties(void* shader_byte_code, size_t shader_size) {

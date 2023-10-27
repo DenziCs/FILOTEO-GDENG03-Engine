@@ -34,16 +34,12 @@ void AppWindow::onCreate() {
 	mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
 	GameObjectManager::getInstance()->setVertexShaderProperties(shaderByteCode, shaderSize);
 
-	for (int i = 0; i < 10; i++) {
-		GameObjectManager::getInstance()->createObject(GameObjectManager::CUBE, shaderByteCode, shaderSize);
-		ACube* object = (ACube*)GameObjectManager::getInstance()->findObjectByName("Cube " + std::to_string(i));
-		if (object) {
-			object->setScale(0.25f, 0.25f, 0.25f);
-			object->setRotationSpeed(Randomizer::getRandomFloat(1.f, 5.f));
-			object->setPosition(Randomizer::getRandomFloat(-1.f, 1.f), Randomizer::getRandomFloat(-1.f, 1.f), Randomizer::getRandomFloat(-1.f, 1.f));
-		}
-	}
 	GameObjectManager::getInstance()->createObject(GameObjectManager::PLANE, shaderByteCode, shaderSize);
+	APlane* object = (APlane*)GameObjectManager::getInstance()->findObjectByName("Plane 0");
+	if (object) {
+		object->setScale(4.f, 1.f, 4.f);
+		object->setPosition(0.f, -1.f, 0.f);
+	}
 
 	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
 	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);

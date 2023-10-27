@@ -34,6 +34,7 @@ public:
 	void setSelectedObject(std::string name);
 	void setSelectedObject(AGameObject* game_object);
 	AGameObject* getSelectedObject();
+	void deselectObject();
 
 	void setVertexShaderProperties(void* shader_byte_code, size_t shader_size);
 

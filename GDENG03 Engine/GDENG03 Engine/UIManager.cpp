@@ -1,8 +1,8 @@
 #include"UIManager.h"
 #include"AGraphicsEngine.h"
 #include"ADeviceContext.h"
-#include"SimpleWindowPanel.h"
 #include"MainMenuBar.h"
+#include"InspectorWindow.h"
 
 UIManager* UIManager::instance = nullptr;
 
@@ -50,11 +50,11 @@ UIManager::UIManager(HWND window_handle) {
         AGraphicsEngine::getInstance()->getImmediateDeviceContext()->getD3DDeviceContext()
     );
 
-    SimpleWindowPanel* simpleWindowPanel = new SimpleWindowPanel("First Panel");
-    mListUI.push_back(simpleWindowPanel);
-
     MainMenuBar* mainMenuBar = new MainMenuBar("Toolbar");
     mListUI.push_back(mainMenuBar);
+
+    InspectorWindow* inspectorWindow = new InspectorWindow("Inspector Window");
+    mListUI.push_back(inspectorWindow);
 }
 
 UIManager::~UIManager() {

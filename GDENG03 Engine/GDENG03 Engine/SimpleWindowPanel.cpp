@@ -13,6 +13,7 @@ void SimpleWindowPanel::draw() {
 	windowFlags |= ImGuiWindowFlags_NoResize;
 	ImGui::Begin("Scene Settings", NULL, windowFlags);
 	ImGui::SetWindowSize(ImVec2(400, 150));
+	ImGui::SetWindowPos(ImVec2(800, 20));
 	ImGui::Text("Below are settings for configuring the scene.");
 	ImGui::Checkbox("Show Demo Window", &mIsDemoWindowOpen);
 	ImGui::ColorEdit3("Clear Color", mBackgroundColor);

@@ -171,7 +171,12 @@
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>Engine\Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuBar.cpp" />
+    <ClCompile Include="MainMenuBar.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="InspectorWindow.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -288,7 +293,12 @@
     <ClInclude Include="GameObjectManager.h">
       <Filter>Engine\Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenuBar.h" />
+    <ClInclude Include="MainMenuBar.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectorWindow.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

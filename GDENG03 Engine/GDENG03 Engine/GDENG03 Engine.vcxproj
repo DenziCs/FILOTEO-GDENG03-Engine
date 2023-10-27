@@ -154,6 +154,7 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InspectorWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuBar.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InspectorWindow.h" />
     <ClInclude Include="MainMenuBar.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="Point.h" />
