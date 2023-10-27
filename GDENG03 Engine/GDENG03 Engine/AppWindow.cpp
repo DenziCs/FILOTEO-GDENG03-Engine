@@ -34,7 +34,7 @@ void AppWindow::onCreate() {
 	mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
 	GameObjectManager::getInstance()->setVertexShaderProperties(shaderByteCode, shaderSize);
 
-	GameObjectManager::getInstance()->createObject(GameObjectManager::PLANE, shaderByteCode, shaderSize);
+	GameObjectManager::getInstance()->createObject(GameObjectManager::PLANE);
 	APlane* object = (APlane*)GameObjectManager::getInstance()->findObjectByName("Plane 0");
 	if (object) {
 		object->setScale(4.f, 1.f, 4.f);

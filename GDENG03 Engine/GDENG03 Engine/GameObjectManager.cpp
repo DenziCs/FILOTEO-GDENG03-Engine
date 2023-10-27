@@ -45,7 +45,6 @@ int GameObjectManager::getActiveObjectCount() {
 
 void GameObjectManager::update() {
 	for (int i = 0; i < mGameObjectList.size(); i++) {
-		mGameObjectList[i]->setActive(GlobalProperties::ARE_CUBES_ACTIVE);
 		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->update(TimeManager::getDeltaTime());
 	}
 }
@@ -93,6 +92,7 @@ void GameObjectManager::createObject(PrimitiveType primitive_type, void* shader_
 
 		APlane* newPlane = new APlane(newName, shader_byte_code, shader_size);
 		addObject(newPlane);
+		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
 	}
 	break;
 

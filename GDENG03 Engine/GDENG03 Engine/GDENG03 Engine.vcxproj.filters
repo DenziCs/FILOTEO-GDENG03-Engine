@@ -180,6 +180,7 @@
     <ClCompile Include="SceneOutliner.cpp">
       <Filter>Engine\User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="AngleConverter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -305,6 +306,7 @@
     <ClInclude Include="SceneOutliner.h">
       <Filter>Engine\User Interface</Filter>
     </ClInclude>
+    <ClInclude Include="AngleConverter.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

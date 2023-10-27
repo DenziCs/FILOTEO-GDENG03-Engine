@@ -136,6 +136,7 @@
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="AGraphicsEngine.cpp" />
     <ClCompile Include="AIndexBuffer.cpp" />
+    <ClCompile Include="AngleConverter.cpp" />
     <ClCompile Include="APixelShader.cpp" />
     <ClCompile Include="APlane.cpp" />
     <ClCompile Include="AppWindow.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="AGraphicsEngine.h" />
     <ClInclude Include="AIndexBuffer.h" />
     <ClInclude Include="AInputListener.h" />
+    <ClInclude Include="AngleConverter.h" />
     <ClInclude Include="APixelShader.h" />
     <ClInclude Include="APlane.h" />
     <ClInclude Include="AppWindow.h" />
