@@ -31,6 +31,10 @@ std::vector<AGameObject*> GameObjectManager::getAllGameObjects() {
 	return mGameObjectList;
 }
 
+int GameObjectManager::getObjectCount() {
+	return mGameObjectList.size();
+}
+
 int GameObjectManager::getActiveObjectCount() {
 	int activeObjectCount = 0;
 	for (int i = 0; i < mGameObjectList.size(); i++) {
@@ -89,6 +93,44 @@ void GameObjectManager::createObject(PrimitiveType primitive_type, void* shader_
 
 		APlane* newPlane = new APlane(newName, shader_byte_code, shader_size);
 		addObject(newPlane);
+	}
+	break;
+
+	}
+}
+
+void GameObjectManager::createObject(PrimitiveType primitive_type) {
+	std::string newName = "";
+
+	switch (primitive_type) {
+	case CUBE: {
+		int cubeCount = -1;
+		AGameObject* cube = nullptr;
+		do {
+			cubeCount++;
+			newName = "Cube " + std::to_string(cubeCount);
+			cube = mGameObjectTable[newName];
+		}
+		while (cube);
+
+		ACube* newCube = new ACube(newName, mVertexShaderByteCode, mShaderSize);
+		addObject(newCube);
+		std::cout << newCube->getObjectName() << " spawned." << std::endl;
+	}
+	break;
+
+	case PLANE: {
+		int planeCount = -1;
+		AGameObject* plane = nullptr;
+		do {
+			planeCount++;
+			newName = "Plane " + std::to_string(planeCount);
+			plane = mGameObjectTable[newName];
+		}
+		while (plane);
+
+		APlane* newPlane = new APlane(newName, mVertexShaderByteCode, mShaderSize);
+		addObject(newPlane);
 		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
 	}
 	break;
@@ -120,6 +162,11 @@ void GameObjectManager::setSelectedObject(AGameObject* game_object) {
 
 AGameObject* GameObjectManager::getSelectedObject() {
 	return mCurrentSelectedObject;
+}
+
+void GameObjectManager::setVertexShaderProperties(void* shader_byte_code, size_t shader_size) {
+	mVertexShaderByteCode = shader_byte_code;
+	mShaderSize = shader_size;
 }
 
 GameObjectManager::GameObjectManager() {

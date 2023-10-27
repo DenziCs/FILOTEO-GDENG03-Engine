@@ -171,6 +171,7 @@
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>Engine\Game Objects</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -287,6 +288,7 @@
     <ClInclude Include="GameObjectManager.h">
       <Filter>Engine\Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="MainMenuBar.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

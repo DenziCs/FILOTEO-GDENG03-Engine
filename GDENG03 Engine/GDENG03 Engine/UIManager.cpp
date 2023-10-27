@@ -2,6 +2,7 @@
 #include"AGraphicsEngine.h"
 #include"ADeviceContext.h"
 #include"SimpleWindowPanel.h"
+#include"MainMenuBar.h"
 
 UIManager* UIManager::instance = nullptr;
 
@@ -51,6 +52,9 @@ UIManager::UIManager(HWND window_handle) {
 
     SimpleWindowPanel* simpleWindowPanel = new SimpleWindowPanel("First Panel");
     mListUI.push_back(simpleWindowPanel);
+
+    MainMenuBar* mainMenuBar = new MainMenuBar("Toolbar");
+    mListUI.push_back(mainMenuBar);
 }
 
 UIManager::~UIManager() {

@@ -32,6 +32,7 @@ void AppWindow::onCreate() {
 	size_t shaderSize;
 	AGraphicsEngine::getInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &shaderSize);
 	mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
+	GameObjectManager::getInstance()->setVertexShaderProperties(shaderByteCode, shaderSize);
 
 	for (int i = 0; i < 10; i++) {
 		GameObjectManager::getInstance()->createObject(GameObjectManager::CUBE, shaderByteCode, shaderSize);

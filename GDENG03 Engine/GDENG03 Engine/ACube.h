@@ -33,7 +33,7 @@ private:
 	AConstantBuffer* mConstantBuffer;
 
 	float mTranslationSpeed = 1.f;
-	float mRotationSpeed = 10.f;
+	float mRotationSpeed = 1.f;
 	float mScaleSpeed = 1.f;
 
 	float mDeltaTime = 0.f;
