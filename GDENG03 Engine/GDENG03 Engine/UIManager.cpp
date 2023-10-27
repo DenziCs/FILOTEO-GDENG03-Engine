@@ -4,6 +4,7 @@
 #include"MainMenuBar.h"
 #include"InspectorWindow.h"
 #include"SceneOutliner.h"
+#include"EngineProfiler.h"
 
 UIManager* UIManager::instance = nullptr;
 
@@ -59,6 +60,9 @@ UIManager::UIManager(HWND window_handle) {
 
     InspectorWindow* inspectorWindow = new InspectorWindow("Inspector Window");
     mListUI.push_back(inspectorWindow);
+
+    EngineProfiler* engineProfiler = new EngineProfiler("Engine Profiler");
+    mListUI.push_back(engineProfiler);
 }
 
 UIManager::~UIManager() {
