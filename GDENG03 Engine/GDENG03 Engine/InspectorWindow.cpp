@@ -29,7 +29,7 @@ void InspectorWindow::draw() {
 		ImGui::Separator();
 		ImGui::Checkbox("Enabled", &mIsSelectedObjectActive);
 		ImGui::DragFloat3("Position", mObjectPosition, 0.25f);
-		ImGui::DragFloat3("Rotation", mObjectRotation, 1.f, 0.f, 360.f);
+		ImGui::DragFloat3("Rotation", mObjectRotation, 1.f, -360.f, 360.f);
 		ImGui::DragFloat3("Scale", mObjectScale, 0.25f, 0.f, 100.f);
 
 		selectedObject->setActive(mIsSelectedObjectActive);
