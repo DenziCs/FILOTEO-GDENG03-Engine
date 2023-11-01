@@ -34,13 +34,6 @@ void AppWindow::onCreate() {
 	mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
 	GameObjectManager::getInstance()->setVertexShaderProperties(shaderByteCode, shaderSize);
 
-	GameObjectManager::getInstance()->createObject(GameObjectManager::PLANE);
-	APlane* object = (APlane*)GameObjectManager::getInstance()->findObjectByName("Plane 0");
-	if (object) {
-		object->setScale(4.f, 1.f, 4.f);
-		object->setPosition(0.f, -1.f, 0.f);
-	}
-
 	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
 	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
