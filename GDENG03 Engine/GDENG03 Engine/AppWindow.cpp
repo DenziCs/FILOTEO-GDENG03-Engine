@@ -41,7 +41,6 @@ void AppWindow::onCreate() {
 		object->setPosition(0.f, -1.f, 0.f);
 	}
 
-	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
 	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
 	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
@@ -76,6 +75,7 @@ void AppWindow::onUpdate() {
 
 void AppWindow::onDestroy() {
 	AWindow::onDestroy();
+	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
 	mSwapChain->release();
 
 	InputManager::destroy();
