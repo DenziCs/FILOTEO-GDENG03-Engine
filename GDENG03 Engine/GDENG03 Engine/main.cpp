@@ -1,7 +1,7 @@
 /*
 Nathaniel Francis S. Filoteo
 GDENG03 X22
-HO -- UI Manager & Game Object Manager
+HO -- Physics ECS
 */
 
 #include"AppWindow.h"
