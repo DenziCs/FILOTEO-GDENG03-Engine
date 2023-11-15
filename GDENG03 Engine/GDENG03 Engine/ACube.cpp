@@ -145,39 +145,41 @@ void ACube::update(float delta_time) {
 		}
 
 		else if (InputManager::getInstance()->isKeyDown('T')) {
+			float translationScalar = mTranslationSpeed * delta_time;
+
 			if (InputManager::getInstance()->isKeyDown('I')) {
 				Vector3 newPosition = this->getLocalPosition();
-				newPosition += Vector3(0.f, mTranslationSpeed * delta_time, 0.f);
+				newPosition += this->mLocalMatrix.getUpVector() * translationScalar;
 				this->setPosition(newPosition);
 			}
 
 			else if (InputManager::getInstance()->isKeyDown('K')) {
 				Vector3 newPosition = this->getLocalPosition();
-				newPosition += Vector3(0.f, -mTranslationSpeed * delta_time, 0.f);
+				newPosition += this->mLocalMatrix.getUpVector() * -translationScalar;
 				this->setPosition(newPosition);
 			}
 
 			else if (InputManager::getInstance()->isKeyDown('L')) {
 				Vector3 newPosition = this->getLocalPosition();
-				newPosition += Vector3(mTranslationSpeed * delta_time, 0.f, 0.f);
+				newPosition += this->mLocalMatrix.getRightVector() * translationScalar;
 				this->setPosition(newPosition);
 			}
 
 			else if (InputManager::getInstance()->isKeyDown('J')) {
 				Vector3 newPosition = this->getLocalPosition();
-				newPosition += Vector3(-mTranslationSpeed * delta_time, 0.f, 0.f);
+				newPosition += this->mLocalMatrix.getRightVector() * -translationScalar;
 				this->setPosition(newPosition);
 			}
 
 			else if (InputManager::getInstance()->isKeyDown('U')) {
 				Vector3 newPosition = this->getLocalPosition();
-				newPosition += Vector3(0.f, 0.f, mTranslationSpeed * delta_time);
+				newPosition += this->mLocalMatrix.getForwardVector() * translationScalar;
 				this->setPosition(newPosition);
 			}
 
 			else if (InputManager::getInstance()->isKeyDown('M')) {
 				Vector3 newPosition = this->getLocalPosition();
-				newPosition += Vector3(0.f, 0.f, -mTranslationSpeed * delta_time);
+				newPosition += this->mLocalMatrix.getForwardVector() * -translationScalar;
 				this->setPosition(newPosition);
 			}
 		}
