@@ -1,4 +1,5 @@
 #include"AWindow.h"
+#include"GlobalProperties.h"
 #include"imgui_impl_win32.h"
 
 AWindow* window = nullptr;
@@ -52,12 +53,12 @@ bool AWindow::initialize() {
 	mWindowHandle = ::CreateWindowEx(
 		WS_EX_OVERLAPPEDWINDOW,
 		L"AWindowClass",
-		L"FILOTEO HO: Dear IMGUI Simple Window",
-		WS_OVERLAPPEDWINDOW,
+		L"FILOTEO HO: UI Manager & Game Object Manager",
+		WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		1024,
-		768,
+		GlobalProperties::WINDOW_WIDTH,
+		GlobalProperties::WINDOW_HEIGHT,
 		NULL,
 		NULL,
 		NULL,

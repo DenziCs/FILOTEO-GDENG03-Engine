@@ -49,6 +49,15 @@
     <Filter Include="IMGUI">
       <UniqueIdentifier>{91f3ab8b-1323-4830-8368-128d06b4ec40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\User Interface">
+      <UniqueIdentifier>{bf97a357-263b-412c-a064-3c366a9b36f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Misc">
+      <UniqueIdentifier>{34822e23-8642-480a-b5e6-5762ded37330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Game Objects">
+      <UniqueIdentifier>{42a52f78-2cf3-48d9-83a8-158889ba6236}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,9 +104,6 @@
     </ClCompile>
     <ClCompile Include="AIndexBuffer.cpp">
       <Filter>Engine\Graphics\IndexBuffer</Filter>
-    </ClCompile>
-    <ClCompile Include="AGameObject.cpp">
-      <Filter>Engine\Graphics\Primitives</Filter>
     </ClCompile>
     <ClCompile Include="ACube.cpp">
       <Filter>Engine\Graphics\Primitives</Filter>
@@ -147,6 +153,39 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>IMGUI</Filter>
     </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="AUIPanel.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleWindowPanel.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalProperties.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>Engine\Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>Engine\Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuBar.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="InspectorWindow.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneOutliner.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="AngleConverter.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineProfiler.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -190,9 +229,6 @@
     </ClInclude>
     <ClInclude Include="AIndexBuffer.h">
       <Filter>Engine\Graphics\IndexBuffer</Filter>
-    </ClInclude>
-    <ClInclude Include="AGameObject.h">
-      <Filter>Engine\Graphics\Primitives</Filter>
     </ClInclude>
     <ClInclude Include="ACube.h">
       <Filter>Engine\Graphics\Primitives</Filter>
@@ -247,6 +283,39 @@
     </ClInclude>
     <ClInclude Include="imgui\imstb_truetype.h">
       <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="AUIPanel.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleWindowPanel.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalProperties.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="AGameObject.h">
+      <Filter>Engine\Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>Engine\Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuBar.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectorWindow.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneOutliner.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="AngleConverter.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineProfiler.h">
+      <Filter>Engine\User Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -30,4 +30,6 @@ Matrix4x4 SceneCameraManager::getSceneCameraProjectionMatrix() {
 
 SceneCameraManager::SceneCameraManager() {}
 
-SceneCameraManager::~SceneCameraManager() {}
+SceneCameraManager::~SceneCameraManager() {
+	delete instance;
+}

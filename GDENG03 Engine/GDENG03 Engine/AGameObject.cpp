@@ -10,6 +10,26 @@ AGameObject::AGameObject(std::string name) {
 
 AGameObject::~AGameObject() {}
 
+std::string AGameObject::getObjectName() {
+	return mObjectName;
+}
+
+bool AGameObject::isActive() {
+	return mIsActive;
+}
+
+void AGameObject::setActive(bool is_object_active) {
+	mIsActive = is_object_active;
+}
+
+void AGameObject::select() {
+	mIsSelected = true;
+}
+
+void AGameObject::deselect() {
+	mIsSelected = false;
+}
+
 void AGameObject::setPosition(float x, float y, float z) {
 	mLocalPosition.x = x;
 	mLocalPosition.y = y;

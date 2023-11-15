@@ -1,8 +1,10 @@
 #pragma once
 #include"AWindow.h"
 #include"AGraphicsEngine.h"
+#include"GameObjectManager.h"
 #include"InputManager.h"
 #include"SceneCameraManager.h"
+#include"UIManager.h"
 #include"ASwapChain.h"
 #include"ADeviceContext.h"
 #include"AVertexBuffer.h"
@@ -36,10 +38,4 @@ private:
 	AConstantBuffer* mConstantBuffer;
 	AVertexShader* mVertexShader;
 	APixelShader* mPixelShader;
-
-	std::vector<AGameObject*> mObjectList;
-
-	bool mIsDemoWindowOpen = false;
-	bool mAreCubesMoving = true;
-	float mBackgroundColor[3];
 };

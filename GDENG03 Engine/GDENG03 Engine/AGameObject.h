@@ -15,6 +15,12 @@ public:
 	virtual void update(float delta_time) = 0;
 	virtual void draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) = 0;
 
+	std::string getObjectName();
+	bool isActive();
+	void setActive(bool is_object_active);
+	void select();
+	void deselect();
+
 	void setPosition(float x, float y, float z);
 	void setPosition(Vector3 position);
 	Vector3 getLocalPosition();
@@ -44,4 +50,7 @@ protected:
 	Vector3 mLocalScale;
 	Vector3 mLocalRotation;
 	Matrix4x4 mLocalMatrix;
+
+	bool mIsActive = true;
+	bool mIsSelected = false;
 };
