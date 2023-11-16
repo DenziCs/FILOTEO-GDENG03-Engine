@@ -44,17 +44,17 @@ void InspectorWindow::draw() {
 void InspectorWindow::updateObjectInfo(AGameObject* selected_object) {
 	mIsSelectedObjectActive = selected_object->isActive();
 
-	Vector3 position = selected_object->getLocalPosition();
+	Vector3D position = selected_object->getLocalPosition();
 	mObjectPosition[0] = position.x;
 	mObjectPosition[1] = position.y;
 	mObjectPosition[2] = position.z;
 
-	Vector3 rotation = selected_object->getLocalRotation();
+	Vector3D rotation = selected_object->getLocalRotation();
 	mObjectRotation[0] = AngleConverter::toDegrees(rotation.x);
 	mObjectRotation[1] = AngleConverter::toDegrees(rotation.y);
 	mObjectRotation[2] = AngleConverter::toDegrees(rotation.z);
 
-	Vector3 scale = selected_object->getLocalScale();
+	Vector3D scale = selected_object->getLocalScale();
 	mObjectScale[0] = scale.x;
 	mObjectScale[1] = scale.y;
 	mObjectScale[2] = scale.z;

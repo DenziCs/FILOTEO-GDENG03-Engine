@@ -2,9 +2,9 @@
 
 AGameObject::AGameObject(std::string name) {
 	mObjectName = name;
-	mLocalPosition = Vector3(0.f, 0.f, 0.f);
-	mLocalRotation = Vector3(0.f, 0.f, 0.f);
-	mLocalScale = Vector3(1.f, 1.f, 1.f);
+	mLocalPosition = Vector3D(0.f, 0.f, 0.f);
+	mLocalRotation = Vector3D(0.f, 0.f, 0.f);
+	mLocalScale = Vector3D(1.f, 1.f, 1.f);
 	mLocalMatrix.setIdentity();
 }
 
@@ -38,13 +38,13 @@ void AGameObject::setPosition(float x, float y, float z) {
 	updateLocalMatrix();
 }
 
-void AGameObject::setPosition(Vector3 position) {
+void AGameObject::setPosition(Vector3D position) {
 	mLocalPosition = position;
 
 	updateLocalMatrix();
 }
 
-Vector3 AGameObject::getLocalPosition() {
+Vector3D AGameObject::getLocalPosition() {
 	return mLocalPosition;
 }
 
@@ -56,13 +56,13 @@ void AGameObject::setScale(float x, float y, float z) {
 	updateLocalMatrix();
 }
 
-void AGameObject::setScale(Vector3 scale) {
+void AGameObject::setScale(Vector3D scale) {
 	mLocalScale = scale;
 
 	updateLocalMatrix();
 }
 
-Vector3 AGameObject::getLocalScale() {
+Vector3D AGameObject::getLocalScale() {
 	return mLocalScale;
 }
 
@@ -74,13 +74,13 @@ void AGameObject::setRotation(float x, float y, float z) {
 	updateLocalMatrix();
 }
 
-void AGameObject::setRotation(Vector3 rotation) {
+void AGameObject::setRotation(Vector3D rotation) {
 	mLocalRotation = rotation;
 
 	updateLocalMatrix();
 }
 
-Vector3 AGameObject::getLocalRotation() {
+Vector3D AGameObject::getLocalRotation() {
 	return mLocalRotation;
 }
 

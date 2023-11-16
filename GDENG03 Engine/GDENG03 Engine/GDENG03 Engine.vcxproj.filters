@@ -102,7 +102,7 @@
     <ClCompile Include="Matrix4x4.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Vector3.cpp">
+    <ClCompile Include="Vector3D.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
     <ClCompile Include="AIndexBuffer.cpp">
@@ -227,7 +227,7 @@
     <ClInclude Include="Matrix4x4.h">
       <Filter>Engine\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3.h">
+    <ClInclude Include="Vector3D.h">
       <Filter>Engine\Math</Filter>
     </ClInclude>
     <ClInclude Include="AIndexBuffer.h">

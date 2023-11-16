@@ -1,5 +1,5 @@
 #pragma once
-#include"Vector3.h"
+#include"Vector3D.h"
 #include"Matrix4x4.h"
 #include<string>
 
@@ -22,16 +22,16 @@ public:
 	void deselect();
 
 	void setPosition(float x, float y, float z);
-	void setPosition(Vector3 position);
-	Vector3 getLocalPosition();
+	void setPosition(Vector3D position);
+	Vector3D getLocalPosition();
 
 	void setScale(float x, float y, float z);
-	void setScale(Vector3 scale);
-	Vector3 getLocalScale();
+	void setScale(Vector3D scale);
+	Vector3D getLocalScale();
 
 	void setRotation(float x, float y, float z);
-	void setRotation(Vector3 rotation);
-	Vector3 getLocalRotation();
+	void setRotation(Vector3D rotation);
+	Vector3D getLocalRotation();
 
 	void updateLocalMatrix();
 	Matrix4x4 getLocalMatrix();
@@ -46,9 +46,9 @@ public:
 
 protected:
 	std::string mObjectName;
-	Vector3 mLocalPosition;
-	Vector3 mLocalScale;
-	Vector3 mLocalRotation;
+	Vector3D mLocalPosition;
+	Vector3D mLocalScale;
+	Vector3D mLocalRotation;
 	Matrix4x4 mLocalMatrix;
 
 	bool mIsActive = true;
