@@ -49,7 +49,7 @@ void GameObjectManager::update() {
 	}
 }
 
-void GameObjectManager::render(int viewport_width, int viewport_height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {
+void GameObjectManager::draw(int viewport_width, int viewport_height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {
 	for (int i = 0; i < mGameObjectList.size(); i++) {
 		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->draw(viewport_width, viewport_height, vertex_shader, pixel_shader);
 	}

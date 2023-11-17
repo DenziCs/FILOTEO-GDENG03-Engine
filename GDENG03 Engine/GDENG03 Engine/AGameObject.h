@@ -34,7 +34,9 @@ public:
 	Vector3D getLocalRotation();
 
 	void updateLocalMatrix();
+	void updateLocalMatrix(float physics_matrix[16]);
 	Matrix4x4 getLocalMatrix();
+	float* getPhysicsMatrix();
 
 	__declspec(align(16))
 		struct constant {

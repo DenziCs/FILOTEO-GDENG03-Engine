@@ -61,6 +61,12 @@
     <Filter Include="Physics">
       <UniqueIdentifier>{17e6c249-bd98-4017-b41f-5b2e3b00b9f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Components">
+      <UniqueIdentifier>{0c11fef6-5004-4b45-9126-651f732f28af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Systems">
+      <UniqueIdentifier>{dfdc964c-ed85-446f-bc07-f49e28185aa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -188,6 +194,18 @@
     </ClCompile>
     <ClCompile Include="EngineProfiler.cpp">
       <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="AComponent.cpp">
+      <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemManager.cpp">
+      <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>Engine\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -637,6 +655,18 @@
     </ClInclude>
     <ClInclude Include="reactphysics3d\include\reactphysics3d\systems\DynamicsSystem.h">
       <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="AComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemManager.h">
+      <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>Engine\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

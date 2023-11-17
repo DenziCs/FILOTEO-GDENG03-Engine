@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ACamera.cpp" />
+    <ClCompile Include="AComponent.cpp" />
     <ClCompile Include="AConstantBuffer.cpp" />
     <ClCompile Include="ACube.cpp" />
     <ClCompile Include="ADeviceContext.cpp" />
@@ -163,11 +164,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuBar.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
+    <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="SceneCameraManager.cpp" />
     <ClCompile Include="SceneOutliner.cpp" />
     <ClCompile Include="SimpleWindowPanel.cpp" />
+    <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Vector3D.cpp" />
@@ -177,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ACamera.h" />
+    <ClInclude Include="AComponent.h" />
     <ClInclude Include="AConstantBuffer.h" />
     <ClInclude Include="ACube.h" />
     <ClInclude Include="ADeviceContext.h" />
@@ -208,6 +213,8 @@
     <ClInclude Include="InspectorWindow.h" />
     <ClInclude Include="MainMenuBar.h" />
     <ClInclude Include="Matrix4x4.h" />
+    <ClInclude Include="PhysicsComponent.h" />
+    <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Randomizer.h" />
     <ClInclude Include="reactphysics3d\include\reactphysics3d\body\CollisionBody.h" />
@@ -319,6 +326,7 @@
     <ClInclude Include="SceneCameraManager.h" />
     <ClInclude Include="SceneOutliner.h" />
     <ClInclude Include="SimpleWindowPanel.h" />
+    <ClInclude Include="SystemManager.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Vector3D.h" />

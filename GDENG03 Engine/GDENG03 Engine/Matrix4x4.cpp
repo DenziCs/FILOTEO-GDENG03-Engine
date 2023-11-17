@@ -155,6 +155,10 @@ void Matrix4x4::setMatrix(const Matrix4x4& matrix) {
 	::memcpy(mMatrix, matrix.mMatrix, sizeof(float) * 16);
 }
 
+float* Matrix4x4::getMatrix() {
+	return *mMatrix;
+}
+
 Vector3D Matrix4x4::getRightVector() {
 	return Vector3D(mMatrix[0][0], mMatrix[0][1], mMatrix[0][2]);
 }

@@ -29,6 +29,7 @@ public:
 	void operator *=(const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& matrix);
 
+	float* getMatrix();
 	Vector3D getRightVector();
 	Vector3D getUpVector();
 	Vector3D getForwardVector();

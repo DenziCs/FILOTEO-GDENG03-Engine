@@ -22,6 +22,8 @@ void AppWindow::onCreate() {
 	UINT height = windowRect.bottom - windowRect.top;
 	mSwapChain->initialize(this->mWindowHandle, width, height);
 
+	SystemManager::initialize();
+
 	ACamera* sceneCamera = new ACamera("UnregisteredHyperCam2");
 	sceneCamera->setPosition(0.f, 0.f, 0.f);
 	sceneCamera->setRotation(0.f, 0.f, 0.f);
@@ -61,7 +63,8 @@ void AppWindow::onUpdate() {
 	SceneCameraManager::getInstance()->update();
 
 	GameObjectManager::getInstance()->update();
-	GameObjectManager::getInstance()->render(width, height, mVertexShader, mPixelShader);
+	SystemManager::getInstance()->update();
+	GameObjectManager::getInstance()->draw(width, height, mVertexShader, mPixelShader);
 	UIManager::getInstance()->draw();
 	mSwapChain->present(false);
 }
