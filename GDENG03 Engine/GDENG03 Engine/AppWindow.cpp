@@ -25,7 +25,7 @@ void AppWindow::onCreate() {
 	SystemManager::initialize();
 
 	ACamera* sceneCamera = new ACamera("UnregisteredHyperCam2");
-	sceneCamera->setPosition(0.f, 0.f, 0.f);
+	sceneCamera->setPosition(0.f, 0.f, -2.f);
 	sceneCamera->setRotation(0.f, 0.f, 0.f);
 	sceneCamera->setPerspectiveProjectionMatrix(1.57f, (float)width / (float)height, 0.1f, 100.f);
 	SceneCameraManager::getInstance()->setSceneCamera(sceneCamera);
@@ -35,6 +35,19 @@ void AppWindow::onCreate() {
 	AGraphicsEngine::getInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &shaderSize);
 	mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
 	GameObjectManager::getInstance()->setVertexShaderProperties(shaderByteCode, shaderSize);
+
+	GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_PLANE);
+	APlane* object = (APlane*)GameObjectManager::getInstance()->findObjectByName("Physics Plane 0");
+	if (object) {
+		object->setScale(4.f, 1.f, 4.f);
+		object->setPosition(0.f, -1.f, 0.f);
+	}
+
+	GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_CUBE);
+	ACube* cube = (ACube*)GameObjectManager::getInstance()->findObjectByName("Physics Cube 0");
+	if (cube) {
+		cube->setPosition(0.f, 10.f, 0.f);
+	}
 
 	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
 	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
@@ -74,6 +87,7 @@ void AppWindow::onDestroy() {
 	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
 	mSwapChain->release();
 
+	SystemManager::destroy();
 	InputManager::destroy();
 	SceneCameraManager::destroy();
 

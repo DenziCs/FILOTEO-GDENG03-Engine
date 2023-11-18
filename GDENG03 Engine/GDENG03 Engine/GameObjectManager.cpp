@@ -4,6 +4,9 @@
 #include"APlane.h"
 #include"GlobalProperties.h"
 #include<iostream>
+#include"PhysicsComponent.h"
+#include"SystemManager.h"
+#include"PhysicsSystem.h"
 
 GameObjectManager* GameObjectManager::instance = nullptr;
 
@@ -60,45 +63,6 @@ void GameObjectManager::addObject(AGameObject* game_object) {
 	mGameObjectTable[game_object->getObjectName()] = game_object;
 }
 
-void GameObjectManager::createObject(PrimitiveType primitive_type, void* shader_byte_code, size_t shader_size) {
-	std::string newName = "";
-
-	switch (primitive_type) {
-	case CUBE: {
-		int cubeCount = -1;
-		AGameObject* cube = nullptr;
-		do {
-			cubeCount++;
-			newName = "Cube " + std::to_string(cubeCount);
-			cube = mGameObjectTable[newName];
-		}
-		while (cube);
-
-		ACube* newCube = new ACube(newName, shader_byte_code, shader_size);
-		addObject(newCube);
-		std::cout << newCube->getObjectName() << " spawned." << std::endl;
-	}
-	break;
-
-	case PLANE: {
-		int planeCount = -1;
-		AGameObject* plane = nullptr;
-		do {
-			planeCount++;
-			newName = "Plane " + std::to_string(planeCount);
-			plane = mGameObjectTable[newName];
-		}
-		while (plane);
-
-		APlane* newPlane = new APlane(newName, shader_byte_code, shader_size);
-		addObject(newPlane);
-		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
-	}
-	break;
-
-	}
-}
-
 void GameObjectManager::createObject(PrimitiveType primitive_type) {
 	std::string newName = "";
 
@@ -132,6 +96,46 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		APlane* newPlane = new APlane(newName, mVertexShaderByteCode, mShaderSize);
 		addObject(newPlane);
 		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
+	}
+	break;
+
+	case PHYSICS_CUBE: {
+		int cubeCount = -1;
+		AGameObject* cube = nullptr;
+		do {
+			cubeCount++;
+			newName = "Physics Cube " + std::to_string(cubeCount);
+			cube = mGameObjectTable[newName];
+		}
+		while (cube);
+
+		ACube* newCube = new ACube(newName, mVertexShaderByteCode, mShaderSize);
+		addObject(newCube);
+		std::cout << newCube->getObjectName() << " spawned." << std::endl;
+
+		PhysicsComponent* component = new PhysicsComponent(newName + " Physics", newCube);
+		component->enableGravity(true);
+		std::cout << component->getComponentName() << " attached." << std::endl;
+	}
+	break;
+
+	case PHYSICS_PLANE: {
+		int planeCount = -1;
+		AGameObject* plane = nullptr;
+		do {
+			planeCount++;
+			newName = "Physics Plane " + std::to_string(planeCount);
+			plane = mGameObjectTable[newName];
+		}
+		while (plane);
+
+		APlane* newPlane = new APlane(newName, mVertexShaderByteCode, mShaderSize);
+		addObject(newPlane);
+		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
+
+		PhysicsComponent* component = new PhysicsComponent(newName + " Physics", newPlane);
+		component->enableGravity(false);
+		std::cout << component->getComponentName() << " attached." << std::endl;
 	}
 	break;
 
