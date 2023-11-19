@@ -3,6 +3,7 @@
 #include"InputManager.h"
 #include"SceneCameraManager.h"
 #include"ADeviceContext.h"
+#include<iostream>
 
 APlane::APlane(std::string name, void* shader_byte_code, size_t shader_size) : AGameObject::AGameObject(name) {
 	Vertex* currentVertexList = new Vertex[4];

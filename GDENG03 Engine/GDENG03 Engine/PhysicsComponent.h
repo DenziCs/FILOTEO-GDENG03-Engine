@@ -12,6 +12,9 @@ public:
 	void perform(float delta_time) override;
 
 	RigidBody* getRigidBody();
+
+	void setMass(float object_mass);
+	void setRigidBodyType(BodyType rigid_body_type);
 	void enableGravity(bool is_affected_by_gravity);
 
 private:

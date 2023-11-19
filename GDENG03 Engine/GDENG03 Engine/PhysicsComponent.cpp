@@ -12,12 +12,17 @@ PhysicsComponent::PhysicsComponent(std::string name, AGameObject* owner) : AComp
 
 	reactphysics3d::PhysicsCommon* physicsCommon = physicsSystem->getPhysicsCommon();
 	reactphysics3d::PhysicsWorld* physicsWorld = physicsSystem->getPhysicsWorld();
-
+	
+	Vector3D position = this->getOwner()->getLocalPosition();
+	Vector3D rotation = this->getOwner()->getLocalRotation();
 	Vector3D scale = this->getOwner()->getLocalScale();
-	reactphysics3d::Transform transform; transform.setFromOpenGL(this->getOwner()->getPhysicsMatrix());
+
+	reactphysics3d::Transform transform;
+	transform.setPosition(Vector3(position.x, position.y, position.z));
+	transform.setOrientation(Quaternion::fromEulerAngles(rotation.x, rotation.y, rotation.z));
+
 	reactphysics3d::BoxShape* boxShape = physicsCommon->createBoxShape(Vector3(scale.x / 2.f, scale.y / 2.f, scale.z / 2.f));
 	mRigidBody = physicsWorld->createRigidBody(transform);
-	std::cout << "Rigid body created." << std::endl;
 
 	mRigidBody->addCollider(boxShape, transform);
 	mRigidBody->updateMassPropertiesFromColliders();
@@ -25,7 +30,6 @@ PhysicsComponent::PhysicsComponent(std::string name, AGameObject* owner) : AComp
 	mRigidBody->setType(reactphysics3d::BodyType::DYNAMIC);
 
 	transform = mRigidBody->getTransform();
-	std::cout << "Transform get!" << std::endl;
 
 	float matrix[16];
 	transform.getOpenGLMatrix(matrix);
@@ -40,14 +44,22 @@ PhysicsComponent::~PhysicsComponent() {
 
 void PhysicsComponent::perform(float delta_time) {
 	const Transform transform = mRigidBody->getTransform();
-	float physics_matrix[16];
-	transform.getOpenGLMatrix(physics_matrix);
+	float physicsMatrix[16];
+	transform.getOpenGLMatrix(physicsMatrix);
 
-	this->getOwner()->updateLocalMatrix(physics_matrix);
+	this->getOwner()->updateLocalMatrix(physicsMatrix);
 }
 
 RigidBody* PhysicsComponent::getRigidBody() {
 	return mRigidBody;
+}
+
+void PhysicsComponent::setMass(float object_mass) {
+	mMass = object_mass;
+}
+
+void PhysicsComponent::setRigidBodyType(BodyType rigid_body_type) {
+	mRigidBody->setType(rigid_body_type);
 }
 
 void PhysicsComponent::enableGravity(bool is_affected_by_gravity) {

@@ -129,12 +129,14 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		}
 		while (plane);
 
-		APlane* newPlane = new APlane(newName, mVertexShaderByteCode, mShaderSize);
+		ACube* newPlane = new ACube(newName, mVertexShaderByteCode, mShaderSize);
+		newPlane->setPosition(0.f, -10.f, 0.f);
+		newPlane->setScale(10.f, 0.1f, 10.f);
 		addObject(newPlane);
 		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
 
 		PhysicsComponent* component = new PhysicsComponent(newName + " Physics", newPlane);
-		component->enableGravity(false);
+		component->setRigidBodyType(BodyType::STATIC);
 		std::cout << component->getComponentName() << " attached." << std::endl;
 	}
 	break;

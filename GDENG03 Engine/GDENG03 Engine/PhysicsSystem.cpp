@@ -14,12 +14,6 @@ PhysicsSystem::PhysicsSystem() {
 }
 
 PhysicsSystem::~PhysicsSystem() {
-	mComponentTable.clear();
-
-	for (int i = 0; i < mComponentList.size(); i++) {
-		delete mComponentList[i];
-	}
-
 	delete mPhysicsCommon;
 	std::cout << "Physics System destroyed!" << std::endl;
 }
