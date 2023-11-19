@@ -49,6 +49,7 @@ int GameObjectManager::getActiveObjectCount() {
 void GameObjectManager::update() {
 	for (int i = 0; i < mGameObjectList.size(); i++) {
 		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->update(TimeManager::getDeltaTime());
+		std::cout << mGameObjectList[i]->getObjectName() << " updated." << std::endl;
 	}
 }
 
@@ -129,9 +130,9 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		}
 		while (plane);
 
-		ACube* newPlane = new ACube(newName, mVertexShaderByteCode, mShaderSize);
+		APlane* newPlane = new APlane(newName, mVertexShaderByteCode, mShaderSize);
 		newPlane->setPosition(0.f, -10.f, 0.f);
-		newPlane->setScale(10.f, 0.1f, 10.f);
+		newPlane->setScale(10.f, 1.f, 10.f);
 		addObject(newPlane);
 		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
 

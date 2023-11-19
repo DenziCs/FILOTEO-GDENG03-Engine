@@ -37,12 +37,6 @@ void AppWindow::onCreate() {
 	mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
 	GameObjectManager::getInstance()->setVertexShaderProperties(shaderByteCode, shaderSize);
 
-	GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_PLANE);
-
-	for (int i = 0; i < 10; i++) {
-		GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_CUBE);
-	}
-
 	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
 	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
 	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
