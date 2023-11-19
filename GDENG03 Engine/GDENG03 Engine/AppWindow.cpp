@@ -26,7 +26,7 @@ void AppWindow::onCreate() {
 	SystemManager::initialize();
 
 	ACamera* sceneCamera = new ACamera("UnregisteredHyperCam2");
-	sceneCamera->setPosition(0.f, -20.f, 0.f);
+	sceneCamera->setPosition(0.f, -15.f, -10.f);
 	sceneCamera->setRotation(0.f, 0.f, 0.f);
 	sceneCamera->setPerspectiveProjectionMatrix(1.57f, (float)width / (float)height, 0.1f, 100.f);
 	SceneCameraManager::getInstance()->setSceneCamera(sceneCamera);
