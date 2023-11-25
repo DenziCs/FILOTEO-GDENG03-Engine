@@ -14,7 +14,7 @@ Vertex::Vertex() {
 	color1.z = 0;
 }
 
-Vertex::Vertex(Vector3 vertex_position_0, Vector3 vertex_color_0, Vector3 vertex_color_1) {
+Vertex::Vertex(Vector3D vertex_position_0, Vector3D vertex_color_0, Vector3D vertex_color_1) {
 	position.x = vertex_position_0.x;
 	position.y = vertex_position_0.y;
 	position.z = vertex_position_0.z;

@@ -6,6 +6,7 @@
 #include"imgui_stdlib.h"
 #include"GlobalProperties.h"
 #include<iostream>
+#include"PhysicsComponent.h"
 
 AppWindow::AppWindow() {}
 
@@ -22,8 +23,10 @@ void AppWindow::onCreate() {
 	UINT height = windowRect.bottom - windowRect.top;
 	mSwapChain->initialize(this->mWindowHandle, width, height);
 
+	SystemManager::initialize();
+
 	ACamera* sceneCamera = new ACamera("UnregisteredHyperCam2");
-	sceneCamera->setPosition(0.f, 0.f, 0.f);
+	sceneCamera->setPosition(0.f, 1.f, -2.f);
 	sceneCamera->setRotation(0.f, 0.f, 0.f);
 	sceneCamera->setPerspectiveProjectionMatrix(1.57f, (float)width / (float)height, 0.1f, 100.f);
 	SceneCameraManager::getInstance()->setSceneCamera(sceneCamera);
@@ -61,7 +64,8 @@ void AppWindow::onUpdate() {
 	SceneCameraManager::getInstance()->update();
 
 	GameObjectManager::getInstance()->update();
-	GameObjectManager::getInstance()->render(width, height, mVertexShader, mPixelShader);
+	SystemManager::getInstance()->update();
+	GameObjectManager::getInstance()->draw(width, height, mVertexShader, mPixelShader);
 	UIManager::getInstance()->draw();
 	mSwapChain->present(false);
 }
@@ -71,6 +75,7 @@ void AppWindow::onDestroy() {
 	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
 	mSwapChain->release();
 
+	SystemManager::destroy();
 	InputManager::destroy();
 	SceneCameraManager::destroy();
 

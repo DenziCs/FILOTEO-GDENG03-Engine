@@ -5,6 +5,7 @@
 #include"InputManager.h"
 #include"SceneCameraManager.h"
 #include"UIManager.h"
+#include"SystemManager.h"
 #include"ASwapChain.h"
 #include"ADeviceContext.h"
 #include"AVertexBuffer.h"

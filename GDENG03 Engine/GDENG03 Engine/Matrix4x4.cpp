@@ -22,7 +22,7 @@ void Matrix4x4::setTranslation(float delta_x, float delta_y, float delta_z) {
 	mMatrix[3][2] = delta_z;
 }
 
-void Matrix4x4::setTranslation(const Vector3& translate_vector) {
+void Matrix4x4::setTranslation(const Vector3D& translate_vector) {
 	setIdentity();
 
 	mMatrix[3][0] = translate_vector.x;
@@ -38,7 +38,7 @@ void Matrix4x4::setScale(float factor_x, float factor_y, float factor_z) {
 	mMatrix[2][2] = factor_z;
 }
 
-void Matrix4x4::setScale(const Vector3& scale_vector) {
+void Matrix4x4::setScale(const Vector3D& scale_vector) {
 	setIdentity();
 
 	mMatrix[0][0] = scale_vector.x;
@@ -95,7 +95,7 @@ void Matrix4x4::translate(float delta_x, float delta_y, float delta_z) {
 	*this *= translator;
 }
 
-void Matrix4x4::translate(const Vector3& translate_vector) {
+void Matrix4x4::translate(const Vector3D& translate_vector) {
 	Matrix4x4 translator;
 	translator.setTranslation(translate_vector);
 	*this *= translator;
@@ -107,7 +107,7 @@ void Matrix4x4::scale(float factor_x, float factor_y, float factor_z) {
 	*this *= scaleMatrix;
 }
 
-void Matrix4x4::scale(const Vector3& scale_vector) {
+void Matrix4x4::scale(const Vector3D& scale_vector) {
 	Matrix4x4 scaleMatrix;
 	scaleMatrix.setScale(scale_vector);
 	*this *= scaleMatrix;
@@ -155,20 +155,24 @@ void Matrix4x4::setMatrix(const Matrix4x4& matrix) {
 	::memcpy(mMatrix, matrix.mMatrix, sizeof(float) * 16);
 }
 
-Vector3 Matrix4x4::getRightVector() {
-	return Vector3(mMatrix[0][0], mMatrix[0][1], mMatrix[0][2]);
+float* Matrix4x4::getMatrix() {
+	return *mMatrix;
 }
 
-Vector3 Matrix4x4::getUpVector() {
-	return Vector3(mMatrix[1][0], mMatrix[1][1], mMatrix[1][2]);
+Vector3D Matrix4x4::getRightVector() {
+	return Vector3D(mMatrix[0][0], mMatrix[0][1], mMatrix[0][2]);
 }
 
-Vector3 Matrix4x4::getForwardVector() {
-	return Vector3(mMatrix[2][0], mMatrix[2][1], mMatrix[2][2]);
+Vector3D Matrix4x4::getUpVector() {
+	return Vector3D(mMatrix[1][0], mMatrix[1][1], mMatrix[1][2]);
 }
 
-Vector3 Matrix4x4::getTranslation() {
-	return Vector3(mMatrix[3][0], mMatrix[3][1], mMatrix[3][2]);
+Vector3D Matrix4x4::getForwardVector() {
+	return Vector3D(mMatrix[2][0], mMatrix[2][1], mMatrix[2][2]);
+}
+
+Vector3D Matrix4x4::getTranslation() {
+	return Vector3D(mMatrix[3][0], mMatrix[3][1], mMatrix[3][2]);
 }
 
 float Matrix4x4::getDeterminant() {

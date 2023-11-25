@@ -1,6 +1,6 @@
 #pragma once
 #include<memory>
-#include"Vector3.h"
+#include"Vector3D.h"
 #include"Vector4.h"
 
 class Matrix4x4
@@ -11,9 +11,9 @@ public:
 
 	void setIdentity();
 	void setTranslation(float delta_x, float delta_y, float delta_z);
-	void setTranslation(const Vector3& translate_vector);
+	void setTranslation(const Vector3D& translate_vector);
 	void setScale(float factor_x, float factor_y, float factor_z);
-	void setScale(const Vector3& scale_vector);
+	void setScale(const Vector3D& scale_vector);
 	void setRotationX(float theta);
 	void setRotationY(float theta);
 	void setRotationZ(float theta);
@@ -21,18 +21,19 @@ public:
 	void setPerspectiveProjection(float field_of_view, float aspect, float near_plane, float far_plane);
 
 	void translate(float delta_x, float delta_y, float delta_z);
-	void translate(const Vector3& translate_vector);
+	void translate(const Vector3D& translate_vector);
 	void scale(float factor_x, float factor_y, float factor_z);
-	void scale(const Vector3& scale_vector);
+	void scale(const Vector3D& scale_vector);
 	void rotate(int axis, float theta);
 
 	void operator *=(const Matrix4x4& matrix);
 	void setMatrix(const Matrix4x4& matrix);
 
-	Vector3 getRightVector();
-	Vector3 getUpVector();
-	Vector3 getForwardVector();
-	Vector3 getTranslation();
+	float* getMatrix();
+	Vector3D getRightVector();
+	Vector3D getUpVector();
+	Vector3D getForwardVector();
+	Vector3D getTranslation();
 	float getDeterminant();
 	void inverse();
 
