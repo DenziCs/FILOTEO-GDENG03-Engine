@@ -67,6 +67,9 @@
     <Filter Include="Engine\Systems">
       <UniqueIdentifier>{dfdc964c-ed85-446f-bc07-f49e28185aa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Editor">
+      <UniqueIdentifier>{fbc7b40e-400d-4dd7-a8e7-6997e546835b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -206,6 +209,18 @@
     </ClCompile>
     <ClCompile Include="PhysicsSystem.cpp">
       <Filter>Engine\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="BackendManager.cpp">
+      <Filter>Engine\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="StateSnapshot.cpp">
+      <Filter>Engine\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionMemento.cpp">
+      <Filter>Engine\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionHistoryManager.cpp">
+      <Filter>Engine\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -667,6 +682,18 @@
     </ClInclude>
     <ClInclude Include="PhysicsSystem.h">
       <Filter>Engine\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="BackendManager.h">
+      <Filter>Engine\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="StateSnapshot.h">
+      <Filter>Engine\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionMemento.h">
+      <Filter>Engine\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionHistoryManager.h">
+      <Filter>Engine\Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

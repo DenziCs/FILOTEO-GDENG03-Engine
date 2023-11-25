@@ -135,6 +135,8 @@
     <ClCompile Include="ACamera.cpp" />
     <ClCompile Include="AComponent.cpp" />
     <ClCompile Include="AConstantBuffer.cpp" />
+    <ClCompile Include="ActionHistoryManager.cpp" />
+    <ClCompile Include="ActionMemento.cpp" />
     <ClCompile Include="ACube.cpp" />
     <ClCompile Include="ADeviceContext.cpp" />
     <ClCompile Include="AGameObject.cpp" />
@@ -148,6 +150,7 @@
     <ClCompile Include="AUIPanel.cpp" />
     <ClCompile Include="AVertexBuffer.cpp" />
     <ClCompile Include="AWindow.cpp" />
+    <ClCompile Include="BackendManager.cpp" />
     <ClCompile Include="EngineProfiler.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GlobalProperties.cpp" />
@@ -171,6 +174,7 @@
     <ClCompile Include="SceneCameraManager.cpp" />
     <ClCompile Include="SceneOutliner.cpp" />
     <ClCompile Include="SimpleWindowPanel.cpp" />
+    <ClCompile Include="StateSnapshot.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="UIManager.cpp" />
@@ -183,6 +187,8 @@
     <ClInclude Include="ACamera.h" />
     <ClInclude Include="AComponent.h" />
     <ClInclude Include="AConstantBuffer.h" />
+    <ClInclude Include="ActionHistoryManager.h" />
+    <ClInclude Include="ActionMemento.h" />
     <ClInclude Include="ACube.h" />
     <ClInclude Include="ADeviceContext.h" />
     <ClInclude Include="AGameObject.h" />
@@ -197,6 +203,7 @@
     <ClInclude Include="AUIPanel.h" />
     <ClInclude Include="AVertexBuffer.h" />
     <ClInclude Include="AWindow.h" />
+    <ClInclude Include="BackendManager.h" />
     <ClInclude Include="EngineProfiler.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GlobalProperties.h" />
@@ -326,6 +333,7 @@
     <ClInclude Include="SceneCameraManager.h" />
     <ClInclude Include="SceneOutliner.h" />
     <ClInclude Include="SimpleWindowPanel.h" />
+    <ClInclude Include="StateSnapshot.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="UIManager.h" />
