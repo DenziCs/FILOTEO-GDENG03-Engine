@@ -12,7 +12,7 @@ public:
 	AGameObject(std::string name);
 	~AGameObject();
 
-	virtual void update(float delta_time) = 0;
+	virtual void update(float delta_time);
 	virtual void draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) = 0;
 
 	std::string getObjectName();
@@ -20,6 +20,10 @@ public:
 	void setActive(bool is_object_active);
 	void select();
 	void deselect();
+
+	void setTranslationSpeed(float translation_speed);
+	void setRotationSpeed(float rotation_speed);
+	void setScaleSpeed(float scale_speed);
 
 	void setPosition(float x, float y, float z);
 	void setPosition(Vector3D position);
@@ -55,4 +59,8 @@ protected:
 
 	bool mIsActive = true;
 	bool mIsSelected = false;
+
+	float mTranslationSpeed = 5.f;
+	float mRotationSpeed = 1.f;
+	float mScaleSpeed = 1.f;
 };

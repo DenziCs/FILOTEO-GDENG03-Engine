@@ -1,4 +1,6 @@
 #include"AGameObject.h"
+#include"InputManager.h"
+#include<Windows.h>
 
 AGameObject::AGameObject(std::string name) {
 	mObjectName = name;
@@ -9,6 +11,154 @@ AGameObject::AGameObject(std::string name) {
 }
 
 AGameObject::~AGameObject() {}
+
+void AGameObject::update(float delta_time) {
+	if (this->mIsSelected) {
+		if (InputManager::getInstance()->isKeyDown('R')) {
+			if (InputManager::getInstance()->isKeyDown(VK_UP)) {
+				float deltaRotation = mRotationSpeed * delta_time;
+				Vector3D newRotation = this->getLocalRotation();
+				newRotation += Vector3D(deltaRotation, deltaRotation, deltaRotation);
+				this->setRotation(newRotation);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown(VK_DOWN)) {
+				float deltaRotation = -mRotationSpeed * delta_time;
+				Vector3D newRotation = this->getLocalRotation();
+				newRotation += Vector3D(deltaRotation, deltaRotation, deltaRotation);
+				this->setRotation(newRotation);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('I')) {
+				Vector3D newRotation = this->getLocalRotation();
+				newRotation += Vector3D(mRotationSpeed * delta_time, 0.f, 0.f);
+				this->setRotation(newRotation);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('K')) {
+				Vector3D newRotation = this->getLocalRotation();
+				newRotation += Vector3D(-mRotationSpeed * delta_time, 0.f, 0.f);
+				this->setRotation(newRotation);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('L')) {
+				Vector3D newRotation = this->getLocalRotation();
+				newRotation += Vector3D(0.f, -mRotationSpeed * delta_time, 0.f);
+				this->setRotation(newRotation);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('J')) {
+				Vector3D newRotation = this->getLocalRotation();
+				newRotation += Vector3D(0.f, mRotationSpeed * delta_time, 0.f);
+				this->setRotation(newRotation);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('O')) {
+				Vector3D newRotation = this->getLocalRotation();
+				newRotation += Vector3D(0.f, 0.f, -mRotationSpeed * delta_time);
+				this->setRotation(newRotation);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('U')) {
+				Vector3D newRotation = this->getLocalRotation();
+				newRotation += Vector3D(0.f, 0.f, mRotationSpeed * delta_time);
+				this->setRotation(newRotation);
+			}
+		}
+
+		else if (InputManager::getInstance()->isKeyDown('T')) {
+			float translationScalar = mTranslationSpeed * delta_time;
+
+			if (InputManager::getInstance()->isKeyDown('I')) {
+				Vector3D newPosition = this->getLocalPosition();
+				newPosition += this->mLocalMatrix.getUpVector() * translationScalar;
+				this->setPosition(newPosition);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('K')) {
+				Vector3D newPosition = this->getLocalPosition();
+				newPosition += this->mLocalMatrix.getUpVector() * -translationScalar;
+				this->setPosition(newPosition);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('L')) {
+				Vector3D newPosition = this->getLocalPosition();
+				newPosition += this->mLocalMatrix.getRightVector() * translationScalar;
+				this->setPosition(newPosition);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('J')) {
+				Vector3D newPosition = this->getLocalPosition();
+				newPosition += this->mLocalMatrix.getRightVector() * -translationScalar;
+				this->setPosition(newPosition);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('U')) {
+				Vector3D newPosition = this->getLocalPosition();
+				newPosition += this->mLocalMatrix.getForwardVector() * translationScalar;
+				this->setPosition(newPosition);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('M')) {
+				Vector3D newPosition = this->getLocalPosition();
+				newPosition += this->mLocalMatrix.getForwardVector() * -translationScalar;
+				this->setPosition(newPosition);
+			}
+		}
+
+		else if (InputManager::getInstance()->isKeyDown('Y')) {
+			if (InputManager::getInstance()->isKeyDown(VK_UP)) {
+				float deltaScale = mScaleSpeed * delta_time;
+				Vector3D newScale = this->getLocalScale();
+				newScale += Vector3D(deltaScale, deltaScale, deltaScale);
+				this->setScale(newScale);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown(VK_DOWN)) {
+				float deltaScale = -mScaleSpeed * delta_time;
+				Vector3D newScale = this->getLocalScale();
+				newScale += Vector3D(deltaScale, deltaScale, deltaScale);
+				if (newScale.x > 0.f && newScale.y > 0.f && newScale.z > 0.f) this->setScale(newScale);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('I')) {
+				Vector3D newScale = this->getLocalScale();
+				newScale += Vector3D(0.f, mScaleSpeed * delta_time, 0.f);
+				this->setScale(newScale);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('K')) {
+				Vector3D newScale = this->getLocalScale();
+				newScale += Vector3D(0.f, -mScaleSpeed * delta_time, 0.f);
+				if (newScale.y > 0.f) this->setScale(newScale);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('L')) {
+				Vector3D newScale = this->getLocalScale();
+				newScale += Vector3D(mScaleSpeed * delta_time, 0.f, 0.f);
+				this->setScale(newScale);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('J')) {
+				Vector3D newScale = this->getLocalScale();
+				newScale += Vector3D(-mScaleSpeed * delta_time, 0.f, 0.f);
+				if (newScale.x > 0.f) this->setScale(newScale);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('U')) {
+				Vector3D newScale = this->getLocalScale();
+				newScale += Vector3D(0.f, 0.f, mScaleSpeed * delta_time);
+				this->setScale(newScale);
+			}
+
+			else if (InputManager::getInstance()->isKeyDown('M')) {
+				Vector3D newScale = this->getLocalScale();
+				newScale += Vector3D(0.f, 0.f, -mScaleSpeed * delta_time);
+				if (newScale.z > 0.f) this->setScale(newScale);
+			}
+		}
+	}
+}
 
 std::string AGameObject::getObjectName() {
 	return mObjectName;
@@ -28,6 +178,18 @@ void AGameObject::select() {
 
 void AGameObject::deselect() {
 	mIsSelected = false;
+}
+
+void AGameObject::setTranslationSpeed(float translation_speed) {
+	mTranslationSpeed = translation_speed;
+}
+
+void AGameObject::setRotationSpeed(float rotation_speed) {
+	mRotationSpeed = rotation_speed;
+}
+
+void AGameObject::setScaleSpeed(float scale_speed) {
+	mScaleSpeed = scale_speed;
 }
 
 void AGameObject::setPosition(float x, float y, float z) {

@@ -49,7 +49,6 @@ int GameObjectManager::getActiveObjectCount() {
 void GameObjectManager::update() {
 	for (int i = 0; i < mGameObjectList.size(); i++) {
 		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->update(TimeManager::getDeltaTime());
-		std::cout << mGameObjectList[i]->getObjectName() << " updated." << std::endl;
 	}
 }
 

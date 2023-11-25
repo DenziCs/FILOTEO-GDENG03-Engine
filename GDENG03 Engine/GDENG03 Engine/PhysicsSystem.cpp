@@ -49,7 +49,6 @@ void PhysicsSystem::update() {
 		mPhysicsWorld->update(TimeManager::getDeltaTime());
 		for (int i = 0; i < mComponentList.size(); i++) {
 			mComponentList[i]->perform(TimeManager::getDeltaTime());
-			std::cout << mComponentList[i]->getComponentName() << " performed." << std::endl;
 		}
 	}
 }

@@ -1,6 +1,5 @@
 #include"ACube.h"
 #include"AGraphicsEngine.h"
-#include"InputManager.h"
 #include"SceneCameraManager.h"
 #include"ADeviceContext.h"
 #include<iostream>
@@ -78,164 +77,16 @@ ACube::ACube(std::string name, void* shader_byte_code, size_t shader_size) : AGa
 	mConstantBuffer->load(&datablock, sizeof(constant));
 
 	delete[] currentVertexList;
-
-	InputManager::getInstance()->addListener(this);
 }
 
 ACube::~ACube() {
 	mVertexBuffer->release();
 	mIndexBuffer->release();
 	mConstantBuffer->release();
-
-	InputManager::getInstance()->removeListener(this);
 }
 
 void ACube::update(float delta_time) {
-	if (this->mIsSelected) {
-		if (InputManager::getInstance()->isKeyDown('R')) {
-			if (InputManager::getInstance()->isKeyDown(VK_UP)) {
-				float deltaRotation = mRotationSpeed * delta_time;
-				Vector3D newRotation = this->getLocalRotation();
-				newRotation += Vector3D(deltaRotation, deltaRotation, deltaRotation);
-				this->setRotation(newRotation);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown(VK_DOWN)) {
-				float deltaRotation = -mRotationSpeed * delta_time;
-				Vector3D newRotation = this->getLocalRotation();
-				newRotation += Vector3D(deltaRotation, deltaRotation, deltaRotation);
-				this->setRotation(newRotation);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('I')) {
-				Vector3D newRotation = this->getLocalRotation();
-				newRotation += Vector3D(mRotationSpeed * delta_time, 0.f, 0.f);
-				this->setRotation(newRotation);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('K')) {
-				Vector3D newRotation = this->getLocalRotation();
-				newRotation += Vector3D(-mRotationSpeed * delta_time, 0.f, 0.f);
-				this->setRotation(newRotation);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('L')) {
-				Vector3D newRotation = this->getLocalRotation();
-				newRotation += Vector3D(0.f, -mRotationSpeed * delta_time, 0.f);
-				this->setRotation(newRotation);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('J')) {
-				Vector3D newRotation = this->getLocalRotation();
-				newRotation += Vector3D(0.f, mRotationSpeed * delta_time, 0.f);
-				this->setRotation(newRotation);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('O')) {
-				Vector3D newRotation = this->getLocalRotation();
-				newRotation += Vector3D(0.f, 0.f, -mRotationSpeed * delta_time);
-				this->setRotation(newRotation);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('U')) {
-				Vector3D newRotation = this->getLocalRotation();
-				newRotation += Vector3D(0.f, 0.f, mRotationSpeed * delta_time);
-				this->setRotation(newRotation);
-			}
-		}
-
-		else if (InputManager::getInstance()->isKeyDown('T')) {
-			float translationScalar = mTranslationSpeed * delta_time;
-
-			if (InputManager::getInstance()->isKeyDown('I')) {
-				Vector3D newPosition = this->getLocalPosition();
-				newPosition += this->mLocalMatrix.getUpVector() * translationScalar;
-				this->setPosition(newPosition);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('K')) {
-				Vector3D newPosition = this->getLocalPosition();
-				newPosition += this->mLocalMatrix.getUpVector() * -translationScalar;
-				this->setPosition(newPosition);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('L')) {
-				Vector3D newPosition = this->getLocalPosition();
-				newPosition += this->mLocalMatrix.getRightVector() * translationScalar;
-				this->setPosition(newPosition);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('J')) {
-				Vector3D newPosition = this->getLocalPosition();
-				newPosition += this->mLocalMatrix.getRightVector() * -translationScalar;
-				this->setPosition(newPosition);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('U')) {
-				Vector3D newPosition = this->getLocalPosition();
-				newPosition += this->mLocalMatrix.getForwardVector() * translationScalar;
-				this->setPosition(newPosition);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('M')) {
-				Vector3D newPosition = this->getLocalPosition();
-				newPosition += this->mLocalMatrix.getForwardVector() * -translationScalar;
-				this->setPosition(newPosition);
-			}
-		}
-
-		else if (InputManager::getInstance()->isKeyDown('Y')) {
-			if (InputManager::getInstance()->isKeyDown(VK_UP)) {
-				float deltaScale = mScaleSpeed * delta_time;
-				Vector3D newScale = this->getLocalScale();
-				newScale += Vector3D(deltaScale, deltaScale, deltaScale);
-				this->setScale(newScale);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown(VK_DOWN)) {
-				float deltaScale = -mScaleSpeed * delta_time;
-				Vector3D newScale = this->getLocalScale();
-				newScale += Vector3D(deltaScale, deltaScale, deltaScale);
-				if (newScale.x > 0.f && newScale.y > 0.f && newScale.z > 0.f) this->setScale(newScale);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('I')) {
-				Vector3D newScale = this->getLocalScale();
-				newScale += Vector3D(0.f, mScaleSpeed * delta_time, 0.f);
-				this->setScale(newScale);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('K')) {
-				Vector3D newScale = this->getLocalScale();
-				newScale += Vector3D(0.f, -mScaleSpeed * delta_time, 0.f);
-				if (newScale.y > 0.f) this->setScale(newScale);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('L')) {
-				Vector3D newScale = this->getLocalScale();
-				newScale += Vector3D(mScaleSpeed * delta_time, 0.f, 0.f);
-				this->setScale(newScale);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('J')) {
-				Vector3D newScale = this->getLocalScale();
-				newScale += Vector3D(-mScaleSpeed * delta_time, 0.f, 0.f);
-				if (newScale.x > 0.f) this->setScale(newScale);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('U')) {
-				Vector3D newScale = this->getLocalScale();
-				newScale += Vector3D(0.f, 0.f, mScaleSpeed * delta_time);
-				this->setScale(newScale);
-			}
-
-			else if (InputManager::getInstance()->isKeyDown('M')) {
-				Vector3D newScale = this->getLocalScale();
-				newScale += Vector3D(0.f, 0.f, -mScaleSpeed * delta_time);
-				if (newScale.z > 0.f) this->setScale(newScale);
-			}
-		}
-	}
+	AGameObject::update(delta_time);
 }
 
 void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {
@@ -258,35 +109,3 @@ void ACube::draw(int width, int height, AVertexShader* vertex_shader, APixelShad
 
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->drawIndexedTriangleList(mIndexBuffer->getIndexCount(), 0, 0);
 }
-
-void ACube::setTranslationSpeed(float translation_speed) {
-	mTranslationSpeed = translation_speed;
-}
-
-void ACube::setRotationSpeed(float rotation_speed) {
-	mRotationSpeed = rotation_speed;
-}
-
-void ACube::setScaleSpeed(float scale_speed) {
-	mScaleSpeed = scale_speed;
-}
-
-void ACube::onPress(int key) {
-	if (key == VK_UP) std::cout << "Up arrow key has been pressed." << std::endl;
-	if (key == VK_DOWN) std::cout << "Down arrow key has been pressed." << std::endl;
-}
-
-void ACube::onRelease(int key) {
-	if (key == VK_UP) std::cout << "Up arrow key has been released." << std::endl;
-	if (key == VK_DOWN) std::cout << "Down arrow key has been released." << std::endl;
-}
-
-void ACube::onMouseMove(Point delta_position) {}
-
-void ACube::onLMBPress(Point mouse_position) {}
-
-void ACube::onLMBRelease(Point mouse_position) {}
-
-void ACube::onRMBPress(Point mouse_position) {}
-
-void ACube::onRMBRelease(Point mouse_position) {}
