@@ -7,6 +7,8 @@
 #include"UIManager.h"
 #include"SystemManager.h"
 #include"BackendManager.h"
+#include"ActionHistoryManager.h"
+
 #include"ASwapChain.h"
 #include"ADeviceContext.h"
 #include"AVertexBuffer.h"

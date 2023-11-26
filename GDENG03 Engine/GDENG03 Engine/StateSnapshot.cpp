@@ -3,6 +3,7 @@
 StateSnapshot::StateSnapshot(AGameObject* affected_object) {
 	mObject = affected_object;
 	mObjectName = affected_object->getObjectName();
+	mIsEnabled = affected_object->isActive();
 	mLocalPosition = affected_object->getLocalPosition();
 	mLocalRotation = affected_object->getLocalRotation();
 	mLocalScale = affected_object->getLocalScale();
@@ -16,6 +17,10 @@ AGameObject* StateSnapshot::getObject() {
 
 std::string StateSnapshot::getObjectName() {
 	return mObjectName;
+}
+
+bool StateSnapshot::getEnabledState() {
+	return mIsEnabled;
 }
 
 Vector3D StateSnapshot::getStoredPosition() {

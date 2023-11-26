@@ -1,5 +1,6 @@
 #include"ScenePlayOptionsWindow.h"
 #include"BackendManager.h"
+#include"ActionHistoryManager.h"
 
 ScenePlayOptionsWindow::ScenePlayOptionsWindow(std::string name) : AUIPanel::AUIPanel(name) {}
 
@@ -34,6 +35,17 @@ void ScenePlayOptionsWindow::draw() {
 	}
 	break;
 
+	}
+
+	ImGui::Separator();
+	if (ImGui::Button("Undo")) {
+		ActionHistoryManager* history = ActionHistoryManager::getInstance();
+		if (history->canUndo()) history->undoAction();
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("Redo")) {
+		ActionHistoryManager* history = ActionHistoryManager::getInstance();
+		if (history->canRedo()) history->redoAction();
 	}
 
 	ImGui::End();

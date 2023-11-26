@@ -25,6 +25,7 @@ void AppWindow::onCreate() {
 
 	SystemManager::initialize();
 	BackendManager::initialize();
+	ActionHistoryManager::initialize();
 
 	ACamera* sceneCamera = new ACamera("UnregisteredHyperCam2");
 	sceneCamera->setPosition(0.f, 1.f, -2.f);
@@ -99,6 +100,7 @@ void AppWindow::onDestroy() {
 
 	SystemManager::destroy();
 	BackendManager::destroy();
+	ActionHistoryManager::destroy();
 	InputManager::destroy();
 	SceneCameraManager::destroy();
 

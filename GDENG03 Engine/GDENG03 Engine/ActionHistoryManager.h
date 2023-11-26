@@ -14,8 +14,9 @@ public:
 	void endAction();
 	bool canUndo();
 	bool canRedo();
-	StateSnapshot* undoAction();
-	StateSnapshot* redoAction();
+	void applyState(StateSnapshot* state);
+	void undoAction();
+	void redoAction();
 	void clearUndo();
 	void clearRedo();
 

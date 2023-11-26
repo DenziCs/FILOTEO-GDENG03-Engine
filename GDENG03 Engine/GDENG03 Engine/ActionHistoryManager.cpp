@@ -1,4 +1,5 @@
 #include"ActionHistoryManager.h"
+#include<iostream>
 
 ActionHistoryManager* ActionHistoryManager::instance = nullptr;
 
@@ -40,20 +41,28 @@ bool ActionHistoryManager::canRedo()
 	return !mRedoStack.empty();
 }
 
-StateSnapshot* ActionHistoryManager::undoAction() {
+void ActionHistoryManager::applyState(StateSnapshot* state) {
+	AGameObject* object = state->getObject();
+	object->setActive(state->getEnabledState());
+	object->setScale(state->getStoredScale());
+	object->setRotation(state->getStoredRotation());
+	object->setPosition(state->getStoredPosition());
+}
+
+void ActionHistoryManager::undoAction() {
 	ActionMemento* action = mUndoStack.top();
 	mUndoStack.pop();
 	mRedoStack.push(action);
 
-	return action->getBeforeState();
+	applyState(action->getBeforeState());
 }
 
-StateSnapshot* ActionHistoryManager::redoAction() {
+void ActionHistoryManager::redoAction() {
 	ActionMemento* action = mRedoStack.top();
 	mRedoStack.pop();
 	mUndoStack.push(action);
 
-	return action->getAfterState();
+	applyState(action->getAfterState());
 }
 
 void ActionHistoryManager::clearUndo() {

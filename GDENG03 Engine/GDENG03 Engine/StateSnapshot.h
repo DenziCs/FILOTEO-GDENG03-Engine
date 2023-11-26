@@ -9,6 +9,7 @@ public:
 
 	AGameObject* getObject();
 	std::string getObjectName();
+	bool getEnabledState();
 	Vector3D getStoredPosition();
 	Vector3D getStoredRotation();
 	Vector3D getStoredScale();
@@ -16,6 +17,7 @@ public:
 private:
 	AGameObject* mObject;
 	std::string mObjectName;
+	bool mIsEnabled;
 	Vector3D mLocalPosition;
 	Vector3D mLocalRotation;
 	Vector3D mLocalScale;
