@@ -24,6 +24,7 @@ void AppWindow::onCreate() {
 	mSwapChain->initialize(this->mWindowHandle, width, height);
 
 	SystemManager::initialize();
+	BackendManager::initialize();
 
 	ACamera* sceneCamera = new ACamera("UnregisteredHyperCam2");
 	sceneCamera->setPosition(0.f, 1.f, -2.f);
@@ -63,8 +64,29 @@ void AppWindow::onUpdate() {
 	InputManager::getInstance()->update();
 	SceneCameraManager::getInstance()->update();
 
-	GameObjectManager::getInstance()->update();
-	SystemManager::getInstance()->update();
+	switch (BackendManager::getInstance()->getEditorMode()) {
+	case BackendManager::EDIT: {
+		GameObjectManager::getInstance()->update();
+	}
+	break;
+
+	case BackendManager::PLAY: {
+		GameObjectManager::getInstance()->update();
+		SystemManager::getInstance()->update();
+	}
+	break;
+
+	case BackendManager::PAUSED: {
+		if (BackendManager::getInstance()->isInFrameStep()) {
+			GameObjectManager::getInstance()->update();
+			SystemManager::getInstance()->update();
+			BackendManager::getInstance()->endFrame();
+		}
+	}
+	break;
+
+	}
+
 	GameObjectManager::getInstance()->draw(width, height, mVertexShader, mPixelShader);
 	UIManager::getInstance()->draw();
 	mSwapChain->present(false);
@@ -76,6 +98,7 @@ void AppWindow::onDestroy() {
 	mSwapChain->release();
 
 	SystemManager::destroy();
+	BackendManager::destroy();
 	InputManager::destroy();
 	SceneCameraManager::destroy();
 

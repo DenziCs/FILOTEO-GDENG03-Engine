@@ -222,6 +222,9 @@
     <ClCompile Include="ActionHistoryManager.cpp">
       <Filter>Engine\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="ScenePlayOptionsWindow.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -694,6 +697,9 @@
     </ClInclude>
     <ClInclude Include="ActionHistoryManager.h">
       <Filter>Engine\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenePlayOptionsWindow.h">
+      <Filter>Engine\User Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

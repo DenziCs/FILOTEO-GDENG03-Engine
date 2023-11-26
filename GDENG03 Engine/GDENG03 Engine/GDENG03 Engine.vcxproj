@@ -173,6 +173,7 @@
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="SceneCameraManager.cpp" />
     <ClCompile Include="SceneOutliner.cpp" />
+    <ClCompile Include="ScenePlayOptionsWindow.cpp" />
     <ClCompile Include="SimpleWindowPanel.cpp" />
     <ClCompile Include="StateSnapshot.cpp" />
     <ClCompile Include="SystemManager.cpp" />
@@ -332,6 +333,7 @@
     <ClInclude Include="reactphysics3d\include\reactphysics3d\utils\Profiler.h" />
     <ClInclude Include="SceneCameraManager.h" />
     <ClInclude Include="SceneOutliner.h" />
+    <ClInclude Include="ScenePlayOptionsWindow.h" />
     <ClInclude Include="SimpleWindowPanel.h" />
     <ClInclude Include="StateSnapshot.h" />
     <ClInclude Include="SystemManager.h" />
