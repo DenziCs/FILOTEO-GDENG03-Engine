@@ -1,4 +1,5 @@
 #include"StateSnapshot.h"
+#include"AGameObject.h"
 
 StateSnapshot::StateSnapshot(AGameObject* affected_object) {
 	mObject = affected_object;

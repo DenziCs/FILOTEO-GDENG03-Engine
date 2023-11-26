@@ -2,6 +2,7 @@
 #include"Vector3D.h"
 #include"Matrix4x4.h"
 #include<string>
+#include"StateSnapshot.h"
 
 class AVertexShader;
 class APixelShader;
@@ -42,6 +43,9 @@ public:
 	Matrix4x4 getLocalMatrix();
 	float* getPhysicsMatrix();
 
+	void saveInitialState();
+	void restoreInitialState();
+
 	__declspec(align(16))
 		struct constant {
 		Matrix4x4 worldMatrix;
@@ -59,6 +63,8 @@ protected:
 
 	bool mIsActive = true;
 	bool mIsSelected = false;
+
+	StateSnapshot* mInitialState = nullptr;
 
 	float mTranslationSpeed = 5.f;
 	float mRotationSpeed = 1.f;

@@ -188,6 +188,18 @@ void GameObjectManager::setVertexShaderProperties(void* shader_byte_code, size_t
 	mShaderSize = shader_size;
 }
 
+void GameObjectManager::saveInitialStates() {
+	for (int i = 0; i < mGameObjectList.size(); i++) {
+		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->saveInitialState();
+	}
+}
+
+void GameObjectManager::restoreInitialStates() {
+	for (int i = 0; i < mGameObjectList.size(); i++) {
+		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->restoreInitialState();
+	}
+}
+
 GameObjectManager::GameObjectManager() {
 	mCurrentSelectedObject = nullptr;
 }

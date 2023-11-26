@@ -1,5 +1,8 @@
 #pragma once
-#include"AGameObject.h"
+#include"Vector3D.h"
+#include<string>
+
+class AGameObject;
 
 class StateSnapshot
 {

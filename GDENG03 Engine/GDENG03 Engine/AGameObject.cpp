@@ -301,3 +301,20 @@ float* AGameObject::getPhysicsMatrix() {
 
 	return physicsMatrix.getMatrix();
 }
+
+void AGameObject::saveInitialState() {
+	if (mInitialState) {
+		StateSnapshot* state = mInitialState;
+		delete state;
+	}
+
+	StateSnapshot* newState = new StateSnapshot(this);
+	mInitialState = newState;
+}
+
+void AGameObject::restoreInitialState() {
+	setActive(mInitialState->getEnabledState());
+	setScale(mInitialState->getStoredScale());
+	setRotation(mInitialState->getStoredRotation());
+	setPosition(mInitialState->getStoredPosition());
+}

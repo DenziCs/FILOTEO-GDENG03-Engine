@@ -38,6 +38,8 @@ public:
 	void deselectObject();
 
 	void setVertexShaderProperties(void* shader_byte_code, size_t shader_size);
+	void saveInitialStates();
+	void restoreInitialStates();
 
 private:
 	GameObjectManager();

@@ -1,6 +1,7 @@
 #include"ScenePlayOptionsWindow.h"
 #include"BackendManager.h"
 #include"ActionHistoryManager.h"
+#include"GameObjectManager.h"
 
 ScenePlayOptionsWindow::ScenePlayOptionsWindow(std::string name) : AUIPanel::AUIPanel(name) {}
 
@@ -11,12 +12,18 @@ void ScenePlayOptionsWindow::draw() {
 
 	switch (BackendManager::getInstance()->getEditorMode()) {
 	case BackendManager::EDIT: {
-		if (ImGui::Button("Play")) BackendManager::getInstance()->setEditorMode(BackendManager::PLAY);
+		if (ImGui::Button("Play")) {
+			GameObjectManager::getInstance()->saveInitialStates();
+			BackendManager::getInstance()->setEditorMode(BackendManager::PLAY);
+		}
 	}
 	break;
 
 	case BackendManager::PLAY: {
-		if (ImGui::Button("Stop")) BackendManager::getInstance()->setEditorMode(BackendManager::EDIT);
+		if (ImGui::Button("Stop")) {
+			BackendManager::getInstance()->setEditorMode(BackendManager::EDIT);
+			GameObjectManager::getInstance()->restoreInitialStates();
+		}
 		ImGui::SameLine();
 		if (ImGui::Button("Pause")) BackendManager::getInstance()->setEditorMode(BackendManager::PAUSED);
 		ImGui::SameLine();
@@ -27,7 +34,10 @@ void ScenePlayOptionsWindow::draw() {
 	break;
 
 	case BackendManager::PAUSED: {
-		if (ImGui::Button("Stop")) BackendManager::getInstance()->setEditorMode(BackendManager::EDIT);
+		if (ImGui::Button("Stop")) {
+			BackendManager::getInstance()->setEditorMode(BackendManager::EDIT);
+			GameObjectManager::getInstance()->restoreInitialStates();
+		}
 		ImGui::SameLine();
 		if (ImGui::Button("Resume")) BackendManager::getInstance()->setEditorMode(BackendManager::PLAY);
 		ImGui::SameLine();
