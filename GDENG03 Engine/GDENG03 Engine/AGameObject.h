@@ -4,8 +4,8 @@
 #include<string>
 #include<vector>
 #include"StateSnapshot.h"
+#include"AComponent.h"
 
-class AComponent;
 class AVertexShader;
 class APixelShader;
 
@@ -50,6 +50,7 @@ public:
 
 	void attachComponent(AComponent* new_component);
 	void detachComponent(AComponent* component);
+	AComponent* findComponentOfType(AComponent::ComponentType component_type);
 
 	__declspec(align(16))
 		struct constant {

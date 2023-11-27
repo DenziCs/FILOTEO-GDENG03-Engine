@@ -1,7 +1,6 @@
 #include"AGameObject.h"
 #include"InputManager.h"
 #include<Windows.h>
-#include"AComponent.h"
 
 AGameObject::AGameObject(std::string name) {
 	mObjectName = name;
@@ -326,4 +325,12 @@ void AGameObject::detachComponent(AComponent* component) {
 	mComponentList.erase(std::remove(mComponentList.begin(), mComponentList.end(), component), mComponentList.end());
 	mComponentList.shrink_to_fit();
 	component->detachOwner();
+}
+
+AComponent* AGameObject::findComponentOfType(AComponent::ComponentType component_type) {
+	for (int i = 0; i < mComponentList.size(); i++) {
+		if (mComponentList[i]->getComponentType() == component_type) return mComponentList[i];
+	}
+
+	return NULL;
 }
