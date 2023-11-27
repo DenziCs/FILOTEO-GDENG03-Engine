@@ -1,6 +1,7 @@
 #include"AGameObject.h"
 #include"InputManager.h"
 #include"BackendManager.h"
+#include"PhysicsComponent.h"
 #include<Windows.h>
 
 AGameObject::AGameObject(std::string name) {
@@ -315,6 +316,12 @@ void AGameObject::restoreInitialState() {
 	setScale(mInitialState->getStoredScale());
 	setRotation(mInitialState->getStoredRotation());
 	setPosition(mInitialState->getStoredPosition());
+
+	AComponent* component = findComponentOfType(AComponent::PHYSICS);
+	if (component) {
+		PhysicsComponent* physics = (PhysicsComponent*)component;
+		physics->reset(mInitialState->getStoredPosition(), mInitialState->getStoredRotation());
+	}
 }
 
 void AGameObject::attachComponent(AComponent* new_component) {

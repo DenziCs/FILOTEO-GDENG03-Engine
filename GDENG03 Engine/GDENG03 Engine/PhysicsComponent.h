@@ -1,5 +1,6 @@
 #pragma once
 #include"AComponent.h"
+#include"Vector3D.h"
 #include<reactphysics3d/reactphysics3d.h>
 
 using namespace reactphysics3d;
@@ -15,6 +16,7 @@ public:
 
 	RigidBody* getRigidBody();
 
+	void reset(Vector3D position, Vector3D rotation);
 	void setMass(float object_mass);
 
 private:

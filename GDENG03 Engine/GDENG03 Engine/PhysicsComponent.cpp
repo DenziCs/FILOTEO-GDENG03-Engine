@@ -62,6 +62,21 @@ RigidBody* PhysicsComponent::getRigidBody() {
 	return mRigidBody;
 }
 
+void PhysicsComponent::reset(Vector3D position, Vector3D rotation) {
+	mRigidBody->setLinearVelocity(Vector3::zero());
+	mRigidBody->setAngularVelocity(Vector3::zero());
+
+	Transform transform;
+	transform.setPosition(Vector3(position.x, position.y, position.z)); 
+	transform.setOrientation(Quaternion::fromEulerAngles(rotation.x, rotation.y, rotation.z)); 
+	mRigidBody->setTransform(transform);
+
+	transform = mRigidBody->getTransform();
+	float physicsMatrix[16];
+	transform.getOpenGLMatrix(physicsMatrix);
+	this->getOwner()->updatePhysicsMatrix(physicsMatrix);
+}
+
 void PhysicsComponent::setMass(float object_mass) {
 	mMass = object_mass;
 	mRigidBody->setMass(mMass);
