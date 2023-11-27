@@ -53,7 +53,12 @@ void APlane::update(float delta_time) {
 void APlane::draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {
 	constant shaderNumbers;
 
-	shaderNumbers.worldMatrix = this->getLocalMatrix();
+	if (this->findComponentOfType(AComponent::PHYSICS)) {
+		shaderNumbers.worldMatrix = this->getPhysicsMatrix();
+	}
+		
+	else shaderNumbers.worldMatrix = this->getLocalMatrix();
+
 	shaderNumbers.viewMatrix = SceneCameraManager::getInstance()->getSceneCameraViewMatrix();
 	shaderNumbers.projectionMatrix = SceneCameraManager::getInstance()->getSceneCameraProjectionMatrix();
 	shaderNumbers.coefficient = 0.f;

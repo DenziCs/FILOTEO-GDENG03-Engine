@@ -1,9 +1,9 @@
 #include"AComponent.h"
 
-AComponent::AComponent(std::string component_name, ComponentType component_type, AGameObject* owner) {
+AComponent::AComponent(std::string component_name, ComponentType component_type) {
 	mComponentName = component_name;
 	mType = component_type;
-	mOwner = owner;
+	mOwner = NULL;
 }
 
 AComponent::~AComponent() {

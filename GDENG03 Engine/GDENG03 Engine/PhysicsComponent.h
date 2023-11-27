@@ -7,15 +7,15 @@ using namespace reactphysics3d;
 class PhysicsComponent : public AComponent
 {
 public:
-	PhysicsComponent(std::string name, AGameObject* owner);
+	PhysicsComponent(std::string name);
 	~PhysicsComponent();
+
+	virtual void attachOwner(AGameObject* owner) override;
 	void perform(float delta_time) override;
 
 	RigidBody* getRigidBody();
 
 	void setMass(float object_mass);
-	void setRigidBodyType(BodyType rigid_body_type);
-	void enableGravity(bool is_affected_by_gravity);
 
 private:
 	float mMass = 1000.f;

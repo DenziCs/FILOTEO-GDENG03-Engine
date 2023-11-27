@@ -110,11 +110,14 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		while (cube);
 
 		ACube* newCube = new ACube(newName, mVertexShaderByteCode, mShaderSize);
+		newCube->setPosition(0.f, 10.f, 0.f);
+		// newCube->setScale(1.2f, 1.2f, 1.2f);
 		addObject(newCube);
 		std::cout << newCube->getObjectName() << " spawned." << std::endl;
 
-		PhysicsComponent* component = new PhysicsComponent(newName + " Physics", newCube);
-		component->enableGravity(true);
+		PhysicsComponent* component = new PhysicsComponent(newName + " Physics");
+		newCube->attachComponent(component);
+		component->getRigidBody()->enableGravity(true);
 		std::cout << component->getComponentName() << " attached." << std::endl;
 	}
 	break;
@@ -130,13 +133,14 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		while (plane);
 
 		APlane* newPlane = new APlane(newName, mVertexShaderByteCode, mShaderSize);
-		newPlane->setPosition(0.f, -10.f, 0.f);
+		newPlane->setPosition(0.f, 0.f, 0.f);
 		newPlane->setScale(10.f, 1.f, 10.f);
 		addObject(newPlane);
 		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
 
-		PhysicsComponent* component = new PhysicsComponent(newName + " Physics", newPlane);
-		component->setRigidBodyType(BodyType::STATIC);
+		PhysicsComponent* component = new PhysicsComponent(newName + " Physics");
+		newPlane->attachComponent(component);
+		component->getRigidBody()->setType(BodyType::STATIC);
 		std::cout << component->getComponentName() << " attached." << std::endl;
 	}
 	break;

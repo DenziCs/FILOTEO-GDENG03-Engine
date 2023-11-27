@@ -1,5 +1,6 @@
 #include"AGameObject.h"
 #include"InputManager.h"
+#include"BackendManager.h"
 #include<Windows.h>
 
 AGameObject::AGameObject(std::string name) {
@@ -14,7 +15,7 @@ AGameObject::AGameObject(std::string name) {
 AGameObject::~AGameObject() {}
 
 void AGameObject::update(float delta_time) {
-	if (this->mIsSelected) {
+	if (BackendManager::getInstance()->getEditorMode() == BackendManager::EDIT && this->mIsSelected) {
 		if (InputManager::getInstance()->isKeyDown('R')) {
 			if (InputManager::getInstance()->isKeyDown(VK_UP)) {
 				float deltaRotation = mRotationSpeed * delta_time;
