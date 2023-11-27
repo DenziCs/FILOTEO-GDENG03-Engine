@@ -2,6 +2,7 @@
 #include"PhysicsComponent.h"
 #include"TimeManager.h"
 #include<iostream>
+#include"AGameObject.h"
 
 PhysicsSystem::PhysicsSystem() {
 	mPhysicsCommon = new PhysicsCommon();
@@ -28,7 +29,8 @@ void PhysicsSystem::unregisterComponent(PhysicsComponent* physics_component) {
 	mComponentTable.erase(key);
 	mComponentList.erase(std::remove(mComponentList.begin(), mComponentList.end(), physics_component), mComponentList.end());
 	mComponentList.shrink_to_fit();
-	delete physics_component;
+
+	physics_component->getOwner()->detachComponent(physics_component);
 }
 
 void PhysicsSystem::unregisterComponentByName(std::string name) {

@@ -2,8 +2,10 @@
 #include"Vector3D.h"
 #include"Matrix4x4.h"
 #include<string>
+#include<vector>
 #include"StateSnapshot.h"
 
+class AComponent;
 class AVertexShader;
 class APixelShader;
 
@@ -39,12 +41,15 @@ public:
 	Vector3D getLocalRotation();
 
 	void updateLocalMatrix();
-	void updateLocalMatrix(float physics_matrix[16]);
+	void updatePhysicsMatrix(float physics_matrix[16]);
 	Matrix4x4 getLocalMatrix();
-	float* getPhysicsMatrix();
+	Matrix4x4 getPhysicsMatrix();
 
 	void saveInitialState();
 	void restoreInitialState();
+
+	void attachComponent(AComponent* new_component);
+	void detachComponent(AComponent* component);
 
 	__declspec(align(16))
 		struct constant {
@@ -59,12 +64,16 @@ protected:
 	Vector3D mLocalPosition;
 	Vector3D mLocalScale;
 	Vector3D mLocalRotation;
+
 	Matrix4x4 mLocalMatrix;
+	Matrix4x4 mPhysicsMatrix;
 
 	bool mIsActive = true;
 	bool mIsSelected = false;
 
 	StateSnapshot* mInitialState = nullptr;
+
+	std::vector<AComponent*> mComponentList;
 
 	float mTranslationSpeed = 5.f;
 	float mRotationSpeed = 1.f;

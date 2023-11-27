@@ -1,6 +1,7 @@
 #include"AGameObject.h"
 #include"InputManager.h"
 #include<Windows.h>
+#include"AComponent.h"
 
 AGameObject::AGameObject(std::string name) {
 	mObjectName = name;
@@ -8,6 +9,7 @@ AGameObject::AGameObject(std::string name) {
 	mLocalRotation = Vector3D(0.f, 0.f, 0.f);
 	mLocalScale = Vector3D(1.f, 1.f, 1.f);
 	mLocalMatrix.setIdentity();
+	mPhysicsMatrix.setIdentity();
 }
 
 AGameObject::~AGameObject() {}
@@ -259,7 +261,7 @@ void AGameObject::updateLocalMatrix() {
 	mLocalMatrix = newLocalMatrix;
 }
 
-void AGameObject::updateLocalMatrix(float physics_matrix[16]) {
+void AGameObject::updatePhysicsMatrix(float physics_matrix[16]) {
 	Matrix4x4 physicsMatrix;
 
 	physicsMatrix.mMatrix[0][0] = physics_matrix[0];
@@ -282,24 +284,20 @@ void AGameObject::updateLocalMatrix(float physics_matrix[16]) {
 	physicsMatrix.mMatrix[3][2] = physics_matrix[14];
 	physicsMatrix.mMatrix[3][3] = physics_matrix[15];
 
-	updateLocalMatrix();
-	mLocalMatrix *= physicsMatrix;
+	Matrix4x4 composedMatrix;
+	composedMatrix.setIdentity();
+	composedMatrix.scale(mLocalScale);
+	composedMatrix *= physicsMatrix;
+
+	mPhysicsMatrix = composedMatrix;
 }
 
 Matrix4x4 AGameObject::getLocalMatrix() {
 	return mLocalMatrix;
 }
 
-float* AGameObject::getPhysicsMatrix() {
-	Matrix4x4 physicsMatrix;
-	physicsMatrix.setIdentity();
-
-	physicsMatrix.rotate(0, mLocalRotation.x);
-	physicsMatrix.rotate(1, mLocalRotation.y);
-	physicsMatrix.rotate(2, mLocalRotation.z);
-	physicsMatrix.translate(mLocalPosition);
-
-	return physicsMatrix.getMatrix();
+Matrix4x4 AGameObject::getPhysicsMatrix() {
+	return mPhysicsMatrix;
 }
 
 void AGameObject::saveInitialState() {
@@ -317,4 +315,15 @@ void AGameObject::restoreInitialState() {
 	setScale(mInitialState->getStoredScale());
 	setRotation(mInitialState->getStoredRotation());
 	setPosition(mInitialState->getStoredPosition());
+}
+
+void AGameObject::attachComponent(AComponent* new_component) {
+	mComponentList.push_back(new_component);
+	new_component->attachOwner(this);
+}
+
+void AGameObject::detachComponent(AComponent* component) {
+	mComponentList.erase(std::remove(mComponentList.begin(), mComponentList.end(), component), mComponentList.end());
+	mComponentList.shrink_to_fit();
+	component->detachOwner();
 }

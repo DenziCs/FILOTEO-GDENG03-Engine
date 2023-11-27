@@ -34,7 +34,7 @@ PhysicsComponent::PhysicsComponent(std::string name, AGameObject* owner) : AComp
 	float matrix[16];
 	transform.getOpenGLMatrix(matrix);
 
-	this->getOwner()->updateLocalMatrix(matrix);
+	this->getOwner()->updatePhysicsMatrix(matrix);
 }
 
 PhysicsComponent::~PhysicsComponent() {
@@ -47,7 +47,7 @@ void PhysicsComponent::perform(float delta_time) {
 	float physicsMatrix[16];
 	transform.getOpenGLMatrix(physicsMatrix);
 
-	this->getOwner()->updateLocalMatrix(physicsMatrix);
+	this->getOwner()->updatePhysicsMatrix(physicsMatrix);
 }
 
 RigidBody* PhysicsComponent::getRigidBody() {
@@ -56,6 +56,7 @@ RigidBody* PhysicsComponent::getRigidBody() {
 
 void PhysicsComponent::setMass(float object_mass) {
 	mMass = object_mass;
+	mRigidBody->setMass(mMass);
 }
 
 void PhysicsComponent::setRigidBodyType(BodyType rigid_body_type) {

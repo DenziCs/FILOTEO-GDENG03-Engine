@@ -16,7 +16,7 @@ void AComponent::attachOwner(AGameObject* owner) {
 }
 
 void AComponent::detachOwner() {
-	mOwner = NULL;
+	delete this;
 }
 
 AGameObject* AComponent::getOwner() {
