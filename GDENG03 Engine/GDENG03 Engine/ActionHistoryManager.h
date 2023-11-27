@@ -2,8 +2,9 @@
 #include<stack>
 #include"ActionMemento.h"
 #include"AGameObject.h"
+#include"AInputListener.h"
 
-class ActionHistoryManager
+class ActionHistoryManager : public AInputListener
 {
 public:
 	static ActionHistoryManager* getInstance();
@@ -19,6 +20,15 @@ public:
 	void redoAction();
 	void clearUndo();
 	void clearRedo();
+
+	virtual void onPress(int key) override;
+	virtual void onRelease(int key) override;
+
+	virtual void onMouseMove(Point delta_position) override;
+	virtual void onLMBPress(Point mouse_position) override;
+	virtual void onLMBRelease(Point mouse_position) override;
+	virtual void onRMBPress(Point mouse_position) override;
+	virtual void onRMBRelease(Point mouse_position) override;
 
 private:
 	ActionHistoryManager();

@@ -1,5 +1,7 @@
 #include"ActionHistoryManager.h"
 #include<iostream>
+#include"InputManager.h"
+#include<Windows.h>
 
 ActionHistoryManager* ActionHistoryManager::instance = nullptr;
 
@@ -9,11 +11,13 @@ ActionHistoryManager* ActionHistoryManager::getInstance() {
 
 void ActionHistoryManager::initialize() {
 	instance = new ActionHistoryManager();
+	InputManager::getInstance()->addListener(instance);
 }
 
 void ActionHistoryManager::destroy() {
 	instance->clearUndo();
 	instance->clearRedo();
+	InputManager::getInstance()->removeListener(instance);
 }
 
 void ActionHistoryManager::startAction(AGameObject* game_object) {
@@ -80,6 +84,31 @@ void ActionHistoryManager::clearRedo() {
 		delete action;
 	}
 }
+
+void ActionHistoryManager::onPress(int key) {}
+
+void ActionHistoryManager::onRelease(int key) {
+	if (!InputManager::getInstance()->isKeyDown(VK_CONTROL)) return;
+
+	switch (key) {
+	case 'Z':
+		if (canUndo()) undoAction();
+		break;
+	case 'Y':
+		if (canRedo()) redoAction();
+		break;
+	}
+}
+
+void ActionHistoryManager::onMouseMove(Point delta_position) {}
+
+void ActionHistoryManager::onLMBPress(Point mouse_position) {}
+
+void ActionHistoryManager::onLMBRelease(Point mouse_position) {}
+
+void ActionHistoryManager::onRMBPress(Point mouse_position) {}
+
+void ActionHistoryManager::onRMBRelease(Point mouse_position) {}
 
 ActionHistoryManager::ActionHistoryManager() {
 	mCurrentObject = nullptr;
