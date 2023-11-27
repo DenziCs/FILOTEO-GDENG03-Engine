@@ -2,6 +2,8 @@
 #include"InputManager.h"
 #include"BackendManager.h"
 #include"PhysicsComponent.h"
+#include"SystemManager.h"
+#include"PhysicsSystem.h"
 #include<Windows.h>
 
 AGameObject::AGameObject(std::string name) {
@@ -13,7 +15,17 @@ AGameObject::AGameObject(std::string name) {
 	mPhysicsMatrix.setIdentity();
 }
 
-AGameObject::~AGameObject() {}
+AGameObject::~AGameObject() {
+	for (int i = 0; i < mComponentList.size(); i++) {
+		switch (mComponentList[i]->getComponentType()) {
+		case AComponent::PHYSICS: {
+			SystemManager::getInstance()->getPhysicsSystem()->unregisterComponent((PhysicsComponent*)mComponentList[i]);
+		}
+		break;
+		default: {}
+		}
+	}
+}
 
 void AGameObject::update(float delta_time) {
 	if (BackendManager::getInstance()->getEditorMode() == BackendManager::EDIT && this->mIsSelected) {

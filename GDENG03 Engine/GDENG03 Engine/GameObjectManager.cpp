@@ -149,6 +149,8 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 }
 
 void GameObjectManager::deleteObject(AGameObject* game_object) {
+	if (game_object == mCurrentSelectedObject) deselectObject();
+
 	std::string key = game_object->getObjectName();
 	mGameObjectTable.erase(key);
 	mGameObjectList.erase(std::remove(mGameObjectList.begin(), mGameObjectList.end(), game_object), mGameObjectList.end());

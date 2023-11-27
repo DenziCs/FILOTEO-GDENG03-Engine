@@ -60,6 +60,11 @@ void InspectorWindow::draw() {
 			ActionHistoryManager::getInstance()->endAction();
 			std::cout << "Action taken: Modified scale." << std::endl;
 		}
+
+		if (ImGui::Button("Delete Object")) {
+			GameObjectManager::getInstance()->deleteObject(selectedObject);
+			std::cout << "Permanent action taken: Deleted object." << std::endl;
+		}
 	}
 
 	if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::EndDisabled();
