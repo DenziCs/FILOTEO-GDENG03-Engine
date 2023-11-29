@@ -15,6 +15,10 @@ PhysicsSystem::PhysicsSystem() {
 }
 
 PhysicsSystem::~PhysicsSystem() {
+	while (!mComponentList.empty()) {
+		unregisterComponent(mComponentList[0]);
+	}
+
 	delete mPhysicsCommon;
 	std::cout << "Physics System destroyed!" << std::endl;
 }
