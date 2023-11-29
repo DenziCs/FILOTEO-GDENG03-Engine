@@ -4,6 +4,8 @@
 #include"PhysicsComponent.h"
 #include"SystemManager.h"
 #include"PhysicsSystem.h"
+#include"AVertexShader.h"
+#include"APixelShader.h"
 #include<Windows.h>
 
 AGameObject::AGameObject(std::string name) {
@@ -25,6 +27,9 @@ AGameObject::~AGameObject() {
 		default: {}
 		}
 	}
+
+	mVertexShader->release();
+	mPixelShader->release();
 }
 
 void AGameObject::update(float delta_time) {

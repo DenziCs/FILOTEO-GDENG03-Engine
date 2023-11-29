@@ -33,16 +33,6 @@ void AppWindow::onCreate() {
 	sceneCamera->setPerspectiveProjectionMatrix(1.57f, (float)width / (float)height, 0.1f, 100.f);
 	SceneCameraManager::getInstance()->setSceneCamera(sceneCamera);
 
-	void* shaderByteCode = nullptr;
-	size_t shaderSize;
-	AGraphicsEngine::getInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &shaderSize);
-	mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
-	GameObjectManager::getInstance()->setVertexShaderProperties(shaderByteCode, shaderSize);
-
-	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
-	mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
-	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
-
 	UIManager::initialize(this->mWindowHandle);
 }
 
@@ -88,25 +78,19 @@ void AppWindow::onUpdate() {
 
 	}
 
-	GameObjectManager::getInstance()->draw(width, height, mVertexShader, mPixelShader);
+	GameObjectManager::getInstance()->draw(width, height);
 	UIManager::getInstance()->draw();
 	mSwapChain->present(false);
 }
 
 void AppWindow::onDestroy() {
 	AWindow::onDestroy();
-	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
 	mSwapChain->release();
-
 	SystemManager::destroy();
 	BackendManager::destroy();
 	ActionHistoryManager::destroy();
 	InputManager::destroy();
 	SceneCameraManager::destroy();
-
-	mVertexShader->release();
-	mPixelShader->release();
-
 	GameObjectManager::destroy();
 	UIManager::destroy();
 	AGraphicsEngine::getInstance()->release();

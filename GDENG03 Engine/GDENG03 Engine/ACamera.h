@@ -24,7 +24,7 @@ public:
 	void onRMBPress(const Point mouse_position) override;
 	void onRMBRelease(const Point mouse_position) override;
 
-	void draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) override;
+	void draw(int width, int height) override;
 
 private:
 	Matrix4x4 mProjectionMatrix;

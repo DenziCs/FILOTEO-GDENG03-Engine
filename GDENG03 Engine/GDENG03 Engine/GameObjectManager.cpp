@@ -52,9 +52,9 @@ void GameObjectManager::update() {
 	}
 }
 
-void GameObjectManager::draw(int viewport_width, int viewport_height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {
+void GameObjectManager::draw(int viewport_width, int viewport_height) {
 	for (int i = 0; i < mGameObjectList.size(); i++) {
-		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->draw(viewport_width, viewport_height, vertex_shader, pixel_shader);
+		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->draw(viewport_width, viewport_height);
 	}
 }
 
@@ -77,7 +77,7 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		}
 		while (cube);
 
-		ACube* newCube = new ACube(newName, mVertexShaderByteCode, mShaderSize);
+		ACube* newCube = new ACube(newName);
 		addObject(newCube);
 		std::cout << newCube->getObjectName() << " spawned." << std::endl;
 	}
@@ -93,7 +93,7 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		}
 		while (plane);
 
-		APlane* newPlane = new APlane(newName, mVertexShaderByteCode, mShaderSize);
+		APlane* newPlane = new APlane(newName);
 		addObject(newPlane);
 		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
 	}
@@ -109,9 +109,8 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		}
 		while (cube);
 
-		ACube* newCube = new ACube(newName, mVertexShaderByteCode, mShaderSize);
+		ACube* newCube = new ACube(newName);
 		newCube->setPosition(0.f, 10.f, 0.f);
-		// newCube->setScale(1.2f, 1.2f, 1.2f);
 		addObject(newCube);
 		std::cout << newCube->getObjectName() << " spawned." << std::endl;
 
@@ -132,7 +131,7 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		}
 		while (plane);
 
-		APlane* newPlane = new APlane(newName, mVertexShaderByteCode, mShaderSize);
+		APlane* newPlane = new APlane(newName);
 		newPlane->setPosition(0.f, 0.f, 0.f);
 		newPlane->setScale(10.f, 1.f, 10.f);
 		addObject(newPlane);
@@ -187,11 +186,6 @@ void GameObjectManager::deselectObject() {
 		mCurrentSelectedObject->deselect();
 		mCurrentSelectedObject = nullptr;
 	}
-}
-
-void GameObjectManager::setVertexShaderProperties(void* shader_byte_code, size_t shader_size) {
-	mVertexShaderByteCode = shader_byte_code;
-	mShaderSize = shader_size;
 }
 
 void GameObjectManager::saveInitialStates() {

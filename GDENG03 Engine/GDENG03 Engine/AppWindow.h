@@ -37,9 +37,4 @@ public:
 
 private:
 	ASwapChain* mSwapChain;
-	AVertexBuffer* mVertexBuffer;
-	AIndexBuffer* mIndexBuffer;
-	AConstantBuffer* mConstantBuffer;
-	AVertexShader* mVertexShader;
-	APixelShader* mPixelShader;
 };

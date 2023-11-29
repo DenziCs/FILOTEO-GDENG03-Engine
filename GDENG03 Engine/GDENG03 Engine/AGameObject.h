@@ -16,7 +16,7 @@ public:
 	~AGameObject();
 
 	virtual void update(float delta_time);
-	virtual void draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) = 0;
+	virtual void draw(int width, int height) = 0;
 
 	std::string getObjectName();
 	bool isActive();
@@ -75,6 +75,9 @@ protected:
 	StateSnapshot* mInitialState = nullptr;
 
 	std::vector<AComponent*> mComponentList;
+
+	AVertexShader* mVertexShader = nullptr;
+	APixelShader* mPixelShader = nullptr;
 
 	float mTranslationSpeed = 5.f;
 	float mRotationSpeed = 1.f;
