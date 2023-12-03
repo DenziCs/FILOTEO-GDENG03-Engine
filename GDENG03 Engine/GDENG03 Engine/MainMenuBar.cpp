@@ -1,5 +1,7 @@
 #include"MainMenuBar.h"
 #include"GameObjectManager.h"
+#include"FileSavePanel.h"
+#include"FileLoadPanel.h"
 
 MainMenuBar::MainMenuBar(std::string name) : AUIPanel::AUIPanel(name) {}
 
@@ -8,8 +10,12 @@ void MainMenuBar::draw() {
 
 	if (ImGui::BeginMenu("File")) {
 		if (ImGui::MenuItem("New")) {}
-		if (ImGui::MenuItem("Save")) {}
-		if (ImGui::MenuItem("Open")) {}
+		if (ImGui::MenuItem("Save")) {
+			if (!mSavePanel->isEnabled()) mSavePanel->openExplorer();
+		}
+		if (ImGui::MenuItem("Open")) {
+			if (!mLoadPanel->isEnabled()) mLoadPanel->openExplorer();
+		}
 		if (ImGui::MenuItem("Exit")) {}
 		ImGui::EndMenu();
 	}
@@ -52,4 +58,12 @@ void MainMenuBar::draw() {
 	}
 
 	ImGui::EndMainMenuBar();
+}
+
+void MainMenuBar::setFileSavePanel(FileSavePanel* save_panel) {
+	mSavePanel = save_panel;
+}
+
+void MainMenuBar::setFileLoadPanel(FileLoadPanel* load_panel) {
+	mLoadPanel = load_panel;
 }

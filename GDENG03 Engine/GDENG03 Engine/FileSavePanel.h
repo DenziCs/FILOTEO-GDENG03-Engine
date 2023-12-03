@@ -2,18 +2,18 @@
 #include"AUIPanel.h"
 #include<imfilebrowser.h>
 
-class SceneFilePanel : public AUIPanel
+class FileSavePanel : public AUIPanel
 {
 public:
-	SceneFilePanel(std::string name);
-	~SceneFilePanel();
+	FileSavePanel(std::string name);
+	~FileSavePanel();
 
 	void draw() override;
 	void openExplorer();
+	void closeExplorer();
 
-	std::string getSelectedFileName();
+	bool isEnabled();
 
 private:
 	ImGui::FileBrowser* mBrowser;
-	std::string mSelectedFileName = "";
 };

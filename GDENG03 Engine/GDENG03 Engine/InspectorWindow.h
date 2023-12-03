@@ -3,6 +3,8 @@
 #include"AGameObject.h"
 #include"PhysicsComponent.h"
 
+class MaterialPanel;
+
 class InspectorWindow : public AUIPanel
 {
 public:
@@ -10,6 +12,7 @@ public:
 	~InspectorWindow();
 
 	void draw() override;
+	void setMaterialPanel(MaterialPanel* material_panel);
 
 private:
 	void updatePanelInfo(AGameObject* selected_object);
@@ -28,6 +31,5 @@ private:
 	float mBodyMass = 1000.f;
 	float mAppliedForce[3] = {};
 
-	// Add other members needed for textures tab here.
-	bool mIsPopupEnabled = false;
+	MaterialPanel* mMaterialPanel = nullptr;
 };

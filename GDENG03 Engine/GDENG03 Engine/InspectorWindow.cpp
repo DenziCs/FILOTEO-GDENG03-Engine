@@ -6,6 +6,7 @@
 #include"BackendManager.h"
 #include"SystemManager.h"
 #include"PhysicsSystem.h"
+#include"MaterialPanel.h"
 #include<iostream>
 
 InspectorWindow::InspectorWindow(std::string name) : AUIPanel::AUIPanel(name) {}
@@ -110,10 +111,16 @@ void InspectorWindow::draw() {
 
 			if (ImGui::Button("Add Material")) {
 				mIsPopupEnabled = !mIsPopupEnabled;
-				MaterialPanel* materialPanel = (MaterialPanel*)(UIManager::getInstance()->getPanel(UIManager::MATERIAL_PANEL));
-				UIManager::getInstance()->setActive(materialPanel, mIsPopupEnabled);
+				if (mIsPopupEnabled) mMaterialPanel->openExplorer();
+				else mMaterialPanel->closeExplorer();
 			}
 			*/
+		}
+
+		ImGui::TextWrapped("Material Test");
+
+		if (ImGui::Button("Add Material")) {
+			if (!mMaterialPanel->isEnabled()) mMaterialPanel->openExplorer();
 		}
 
 		if (ImGui::Button("Delete Object")) {
@@ -125,6 +132,10 @@ void InspectorWindow::draw() {
 	}
 
 	ImGui::End();
+}
+
+void InspectorWindow::setMaterialPanel(MaterialPanel* material_panel) {
+	mMaterialPanel = material_panel;
 }
 
 void InspectorWindow::updatePanelInfo(AGameObject* selected_object) {

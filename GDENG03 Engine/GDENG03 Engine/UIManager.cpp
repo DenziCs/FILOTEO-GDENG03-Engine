@@ -6,6 +6,9 @@
 #include"SceneOutliner.h"
 #include"EngineProfiler.h"
 #include"ScenePlayOptionsWindow.h"
+#include"MaterialPanel.h"
+#include"FileSavePanel.h"
+#include"FileLoadPanel.h"
 
 UIManager* UIManager::instance = nullptr;
 
@@ -40,16 +43,6 @@ void UIManager::draw() {
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
-AUIPanel* UIManager::getPanel(PanelName panel_name) {
-    int index = panel_name;
-    if (index >= 0 && index < mListUI.size()) return mListUI[index];
-    else return nullptr;
-}
-
-void UIManager::setActive(AUIPanel* panel, bool is_enabled) {
-    panel->mIsEnabled = is_enabled;
-}
-
 UIManager::UIManager(HWND window_handle) {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -78,7 +71,17 @@ UIManager::UIManager(HWND window_handle) {
     ScenePlayOptionsWindow* scenePlay = new ScenePlayOptionsWindow("Scene Play Options");
     mListUI.push_back(scenePlay);
 
-    // Add material panel constructor here.
+    MaterialPanel* material = new MaterialPanel("Material Panel");
+    mListUI.push_back(material);
+    inspectorWindow->setMaterialPanel(material);
+
+    FileSavePanel* save = new FileSavePanel("Save Panel");
+    mListUI.push_back(save);
+    mainMenuBar->setFileSavePanel(save);
+
+    FileLoadPanel* load = new FileLoadPanel("Load Panel");
+    mListUI.push_back(load);
+    mainMenuBar->setFileLoadPanel(load);
 }
 
 UIManager::~UIManager() {

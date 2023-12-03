@@ -231,7 +231,10 @@
     <ClCompile Include="MaterialPanel.cpp">
       <Filter>Engine\User Interface</Filter>
     </ClCompile>
-    <ClCompile Include="SceneFilePanel.cpp">
+    <ClCompile Include="FileSavePanel.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="FileLoadPanel.cpp">
       <Filter>Engine\User Interface</Filter>
     </ClCompile>
   </ItemGroup>
@@ -716,11 +719,14 @@
     <ClInclude Include="MaterialPanel.h">
       <Filter>Engine\User Interface</Filter>
     </ClInclude>
-    <ClInclude Include="SceneFilePanel.h">
-      <Filter>Engine\User Interface</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imfilebrowser.h">
       <Filter>IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSavePanel.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="FileLoadPanel.h">
+      <Filter>Engine\User Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

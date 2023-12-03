@@ -153,6 +153,8 @@
     <ClCompile Include="AWindow.cpp" />
     <ClCompile Include="BackendManager.cpp" />
     <ClCompile Include="EngineProfiler.cpp" />
+    <ClCompile Include="FileLoadPanel.cpp" />
+    <ClCompile Include="FileSavePanel.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GlobalProperties.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
@@ -174,7 +176,6 @@
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="SceneCameraManager.cpp" />
-    <ClCompile Include="SceneFilePanel.cpp" />
     <ClCompile Include="SceneOutliner.cpp" />
     <ClCompile Include="ScenePlayOptionsWindow.cpp" />
     <ClCompile Include="SimpleWindowPanel.cpp" />
@@ -210,6 +211,8 @@
     <ClInclude Include="AWindow.h" />
     <ClInclude Include="BackendManager.h" />
     <ClInclude Include="EngineProfiler.h" />
+    <ClInclude Include="FileLoadPanel.h" />
+    <ClInclude Include="FileSavePanel.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GlobalProperties.h" />
     <ClInclude Include="imgui\imconfig.h" />
@@ -338,7 +341,6 @@
     <ClInclude Include="reactphysics3d\include\reactphysics3d\utils\Logger.h" />
     <ClInclude Include="reactphysics3d\include\reactphysics3d\utils\Profiler.h" />
     <ClInclude Include="SceneCameraManager.h" />
-    <ClInclude Include="SceneFilePanel.h" />
     <ClInclude Include="SceneOutliner.h" />
     <ClInclude Include="ScenePlayOptionsWindow.h" />
     <ClInclude Include="SimpleWindowPanel.h" />

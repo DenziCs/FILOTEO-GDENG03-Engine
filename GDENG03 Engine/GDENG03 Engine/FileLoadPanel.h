@@ -2,11 +2,11 @@
 #include"AUIPanel.h"
 #include<imfilebrowser.h>
 
-class MaterialPanel : public AUIPanel
+class FileLoadPanel : public AUIPanel
 {
 public:
-	MaterialPanel(std::string name);
-	~MaterialPanel();
+	FileLoadPanel(std::string name);
+	~FileLoadPanel();
 
 	void draw() override;
 	void openExplorer();
