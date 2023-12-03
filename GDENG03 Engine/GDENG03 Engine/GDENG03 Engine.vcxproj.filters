@@ -105,9 +105,6 @@
     <ClCompile Include="AConstantBuffer.cpp">
       <Filter>Engine\Graphics\ConstantBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="TimeManager.cpp">
-      <Filter>Engine\Windowing</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix4x4.cpp">
       <Filter>Engine\Math</Filter>
     </ClCompile>
@@ -225,6 +222,18 @@
     <ClCompile Include="ScenePlayOptionsWindow.cpp">
       <Filter>Engine\User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="StringUtilities.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialPanel.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneFilePanel.cpp">
+      <Filter>Engine\User Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -256,9 +265,6 @@
     </ClInclude>
     <ClInclude Include="AConstantBuffer.h">
       <Filter>Engine\Graphics\ConstantBuffer</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>Engine\Windowing</Filter>
     </ClInclude>
     <ClInclude Include="Matrix4x4.h">
       <Filter>Engine\Math</Filter>
@@ -701,6 +707,21 @@
     <ClInclude Include="ScenePlayOptionsWindow.h">
       <Filter>Engine\User Interface</Filter>
     </ClInclude>
+    <ClInclude Include="StringUtilities.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialPanel.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneFilePanel.h">
+      <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imfilebrowser.h">
+      <Filter>IMGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
@@ -709,5 +730,8 @@
     <FxCompile Include="PixelShader.hlsl">
       <Filter>App</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

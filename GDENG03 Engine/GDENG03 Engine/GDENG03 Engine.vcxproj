@@ -80,6 +80,7 @@
       <PreprocessorDefinitions>WIN32;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\GDENG03 Engine\imgui;$(SolutionDir)\GDENG03 Engine\reactphysics3d\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,12 +167,14 @@
     <ClCompile Include="InspectorWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuBar.cpp" />
+    <ClCompile Include="MaterialPanel.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="SceneCameraManager.cpp" />
+    <ClCompile Include="SceneFilePanel.cpp" />
     <ClCompile Include="SceneOutliner.cpp" />
     <ClCompile Include="ScenePlayOptionsWindow.cpp" />
     <ClCompile Include="SimpleWindowPanel.cpp" />
@@ -210,6 +213,7 @@
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GlobalProperties.h" />
     <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imfilebrowser.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_dx11.h" />
     <ClInclude Include="imgui\imgui_impl_win32.h" />
@@ -221,6 +225,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InspectorWindow.h" />
     <ClInclude Include="MainMenuBar.h" />
+    <ClInclude Include="MaterialPanel.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="PhysicsSystem.h" />
@@ -333,6 +338,7 @@
     <ClInclude Include="reactphysics3d\include\reactphysics3d\utils\Logger.h" />
     <ClInclude Include="reactphysics3d\include\reactphysics3d\utils\Profiler.h" />
     <ClInclude Include="SceneCameraManager.h" />
+    <ClInclude Include="SceneFilePanel.h" />
     <ClInclude Include="SceneOutliner.h" />
     <ClInclude Include="ScenePlayOptionsWindow.h" />
     <ClInclude Include="SimpleWindowPanel.h" />
