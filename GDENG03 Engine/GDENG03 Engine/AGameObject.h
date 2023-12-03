@@ -2,6 +2,9 @@
 #include"Vector3D.h"
 #include"Matrix4x4.h"
 #include<string>
+#include<vector>
+#include"StateSnapshot.h"
+#include"AComponent.h"
 
 class AVertexShader;
 class APixelShader;
@@ -13,7 +16,7 @@ public:
 	~AGameObject();
 
 	virtual void update(float delta_time);
-	virtual void draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) = 0;
+	virtual void draw(int width, int height) = 0;
 
 	std::string getObjectName();
 	bool isActive();
@@ -38,9 +41,16 @@ public:
 	Vector3D getLocalRotation();
 
 	void updateLocalMatrix();
-	void updateLocalMatrix(float physics_matrix[16]);
+	void updatePhysicsMatrix(float physics_matrix[16]);
 	Matrix4x4 getLocalMatrix();
-	float* getPhysicsMatrix();
+	Matrix4x4 getPhysicsMatrix();
+
+	void saveInitialState();
+	void restoreInitialState();
+
+	void attachComponent(AComponent* new_component);
+	void detachComponent(AComponent* component);
+	AComponent* findComponentOfType(AComponent::ComponentType component_type);
 
 	__declspec(align(16))
 		struct constant {
@@ -55,10 +65,19 @@ protected:
 	Vector3D mLocalPosition;
 	Vector3D mLocalScale;
 	Vector3D mLocalRotation;
+
 	Matrix4x4 mLocalMatrix;
+	Matrix4x4 mPhysicsMatrix;
 
 	bool mIsActive = true;
 	bool mIsSelected = false;
+
+	StateSnapshot* mInitialState = nullptr;
+
+	std::vector<AComponent*> mComponentList;
+
+	AVertexShader* mVertexShader = nullptr;
+	APixelShader* mPixelShader = nullptr;
 
 	float mTranslationSpeed = 5.f;
 	float mRotationSpeed = 1.f;

@@ -144,4 +144,4 @@ void ACamera::onRMBRelease(const Point mouse_position) {
 	std::cout << "Right mouse button has been released." << std::endl;
 }
 
-void ACamera::draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {}
+void ACamera::draw(int width, int height) {}

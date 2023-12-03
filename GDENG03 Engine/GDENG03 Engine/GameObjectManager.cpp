@@ -52,9 +52,9 @@ void GameObjectManager::update() {
 	}
 }
 
-void GameObjectManager::draw(int viewport_width, int viewport_height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {
+void GameObjectManager::draw(int viewport_width, int viewport_height) {
 	for (int i = 0; i < mGameObjectList.size(); i++) {
-		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->draw(viewport_width, viewport_height, vertex_shader, pixel_shader);
+		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->draw(viewport_width, viewport_height);
 	}
 }
 
@@ -77,7 +77,7 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		}
 		while (cube);
 
-		ACube* newCube = new ACube(newName, mVertexShaderByteCode, mShaderSize);
+		ACube* newCube = new ACube(newName);
 		addObject(newCube);
 		std::cout << newCube->getObjectName() << " spawned." << std::endl;
 	}
@@ -93,7 +93,7 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		}
 		while (plane);
 
-		APlane* newPlane = new APlane(newName, mVertexShaderByteCode, mShaderSize);
+		APlane* newPlane = new APlane(newName);
 		addObject(newPlane);
 		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
 	}
@@ -109,12 +109,14 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		}
 		while (cube);
 
-		ACube* newCube = new ACube(newName, mVertexShaderByteCode, mShaderSize);
+		ACube* newCube = new ACube(newName);
+		newCube->setPosition(0.f, 10.f, 0.f);
 		addObject(newCube);
 		std::cout << newCube->getObjectName() << " spawned." << std::endl;
 
-		PhysicsComponent* component = new PhysicsComponent(newName + " Physics", newCube);
-		component->enableGravity(true);
+		PhysicsComponent* component = new PhysicsComponent(newName + " Physics");
+		newCube->attachComponent(component);
+		component->getRigidBody()->enableGravity(true);
 		std::cout << component->getComponentName() << " attached." << std::endl;
 	}
 	break;
@@ -129,14 +131,15 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 		}
 		while (plane);
 
-		APlane* newPlane = new APlane(newName, mVertexShaderByteCode, mShaderSize);
-		newPlane->setPosition(0.f, -10.f, 0.f);
+		APlane* newPlane = new APlane(newName);
+		newPlane->setPosition(0.f, 0.f, 0.f);
 		newPlane->setScale(10.f, 1.f, 10.f);
 		addObject(newPlane);
 		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
 
-		PhysicsComponent* component = new PhysicsComponent(newName + " Physics", newPlane);
-		component->setRigidBodyType(BodyType::STATIC);
+		PhysicsComponent* component = new PhysicsComponent(newName + " Physics");
+		newPlane->attachComponent(component);
+		component->getRigidBody()->setType(BodyType::STATIC);
 		std::cout << component->getComponentName() << " attached." << std::endl;
 	}
 	break;
@@ -145,6 +148,8 @@ void GameObjectManager::createObject(PrimitiveType primitive_type) {
 }
 
 void GameObjectManager::deleteObject(AGameObject* game_object) {
+	if (game_object == mCurrentSelectedObject) deselectObject();
+
 	std::string key = game_object->getObjectName();
 	mGameObjectTable.erase(key);
 	mGameObjectList.erase(std::remove(mGameObjectList.begin(), mGameObjectList.end(), game_object), mGameObjectList.end());
@@ -183,9 +188,16 @@ void GameObjectManager::deselectObject() {
 	}
 }
 
-void GameObjectManager::setVertexShaderProperties(void* shader_byte_code, size_t shader_size) {
-	mVertexShaderByteCode = shader_byte_code;
-	mShaderSize = shader_size;
+void GameObjectManager::saveInitialStates() {
+	for (int i = 0; i < mGameObjectList.size(); i++) {
+		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->saveInitialState();
+	}
+}
+
+void GameObjectManager::restoreInitialStates() {
+	for (int i = 0; i < mGameObjectList.size(); i++) {
+		if (mGameObjectList[i]->isActive()) mGameObjectList[i]->restoreInitialState();
+	}
 }
 
 GameObjectManager::GameObjectManager() {

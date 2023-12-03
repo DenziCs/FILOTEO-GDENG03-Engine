@@ -5,6 +5,7 @@
 #include"InspectorWindow.h"
 #include"SceneOutliner.h"
 #include"EngineProfiler.h"
+#include"ScenePlayOptionsWindow.h"
 
 UIManager* UIManager::instance = nullptr;
 
@@ -63,6 +64,9 @@ UIManager::UIManager(HWND window_handle) {
 
     EngineProfiler* engineProfiler = new EngineProfiler("Engine Profiler");
     mListUI.push_back(engineProfiler);
+
+    ScenePlayOptionsWindow* scenePlay = new ScenePlayOptionsWindow("Scene Play Options");
+    mListUI.push_back(scenePlay);
 }
 
 UIManager::~UIManager() {

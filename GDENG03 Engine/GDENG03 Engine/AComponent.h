@@ -14,10 +14,10 @@ public:
 		PHYSICS = 3
 	};
 
-	AComponent(std::string component_name, ComponentType component_type, AGameObject* owner);
+	AComponent(std::string component_name, ComponentType component_type);
 	~AComponent();
 
-	void attachOwner(AGameObject* owner);
+	virtual void attachOwner(AGameObject* owner);
 	void detachOwner();
 	AGameObject* getOwner();
 	ComponentType getComponentType();

@@ -2,6 +2,9 @@
 #include"GlobalProperties.h"
 #include"GameObjectManager.h"
 #include"AngleConverter.h"
+#include"ActionHistoryManager.h"
+#include"BackendManager.h"
+#include<iostream>
 
 InspectorWindow::InspectorWindow(std::string name) : AUIPanel::AUIPanel(name) {}
 
@@ -15,6 +18,8 @@ void InspectorWindow::draw() {
 	ImGui::SetWindowSize(ImVec2(300, GlobalProperties::WINDOW_HEIGHT - 64));
 	ImGui::SetWindowPos(ImVec2(GlobalProperties::WINDOW_WIDTH - 321, 20));
 
+	if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::BeginDisabled();
+
 	if (!GameObjectManager::getInstance()->getSelectedObject()) {
 		ImGui::TextWrapped("No object selected. Select an object from the scene.");
 	}
@@ -27,17 +32,42 @@ void InspectorWindow::draw() {
 		ImGui::SameLine();
 		ImGui::Text(selectedObject->getObjectName().c_str());
 		ImGui::Separator();
-		ImGui::Checkbox("Enabled", &mIsSelectedObjectActive);
-		ImGui::DragFloat3("Position", mObjectPosition, 0.25f);
-		ImGui::DragFloat3("Rotation", mObjectRotation, 1.f, -360.f, 360.f);
-		ImGui::DragFloat3("Scale", mObjectScale, 0.25f, 0.f, 100.f);
 
-		selectedObject->setActive(mIsSelectedObjectActive);
-		selectedObject->setScale(mObjectScale[0], mObjectScale[1], mObjectScale[2]);
-		selectedObject->setRotation(AngleConverter::toRadians(mObjectRotation[0]), AngleConverter::toRadians(mObjectRotation[1]), AngleConverter::toRadians(mObjectRotation[2]));
-		selectedObject->setPosition(mObjectPosition[0], mObjectPosition[1], mObjectPosition[2]);
+		if (ImGui::Checkbox("Enabled", &mIsSelectedObjectActive)) {
+			ActionHistoryManager::getInstance()->startAction(selectedObject);
+			selectedObject->setActive(mIsSelectedObjectActive);
+			ActionHistoryManager::getInstance()->endAction();
+			std::cout << "Action taken: Modified isActive." << std::endl;
+		}
+
+		if (ImGui::DragFloat3("Position", mObjectPosition, 0.25f)) {
+			ActionHistoryManager::getInstance()->startAction(selectedObject);
+			selectedObject->setPosition(mObjectPosition[0], mObjectPosition[1], mObjectPosition[2]);
+			ActionHistoryManager::getInstance()->endAction();
+			std::cout << "Action taken: Modified position." << std::endl;
+		}
+
+		if (ImGui::DragFloat3("Rotation", mObjectRotation, 1.f, -360.f, 360.f)) {
+			ActionHistoryManager::getInstance()->startAction(selectedObject);
+			selectedObject->setRotation(AngleConverter::toRadians(mObjectRotation[0]), AngleConverter::toRadians(mObjectRotation[1]), AngleConverter::toRadians(mObjectRotation[2]));
+			ActionHistoryManager::getInstance()->endAction();
+			std::cout << "Action taken: Modified rotation." << std::endl;
+		}
+
+		if (ImGui::DragFloat3("Scale", mObjectScale, 0.25f, 0.f, 100.f)) {
+			ActionHistoryManager::getInstance()->startAction(selectedObject);
+			selectedObject->setScale(mObjectScale[0], mObjectScale[1], mObjectScale[2]);
+			ActionHistoryManager::getInstance()->endAction();
+			std::cout << "Action taken: Modified scale." << std::endl;
+		}
+
+		if (ImGui::Button("Delete Object")) {
+			GameObjectManager::getInstance()->deleteObject(selectedObject);
+			std::cout << "Permanent action taken: Deleted object." << std::endl;
+		}
 	}
 
+	if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::EndDisabled();
 	ImGui::End();
 }
 

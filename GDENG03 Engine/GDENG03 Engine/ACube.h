@@ -8,11 +8,11 @@
 class ACube : public AGameObject
 {
 public:
-	ACube(std::string name, void* shader_byte_code, size_t shader_size);
+	ACube(std::string name);
 	~ACube();
 
 	void update(float delta_time) override;
-	void draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) override;
+	void draw(int width, int height) override;
 
 private:
 	AVertexBuffer* mVertexBuffer;

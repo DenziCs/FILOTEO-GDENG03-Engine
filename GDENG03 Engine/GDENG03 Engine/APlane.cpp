@@ -5,7 +5,11 @@
 #include"ADeviceContext.h"
 #include<iostream>
 
-APlane::APlane(std::string name, void* shader_byte_code, size_t shader_size) : AGameObject::AGameObject(name) {
+APlane::APlane(std::string name) : AGameObject::AGameObject(name) {
+	void* shaderByteCode = nullptr;
+	size_t shaderSize;
+	AGraphicsEngine::getInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &shaderSize);
+
 	Vertex* currentVertexList = new Vertex[4];
 
 	currentVertexList[0] = Vertex(
@@ -30,13 +34,20 @@ APlane::APlane(std::string name, void* shader_byte_code, size_t shader_size) : A
 	);
 
 	mVertexBuffer = AGraphicsEngine::getInstance()->createVertexBuffer();
-	mVertexBuffer->load(currentVertexList, sizeof(Vertex), 4, shader_byte_code, shader_size);
+	mVertexBuffer->load(currentVertexList, sizeof(Vertex), 4, shaderByteCode, shaderSize);
 
 	constant datablock;
 	datablock.coefficient = 0.f;
 
 	mConstantBuffer = AGraphicsEngine::getInstance()->createConstantBuffer();
 	mConstantBuffer->load(&datablock, sizeof(constant));
+
+	this->mVertexShader = AGraphicsEngine::getInstance()->createVertexShader(shaderByteCode, shaderSize);
+	AGraphicsEngine::getInstance()->releaseCompiledVertexShader();
+
+	AGraphicsEngine::getInstance()->compilePixelShader(L"PixelShader.hlsl", "psmain", &shaderByteCode, &shaderSize);
+	this->mPixelShader = AGraphicsEngine::getInstance()->createPixelShader(shaderByteCode, shaderSize);
+	AGraphicsEngine::getInstance()->releaseCompiledPixelShader();
 
 	delete[] currentVertexList;
 }
@@ -50,21 +61,26 @@ void APlane::update(float delta_time) {
 	AGameObject::update(delta_time);
 }
 
-void APlane::draw(int width, int height, AVertexShader* vertex_shader, APixelShader* pixel_shader) {
+void APlane::draw(int width, int height) {
 	constant shaderNumbers;
 
-	shaderNumbers.worldMatrix = this->getLocalMatrix();
+	if (this->findComponentOfType(AComponent::PHYSICS)) {
+		shaderNumbers.worldMatrix = this->getPhysicsMatrix();
+	}
+		
+	else shaderNumbers.worldMatrix = this->getLocalMatrix();
+
 	shaderNumbers.viewMatrix = SceneCameraManager::getInstance()->getSceneCameraViewMatrix();
 	shaderNumbers.projectionMatrix = SceneCameraManager::getInstance()->getSceneCameraProjectionMatrix();
 	shaderNumbers.coefficient = 0.f;
 
 	mConstantBuffer->update(AGraphicsEngine::getInstance()->getImmediateDeviceContext(), &shaderNumbers);
 
-	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, vertex_shader);
-	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, pixel_shader);
+	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, this->mVertexShader);
+	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setConstantBuffer(mConstantBuffer, this->mPixelShader);
 
-	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexShader(vertex_shader);
-	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setPixelShader(pixel_shader);
+	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexShader(this->mVertexShader);
+	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setPixelShader(this->mPixelShader);
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->setVertexBuffer(mVertexBuffer);
 
 	AGraphicsEngine::getInstance()->getImmediateDeviceContext()->drawTriangleStrip(mVertexBuffer->getVertexCount(), 0);
