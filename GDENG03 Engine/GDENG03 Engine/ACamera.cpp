@@ -3,7 +3,7 @@
 #include<Windows.h>
 #include<iostream>
 
-ACamera::ACamera(std::string name) : AGameObject::AGameObject(name) {
+ACamera::ACamera(std::string name) : AGameObject::AGameObject(name, NO_TYPE) {
 	InputManager::getInstance()->addListener(this);
 }
 

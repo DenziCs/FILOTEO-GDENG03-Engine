@@ -33,11 +33,21 @@ void UIManager::draw() {
     ImGui::NewFrame();
 
     for (int i = 0; i < mListUI.size(); i++) {
-        mListUI[i]->draw();
+        if (mListUI[i]->mIsEnabled) mListUI[i]->draw();
     }
 
     ImGui::Render();
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+}
+
+AUIPanel* UIManager::getPanel(PanelName panel_name) {
+    int index = panel_name;
+    if (index >= 0 && index < mListUI.size()) return mListUI[index];
+    else return nullptr;
+}
+
+void UIManager::setActive(AUIPanel* panel, bool is_enabled) {
+    panel->mIsEnabled = is_enabled;
 }
 
 UIManager::UIManager(HWND window_handle) {
@@ -67,6 +77,8 @@ UIManager::UIManager(HWND window_handle) {
 
     ScenePlayOptionsWindow* scenePlay = new ScenePlayOptionsWindow("Scene Play Options");
     mListUI.push_back(scenePlay);
+
+    // Add material panel constructor here.
 }
 
 UIManager::~UIManager() {

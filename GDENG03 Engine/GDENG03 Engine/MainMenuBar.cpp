@@ -18,22 +18,36 @@ void MainMenuBar::draw() {
 		if (ImGui::MenuItem("Create Cube")) {
 			GameObjectManager::getInstance()->createObject(GameObjectManager::CUBE);
 		}
+
 		if (ImGui::MenuItem("Create Sphere")) {}
+
 		if (ImGui::MenuItem("Create Plane")) {
 			GameObjectManager::getInstance()->createObject(GameObjectManager::PLANE);
 		}
+
 		if (ImGui::BeginMenu("Light")) {
 			if (ImGui::MenuItem("Point Light")) {}
 			ImGui::EndMenu();
 		}
-		if (ImGui::MenuItem("Create Several Physics Cubes")) {
-			for (int i = 0; i < 1; i++) {
+
+		if (ImGui::MenuItem("Create Several Dynamic Physics Cubes")) {
+			for (int i = 0; i < 30; i++) {
 				GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_CUBE);
 			}
 		}
+
+		if (ImGui::MenuItem("Create Dynamic Physics Cube")) {
+			GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_CUBE);
+		}
+
 		if (ImGui::MenuItem("Create Static Physics Plane")) {
 			GameObjectManager::getInstance()->createObject(GameObjectManager::PHYSICS_PLANE);
 		}
+
+		if (ImGui::MenuItem("Create Textured Cube")) {
+			GameObjectManager::getInstance()->createObject(GameObjectManager::TEXTURED_CUBE);
+		}
+
 		ImGui::EndMenu();
 	}
 

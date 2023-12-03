@@ -5,7 +5,7 @@
 #include<iostream>
 #include"GlobalProperties.h"
 
-ACube::ACube(std::string name) : AGameObject::AGameObject(name) {
+ACube::ACube(std::string name) : AGameObject::AGameObject(name, CUBE) {
 	void* shaderByteCode = nullptr;
 	size_t shaderSize;
 	AGraphicsEngine::getInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &shaderSize);

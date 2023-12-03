@@ -9,12 +9,12 @@
 class GameObjectManager
 {
 public:
-
 	enum PrimitiveType {
 		CUBE,
 		PLANE,
 		PHYSICS_CUBE,
-		PHYSICS_PLANE
+		PHYSICS_PLANE,
+		TEXTURED_CUBE
 	};
 
 	static GameObjectManager* getInstance();
@@ -27,8 +27,21 @@ public:
 	int getActiveObjectCount();
 	void update();
 	void draw(int viewport_width, int viewport_height);
+
 	void addObject(AGameObject* game_object);
-	void createObject(PrimitiveType primitive_type);
+	void createObject(PrimitiveType spawn_type);
+	void recreateObject(
+		std::string object_name,
+		AGameObject::ObjectType object_type,
+		Vector3D object_position,
+		Vector3D object_rotation,
+		Vector3D object_scale,
+		bool has_physics_component,
+		bool is_physics_active,
+		bool is_static,
+		bool is_gravity_enabled,
+		float mass
+	);
 	void deleteObject(AGameObject* game_object);
 	void deleteObjectByName(std::string name);
 

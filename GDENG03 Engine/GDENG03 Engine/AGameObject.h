@@ -12,13 +12,22 @@ class APixelShader;
 class AGameObject
 {
 public:
-	AGameObject(std::string name);
+	enum ObjectType {
+		NO_TYPE,
+		CUBE,
+		PLANE,
+		TEXTURED_CUBE
+	};
+
+	AGameObject(std::string name, ObjectType type);
 	~AGameObject();
 
 	virtual void update(float delta_time);
 	virtual void draw(int width, int height) = 0;
 
 	std::string getObjectName();
+	ObjectType getObjectType();
+
 	bool isActive();
 	void setActive(bool is_object_active);
 	void select();
@@ -62,6 +71,8 @@ public:
 
 protected:
 	std::string mObjectName;
+	ObjectType mObjectType;
+
 	Vector3D mLocalPosition;
 	Vector3D mLocalScale;
 	Vector3D mLocalRotation;

@@ -11,11 +11,22 @@
 class UIManager
 {
 public:
+	enum PanelName {
+		MAIN_MENU_TOOLBAR,
+		SCENE_OUTLINER,
+		INSPECTOR,
+		ENGINE_PROFILER,
+		SCENE_PLAY_PANEL,
+		MATERIAL_PANEL
+	};
+
 	static UIManager* getInstance();
 	static void initialize(HWND window_handle);
 	static void destroy();
 
 	void draw();
+	AUIPanel* getPanel(PanelName panel_name);
+	void setActive(AUIPanel* panel, bool is_enabled);
 
 private:
 	UIManager(HWND window_handle);
@@ -25,5 +36,4 @@ private:
 	static UIManager* instance;
 
 	std::vector<AUIPanel*> mListUI;
-	std::unordered_map<std::string, AUIPanel*> mTableUI;
 };

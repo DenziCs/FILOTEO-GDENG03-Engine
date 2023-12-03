@@ -5,7 +5,7 @@
 #include"ADeviceContext.h"
 #include<iostream>
 
-APlane::APlane(std::string name) : AGameObject::AGameObject(name) {
+APlane::APlane(std::string name) : AGameObject::AGameObject(name, PLANE) {
 	void* shaderByteCode = nullptr;
 	size_t shaderSize;
 	AGraphicsEngine::getInstance()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shaderByteCode, &shaderSize);

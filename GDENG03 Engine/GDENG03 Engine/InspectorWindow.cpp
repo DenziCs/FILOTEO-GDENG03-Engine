@@ -4,6 +4,8 @@
 #include"AngleConverter.h"
 #include"ActionHistoryManager.h"
 #include"BackendManager.h"
+#include"SystemManager.h"
+#include"PhysicsSystem.h"
 #include<iostream>
 
 InspectorWindow::InspectorWindow(std::string name) : AUIPanel::AUIPanel(name) {}
@@ -18,60 +20,114 @@ void InspectorWindow::draw() {
 	ImGui::SetWindowSize(ImVec2(300, GlobalProperties::WINDOW_HEIGHT - 64));
 	ImGui::SetWindowPos(ImVec2(GlobalProperties::WINDOW_WIDTH - 321, 20));
 
-	if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::BeginDisabled();
-
 	if (!GameObjectManager::getInstance()->getSelectedObject()) {
 		ImGui::TextWrapped("No object selected. Select an object from the scene.");
 	}
 
 	else {
 		AGameObject* selectedObject = GameObjectManager::getInstance()->getSelectedObject();
-		updateObjectInfo(selectedObject);
+		updatePanelInfo(selectedObject);
 
 		ImGui::Text("Selected Object:");
 		ImGui::SameLine();
 		ImGui::Text(selectedObject->getObjectName().c_str());
 		ImGui::Separator();
 
+		if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::BeginDisabled(); 
+
 		if (ImGui::Checkbox("Enabled", &mIsSelectedObjectActive)) {
-			ActionHistoryManager::getInstance()->startAction(selectedObject);
-			selectedObject->setActive(mIsSelectedObjectActive);
-			ActionHistoryManager::getInstance()->endAction();
+			updateObjectInfo(selectedObject);
 			std::cout << "Action taken: Modified isActive." << std::endl;
 		}
 
 		if (ImGui::DragFloat3("Position", mObjectPosition, 0.25f)) {
-			ActionHistoryManager::getInstance()->startAction(selectedObject);
-			selectedObject->setPosition(mObjectPosition[0], mObjectPosition[1], mObjectPosition[2]);
-			ActionHistoryManager::getInstance()->endAction();
+			updateObjectInfo(selectedObject);
 			std::cout << "Action taken: Modified position." << std::endl;
 		}
 
 		if (ImGui::DragFloat3("Rotation", mObjectRotation, 1.f, -360.f, 360.f)) {
-			ActionHistoryManager::getInstance()->startAction(selectedObject);
-			selectedObject->setRotation(AngleConverter::toRadians(mObjectRotation[0]), AngleConverter::toRadians(mObjectRotation[1]), AngleConverter::toRadians(mObjectRotation[2]));
-			ActionHistoryManager::getInstance()->endAction();
+			updateObjectInfo(selectedObject);
 			std::cout << "Action taken: Modified rotation." << std::endl;
 		}
 
 		if (ImGui::DragFloat3("Scale", mObjectScale, 0.25f, 0.f, 100.f)) {
-			ActionHistoryManager::getInstance()->startAction(selectedObject);
-			selectedObject->setScale(mObjectScale[0], mObjectScale[1], mObjectScale[2]);
-			ActionHistoryManager::getInstance()->endAction();
+			updateObjectInfo(selectedObject);
 			std::cout << "Action taken: Modified scale." << std::endl;
+		}
+
+		if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::EndDisabled(); 
+
+		ImGui::Text("Rigidbody: ");
+
+		if (mHasPhysicsComponent) {
+			if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::BeginDisabled();
+
+			if (ImGui::Button("Detach"))
+				SystemManager::getInstance()->getPhysicsSystem()->unregisterComponent(mCurrentPhysicsComponent);
+
+			if (ImGui::Checkbox("Enabled", &mActiveBody))
+				mCurrentPhysicsComponent->setActive(mActiveBody);
+
+			if (ImGui::Checkbox("Is Static", &mStaticBody))
+				mCurrentPhysicsComponent->setStatic(mStaticBody);
+			
+			if (ImGui::Checkbox("Gravity Enabled", &mGravityBody))
+				mCurrentPhysicsComponent->enableGravity(mGravityBody);
+			
+			if (ImGui::InputFloat("Mass", &mBodyMass))
+				mCurrentPhysicsComponent->setMass(mBodyMass);
+
+			if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::EndDisabled();
+			
+			ImGui::DragFloat3("Applied Force Vector Components", mAppliedForce);
+			
+			if (ImGui::Button("Apply Force"))
+				mCurrentPhysicsComponent->applyForce(mAppliedForce[0], mAppliedForce[1], mAppliedForce[2]);
+		}
+
+		else {
+			ImGui::SameLine();
+			ImGui::Text("None");
+
+			if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::BeginDisabled();
+
+			if (ImGui::Button("Add Physics Component")) {
+				PhysicsComponent* component = new PhysicsComponent(selectedObject->getObjectName() + " Physics");
+				selectedObject->attachComponent(component);
+			}
+
+			if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::EndDisabled();
+		}
+
+		if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::BeginDisabled();
+
+		if (selectedObject->getObjectType() == AGameObject::TEXTURED_CUBE) {
+			// Add drawMaterialsTab() section here.
+
+			/*
+			ImGui::Image();
+			ImGui::TextWrapped("Material: " + ().c_str());
+
+			if (ImGui::Button("Add Material")) {
+				mIsPopupEnabled = !mIsPopupEnabled;
+				MaterialPanel* materialPanel = (MaterialPanel*)(UIManager::getInstance()->getPanel(UIManager::MATERIAL_PANEL));
+				UIManager::getInstance()->setActive(materialPanel, mIsPopupEnabled);
+			}
+			*/
 		}
 
 		if (ImGui::Button("Delete Object")) {
 			GameObjectManager::getInstance()->deleteObject(selectedObject);
 			std::cout << "Permanent action taken: Deleted object." << std::endl;
 		}
+
+		if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::EndDisabled();
 	}
 
-	if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::EndDisabled();
 	ImGui::End();
 }
 
-void InspectorWindow::updateObjectInfo(AGameObject* selected_object) {
+void InspectorWindow::updatePanelInfo(AGameObject* selected_object) {
 	mIsSelectedObjectActive = selected_object->isActive();
 
 	Vector3D position = selected_object->getLocalPosition();
@@ -88,4 +144,31 @@ void InspectorWindow::updateObjectInfo(AGameObject* selected_object) {
 	mObjectScale[0] = scale.x;
 	mObjectScale[1] = scale.y;
 	mObjectScale[2] = scale.z;
+
+	AComponent* component = selected_object->findComponentOfType(AComponent::PHYSICS);
+	if (component) mHasPhysicsComponent = true;
+	else mHasPhysicsComponent = false;
+
+	if (!mHasPhysicsComponent) {
+		mCurrentPhysicsComponent = nullptr;
+		return;
+	}
+
+	PhysicsComponent* physics = (PhysicsComponent*)component;
+	mCurrentPhysicsComponent = physics;
+	mActiveBody = physics->isActive();
+	mStaticBody = physics->isStatic();
+	mGravityBody = physics->isGravityEnabled();
+	mBodyMass = physics->getMass();
+}
+
+void InspectorWindow::updateObjectInfo(AGameObject* selected_object) {
+	ActionHistoryManager::getInstance()->startAction(selected_object);
+
+	selected_object->setActive(mIsSelectedObjectActive);
+	selected_object->setScale(mObjectScale[0], mObjectScale[1], mObjectScale[2]);
+	selected_object->setRotation(AngleConverter::toRadians(mObjectRotation[0]), AngleConverter::toRadians(mObjectRotation[1]), AngleConverter::toRadians(mObjectRotation[2]));
+	selected_object->setPosition(mObjectPosition[0], mObjectPosition[1], mObjectPosition[2]);
+
+	ActionHistoryManager::getInstance()->endAction();
 }

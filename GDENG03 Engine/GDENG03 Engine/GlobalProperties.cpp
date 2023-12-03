@@ -9,6 +9,9 @@ float GlobalProperties::BACKGROUND_COLOR[3] = {
 	216.f / 255.f,
 	216.f / 255.f
 };
+float GlobalProperties::TRANSLATION_SPEED = 5.f;
+float GlobalProperties::ROTATION_SPEED = 1.f;
+float GlobalProperties::SCALE_SPEED = 1.f;
 
 void GlobalProperties::setActiveCubes(bool flag) {
 	IS_CUBE_MOVEMENT_ON = flag;

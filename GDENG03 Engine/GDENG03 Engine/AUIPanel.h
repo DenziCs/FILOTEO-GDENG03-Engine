@@ -14,6 +14,7 @@ protected:
 	virtual void draw() = 0;
 
 	std::string mPanelName;
+	bool mIsEnabled = true;
 
 	friend class UIManager;
 };
