@@ -237,6 +237,9 @@
     <ClCompile Include="FileLoadPanel.cpp">
       <Filter>Engine\User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="SceneTranslator.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -727,6 +730,9 @@
     </ClInclude>
     <ClInclude Include="FileLoadPanel.h">
       <Filter>Engine\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTranslator.h">
+      <Filter>Engine\Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

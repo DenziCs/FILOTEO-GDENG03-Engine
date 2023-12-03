@@ -1,9 +1,10 @@
 #include"FileSavePanel.h"
+#include"SceneTranslator.h"
 
 FileSavePanel::FileSavePanel(std::string name) : AUIPanel::AUIPanel(name) {
 	mBrowser = new ImGui::FileBrowser(ImGuiFileBrowserFlags_NoModal | ImGuiFileBrowserFlags_EnterNewFilename | ImGuiFileBrowserFlags_CreateNewDir);
 	mBrowser->SetTitle("Save As");
-	mBrowser->SetTypeFilters({ ".iet", ".nfs" });
+	mBrowser->SetTypeFilters({ ".iet" });
 }
 
 FileSavePanel::~FileSavePanel() {
@@ -14,7 +15,7 @@ void FileSavePanel::draw() {
 	mBrowser->Display();
 
 	if (mBrowser->HasSelected()) {
-		// mBrowser->GetSelected().string();
+		SceneTranslator::saveScene(mBrowser->GetSelected().string());
 		mBrowser->Close();
 	}
 }

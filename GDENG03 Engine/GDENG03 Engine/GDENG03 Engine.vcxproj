@@ -178,6 +178,7 @@
     <ClCompile Include="SceneCameraManager.cpp" />
     <ClCompile Include="SceneOutliner.cpp" />
     <ClCompile Include="ScenePlayOptionsWindow.cpp" />
+    <ClCompile Include="SceneTranslator.cpp" />
     <ClCompile Include="SimpleWindowPanel.cpp" />
     <ClCompile Include="StateSnapshot.cpp" />
     <ClCompile Include="StringUtilities.cpp" />
@@ -343,6 +344,7 @@
     <ClInclude Include="SceneCameraManager.h" />
     <ClInclude Include="SceneOutliner.h" />
     <ClInclude Include="ScenePlayOptionsWindow.h" />
+    <ClInclude Include="SceneTranslator.h" />
     <ClInclude Include="SimpleWindowPanel.h" />
     <ClInclude Include="StateSnapshot.h" />
     <ClInclude Include="StringUtilities.h" />

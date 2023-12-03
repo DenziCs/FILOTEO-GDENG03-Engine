@@ -93,7 +93,7 @@ void InspectorWindow::draw() {
 			if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::BeginDisabled();
 
 			if (ImGui::Button("Add Physics Component")) {
-				PhysicsComponent* component = new PhysicsComponent(selectedObject->getObjectName() + " Physics");
+				PhysicsComponent* component = new PhysicsComponent(selectedObject->getObjectName() + "_Physics");
 				selectedObject->attachComponent(component);
 			}
 

@@ -1,9 +1,10 @@
 #include"FileLoadPanel.h"
+#include"SceneTranslator.h"
 
 FileLoadPanel::FileLoadPanel(std::string name) : AUIPanel::AUIPanel(name) {
 	mBrowser = new ImGui::FileBrowser(ImGuiFileBrowserFlags_NoModal);
 	mBrowser->SetTitle("Select Scene");
-	mBrowser->SetTypeFilters({ ".iet", ".nfs" });
+	mBrowser->SetTypeFilters({ ".iet" });
 }
 
 FileLoadPanel::~FileLoadPanel() {
@@ -14,7 +15,7 @@ void FileLoadPanel::draw() {
 	mBrowser->Display();
 
 	if (mBrowser->HasSelected()) {
-		// mBrowser->GetSelected().string();
+		SceneTranslator::openScene(mBrowser->GetSelected().string());
 		mBrowser->Close();
 	}
 }
