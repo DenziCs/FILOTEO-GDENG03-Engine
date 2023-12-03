@@ -45,6 +45,7 @@ public:
 	);
 	void deleteObject(AGameObject* game_object);
 	void deleteObjectByName(std::string name);
+	void deleteAllObjects();
 
 	void setSelectedObject(std::string name);
 	void setSelectedObject(AGameObject* game_object);

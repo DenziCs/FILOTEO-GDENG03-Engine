@@ -19,11 +19,7 @@ void GameObjectManager::initialize() {
 }
 
 void GameObjectManager::destroy() {
-	instance->mGameObjectTable.clear();
-
-	for (int i = 0; i < instance->mGameObjectList.size(); i++) {
-		delete instance->mGameObjectList[i];
-	}
+	instance->deleteAllObjects();
 }
 
 AGameObject* GameObjectManager::findObjectByName(std::string name) {
@@ -72,7 +68,7 @@ void GameObjectManager::createObject(PrimitiveType spawn_type) {
 		AGameObject* cube = nullptr;
 		do {
 			cubeCount++;
-			newName = "Cube_" + std::to_string(cubeCount);
+			newName = "Cube " + std::to_string(cubeCount);
 			cube = mGameObjectTable[newName];
 		}
 		while (cube);
@@ -88,7 +84,7 @@ void GameObjectManager::createObject(PrimitiveType spawn_type) {
 		AGameObject* plane = nullptr;
 		do {
 			planeCount++;
-			newName = "Plane_" + std::to_string(planeCount);
+			newName = "Plane " + std::to_string(planeCount);
 			plane = mGameObjectTable[newName];
 		}
 		while (plane);
@@ -104,7 +100,7 @@ void GameObjectManager::createObject(PrimitiveType spawn_type) {
 		AGameObject* cube = nullptr;
 		do {
 			cubeCount++;
-			newName = "Cube_" + std::to_string(cubeCount);
+			newName = "Cube " + std::to_string(cubeCount);
 			cube = mGameObjectTable[newName];
 		}
 		while (cube);
@@ -113,7 +109,7 @@ void GameObjectManager::createObject(PrimitiveType spawn_type) {
 		addObject(newCube);
 		std::cout << newCube->getObjectName() << " spawned." << std::endl;
 
-		PhysicsComponent* component = new PhysicsComponent(newName + "_Physics");
+		PhysicsComponent* component = new PhysicsComponent(newName + " Physics");
 		newCube->attachComponent(component);
 		component->getRigidBody()->enableGravity(true);
 		std::cout << component->getComponentName() << " attached." << std::endl;
@@ -125,7 +121,7 @@ void GameObjectManager::createObject(PrimitiveType spawn_type) {
 		AGameObject* plane = nullptr;
 		do {
 			planeCount++;
-			newName = "Plane_" + std::to_string(planeCount);
+			newName = "Plane " + std::to_string(planeCount);
 			plane = mGameObjectTable[newName];
 		}
 		while (plane);
@@ -134,7 +130,7 @@ void GameObjectManager::createObject(PrimitiveType spawn_type) {
 		addObject(newPlane);
 		std::cout << newPlane->getObjectName() << " spawned." << std::endl;
 
-		PhysicsComponent* component = new PhysicsComponent(newName + "_Physics");
+		PhysicsComponent* component = new PhysicsComponent(newName + " Physics");
 		newPlane->attachComponent(component);
 		component->getRigidBody()->setType(BodyType::STATIC);
 		std::cout << component->getComponentName() << " attached." << std::endl;
@@ -146,7 +142,7 @@ void GameObjectManager::createObject(PrimitiveType spawn_type) {
 		AGameObject* cube = nullptr;
 		do {
 			cubeCount++;
-			newName = "Textured_Cube_" + std::to_string(cubeCount);
+			newName = "Textured Cube " + std::to_string(cubeCount);
 			cube = mGameObjectTable[newName];
 		} while (cube);
 
@@ -231,6 +227,12 @@ void GameObjectManager::deleteObject(AGameObject* game_object) {
 void GameObjectManager::deleteObjectByName(std::string name) {
 	AGameObject* object = findObjectByName(name);
 	if (object) deleteObject(object);
+}
+
+void GameObjectManager::deleteAllObjects() {
+	while (!mGameObjectList.empty()) {
+		deleteObject(mGameObjectList[0]);
+	}
 }
 
 void GameObjectManager::setSelectedObject(std::string name) {

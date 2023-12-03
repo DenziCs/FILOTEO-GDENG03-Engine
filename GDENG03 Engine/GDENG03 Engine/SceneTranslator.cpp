@@ -78,6 +78,8 @@ void SceneTranslator::openScene(std::string file_path) {
 	sceneFile.open(filePath, std::ios::in);
 	if (sceneFile.fail()) return;
 
+	GameObjectManager::getInstance()->deleteAllObjects();
+
 	std::string readLine;
 	int index = 0;
 
@@ -98,77 +100,66 @@ void SceneTranslator::openScene(std::string file_path) {
 		switch (index) {
 		case 0: {
 			objectName = readLine;
-			std::cout << objectName << std::endl;
 			index++;
 		} break;
 
 		case 1: {
 			std::vector split = StringUtilities::split(readLine, ' ');
 			objectType = (AGameObject::ObjectType)std::stoi(split[1]);
-			std::cout << objectType << std::endl;
 			index++;
 		} break;
 
 		case 2: {
 			std::vector split = StringUtilities::split(readLine, ' ');
 			position = Vector3D(std::stof(split[1]), std::stof(split[2]), std::stof(split[3]));
-			std::cout << position.x << " " << position.y << " " << position.z << std::endl;
 			index++;
 		} break;
 
 		case 3: {
 			std::vector split = StringUtilities::split(readLine, ' ');
 			rotation = Vector3D(std::stof(split[1]), std::stof(split[2]), std::stof(split[3]));
-			std::cout << rotation.x << " " << rotation.y << " " << rotation.z << std::endl;
 			index++;
 		} break;
 
 		case 4: {
 			std::vector split = StringUtilities::split(readLine, ' ');
 			scale = Vector3D(std::stof(split[1]), std::stof(split[2]), std::stof(split[3]));
-			std::cout << scale.x << " " << scale.y << " " << scale.z << std::endl;
 			index++;
 		} break;
 
 		case 5: {
 			std::vector split = StringUtilities::split(readLine, ' ');
 			isActive = std::stoi(split[1]);
-			std::cout << isActive << std::endl;
 			index++;
 		} break;
 
 		case 6: {
 			std::vector split = StringUtilities::split(readLine, ' ');
 			hasPhysics = std::stoi(split[1]);
-			std::cout << hasPhysics << std::endl;
 			index++;
 		} break;
 
 		case 7: {
 			std::vector split = StringUtilities::split(readLine, ' ');
 			isPhysicsActive = std::stoi(split[1]);
-			std::cout << isPhysicsActive << std::endl;
 			index++;
 		} break;
 
 		case 8: {
 			std::vector split = StringUtilities::split(readLine, ' ');
 			isStatic = std::stoi(split[1]);
-			std::cout << isStatic << std::endl;
 			index++;
 		} break;
 
 		case 9: {
 			std::vector split = StringUtilities::split(readLine, ' ');
 			isGravityOn = std::stoi(split[1]);
-			std::cout << isGravityOn << std::endl;
 			index++;
 		} break;
 
 		case 10: {
 			std::vector split = StringUtilities::split(readLine, ' ');
 			mass = std::stof(split[1]);
-			std::cout << mass << std::endl;
 			index = 0;
 
 			GameObjectManager::getInstance()->recreateObject(
