@@ -1,7 +1,7 @@
 /*
 Nathaniel Francis S. Filoteo
 GDENG03 X22
-HO -- Physics ECS
+MCO: Comprehensive Exam
 */
 
 #include"AppWindow.h"

@@ -28,8 +28,8 @@ AGameObject::~AGameObject() {
 		}
 	}
 
-	mVertexShader->release();
-	mPixelShader->release();
+	if (mVertexShader) mVertexShader->release();
+	if (mPixelShader) mPixelShader->release();
 }
 
 void AGameObject::update(float delta_time) {
