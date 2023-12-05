@@ -2,6 +2,7 @@
 #include"GameObjectManager.h"
 #include"StringUtilities.h"
 #include"PhysicsComponent.h"
+#include"UnityObject.h"
 
 void SceneTranslator::saveScene(std::string file_path) {
 	std::string filePath = "";
@@ -70,12 +71,8 @@ void SceneTranslator::saveScene(std::string file_path) {
 }
 
 void SceneTranslator::openScene(std::string file_path) {
-	std::string filePath = "";
-	if (file_path.find(".iet") != std::string::npos) filePath = file_path;
-	else filePath = file_path + ".iet";
-
 	std::ifstream sceneFile;
-	sceneFile.open(filePath, std::ios::in);
+	sceneFile.open(file_path, std::ios::in);
 	if (sceneFile.fail()) return;
 
 	GameObjectManager::getInstance()->deleteAllObjects();
@@ -178,5 +175,133 @@ void SceneTranslator::openScene(std::string file_path) {
 		} break;
 
 		}
+	}
+}
+
+void SceneTranslator::openUnityScene(std::string file_path) {
+	std::ifstream sceneFile;
+	sceneFile.open(file_path, std::ios::in);
+	if (sceneFile.fail()) return;
+
+	GameObjectManager::getInstance()->deleteAllObjects();
+
+	std::string readLine;
+	std::vector<UnityObject*> unityObjectList;
+	UnityObject* currentObject = new UnityObject();
+	bool hasSkippedIntro = false;
+
+	while (std::getline(sceneFile, readLine)) {
+		if (readLine.find("--- !u!") != std::string::npos) {
+			if (hasSkippedIntro) unityObjectList.push_back(currentObject);
+			else {
+				UnityObject* object = currentObject;
+				delete object;
+				hasSkippedIntro = true;
+			}
+			std::cout << "Added an object! Current size: " << unityObjectList.size() << std::endl;
+			currentObject = nullptr;
+			currentObject = new UnityObject();
+		}
+
+		currentObject->addLine(readLine);
+	}
+	unityObjectList.push_back(currentObject);
+	std::cout << "Added an object! Current size: " << unityObjectList.size() << std::endl;
+
+	sceneFile.close();
+
+	for (int i = 0; i < unityObjectList.size(); i++) {
+		unityObjectList[i]->retrieveInfo();
+	}
+
+	std::vector<UnityObject*> gameObjectList;
+	std::vector<UnityObject*> transformList;
+	std::vector<UnityObject*> meshList;
+	std::vector<UnityObject*> physicsList;
+
+	for (int i = 0; i < unityObjectList.size(); i++) {
+		int type = unityObjectList[i]->getObjectType();
+		switch (type) {
+
+		case 1: gameObjectList.push_back(unityObjectList[i]); break;
+
+		case 4: transformList.push_back(unityObjectList[i]); break;
+
+		case 33: meshList.push_back(unityObjectList[i]); break;
+
+		case 54: physicsList.push_back(unityObjectList[i]); break;
+
+		default: {}
+		}
+	}
+
+	for (int i = 0; i < meshList.size(); i++) {
+		if (meshList[i]->getGameObjectType() == 0) continue;
+
+		long long int ownerID = meshList[i]->getOwnerID();
+
+		UnityObject* gameObject = nullptr;
+		for (int j = 0; j < gameObjectList.size(); j++) {
+			if (gameObjectList[j]->getObjectID() == ownerID) {
+				gameObject = gameObjectList[j];
+				break;
+			}
+		}
+		if (!gameObject) break;
+
+		UnityObject* transform = nullptr;
+		for (int j = 0; j < transformList.size(); j++) {
+			if (transformList[j]->getOwnerID() == ownerID) {
+				transform = transformList[j];
+				break;
+			}
+		}
+		if (!transform) break;
+
+		UnityObject* physics = nullptr;
+		for (int j = 0; j < physicsList.size(); j++) {
+			if (physicsList[j]->getOwnerID() == ownerID) {
+				physics = physicsList[j];
+				break;
+			}
+		}
+
+		Vector3D scale = transform->getScale();
+		if (meshList[i]->getGameObjectType() == 2) {
+			scale.x *= 10.f;
+			scale.z *= 10.f;
+		}
+
+		bool hasPhysics = (physics != nullptr);
+		bool isStatic; if (hasPhysics) isStatic = physics->isStatic(); else isStatic = false;
+		bool isGravityOn; if (hasPhysics) isGravityOn = physics->isGravityEnabled(); else isGravityOn = false;
+		float mass; if (hasPhysics) mass = physics->getMass(); else mass = 0.f;
+
+		GameObjectManager::getInstance()->recreateObject(
+			gameObject->getGameObjectName(),
+			(AGameObject::ObjectType)meshList[i]->getGameObjectType(),
+			transform->getPosition(),
+			transform->getRotation(),
+			scale,
+			gameObject->isActive(),
+			hasPhysics,
+			hasPhysics,
+			isStatic,
+			isGravityOn,
+			mass
+		);
+	}
+
+	gameObjectList.clear();
+	transformList.clear();
+	meshList.clear();
+	physicsList.clear();
+
+	while (!unityObjectList.empty()) {
+		UnityObject* object = unityObjectList[0];
+		unityObjectList.erase(std::remove(unityObjectList.begin(), unityObjectList.end(), object), unityObjectList.end());
+		unityObjectList.shrink_to_fit();
+		std::cout << "Object erased. Current size: " << unityObjectList.size() << std::endl;
+		delete object;
 	}
 }

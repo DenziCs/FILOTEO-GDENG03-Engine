@@ -4,7 +4,7 @@
 FileLoadPanel::FileLoadPanel(std::string name) : AUIPanel::AUIPanel(name) {
 	mBrowser = new ImGui::FileBrowser(ImGuiFileBrowserFlags_NoModal);
 	mBrowser->SetTitle("Select Scene");
-	mBrowser->SetTypeFilters({ ".iet" });
+	mBrowser->SetTypeFilters({ ".iet", ".unity" });
 }
 
 FileLoadPanel::~FileLoadPanel() {
@@ -15,7 +15,12 @@ void FileLoadPanel::draw() {
 	mBrowser->Display();
 
 	if (mBrowser->HasSelected()) {
-		SceneTranslator::openScene(mBrowser->GetSelected().string());
+		if (mBrowser->GetSelected().string().find(".iet") != std::string::npos)
+			SceneTranslator::openScene(mBrowser->GetSelected().string());
+
+		else if (mBrowser->GetSelected().string().find(".unity") != std::string::npos)
+			SceneTranslator::openUnityScene(mBrowser->GetSelected().string());
+
 		mBrowser->Close();
 	}
 }

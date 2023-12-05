@@ -240,6 +240,9 @@
     <ClCompile Include="SceneTranslator.cpp">
       <Filter>Engine\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="UnityObject.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow.h">
@@ -732,6 +735,9 @@
       <Filter>Engine\User Interface</Filter>
     </ClInclude>
     <ClInclude Include="SceneTranslator.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="UnityObject.h">
       <Filter>Engine\Misc</Filter>
     </ClInclude>
   </ItemGroup>

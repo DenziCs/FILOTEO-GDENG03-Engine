@@ -8,4 +8,5 @@ class SceneTranslator
 public:
 	static void saveScene(std::string file_path);
 	static void openScene(std::string file_path);
+	static void openUnityScene(std::string file_path);
 };
