@@ -187,6 +187,8 @@ void GameObjectManager::recreateObject(
 			component->enableGravity(is_gravity_enabled);
 			component->setMass(mass);
 			std::cout << component->getComponentName() << " attached." << std::endl;
+
+			component->reset(object_position, object_rotation);
 		}
 	} break;
 
@@ -207,6 +209,8 @@ void GameObjectManager::recreateObject(
 			component->enableGravity(is_gravity_enabled);
 			component->setMass(mass);
 			std::cout << component->getComponentName() << " attached." << std::endl;
+
+			component->reset(object_position, object_rotation);
 		}
 	} break;
 

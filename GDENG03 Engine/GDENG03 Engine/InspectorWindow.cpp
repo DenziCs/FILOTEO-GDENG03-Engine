@@ -66,12 +66,14 @@ void InspectorWindow::draw() {
 			if (ImGui::Button("Detach"))
 				SystemManager::getInstance()->getPhysicsSystem()->unregisterComponent(mCurrentPhysicsComponent);
 
-			if (ImGui::Checkbox("Enabled", &mActiveBody))
+			if (ImGui::Checkbox("Physics Enabled", &mActiveBody)) {
 				mCurrentPhysicsComponent->setActive(mActiveBody);
+			}
 
-			if (ImGui::Checkbox("Is Static", &mStaticBody))
+			if (ImGui::Checkbox("Is Static", &mStaticBody)) {
 				mCurrentPhysicsComponent->setStatic(mStaticBody);
-			
+			}
+				
 			if (ImGui::Checkbox("Gravity Enabled", &mGravityBody))
 				mCurrentPhysicsComponent->enableGravity(mGravityBody);
 			

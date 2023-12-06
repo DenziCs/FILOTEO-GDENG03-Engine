@@ -97,7 +97,21 @@ float PhysicsComponent::getMass() {
 }
 
 void PhysicsComponent::setActive(bool is_active) {
+	BoxShape* boxShape = nullptr;
+	if (is_active) {
+		mRigidBody->removeCollider(mRigidBody->getCollider(0));
+	}
+
 	mRigidBody->setIsActive(is_active);
+
+	if (is_active) {
+		AGameObject* owner = this->getOwner();
+		Vector3D scale = owner->getLocalScale();
+		BoxShape* boxShape = SystemManager::getInstance()->getPhysicsSystem()->getPhysicsCommon()->createBoxShape(Vector3(scale.x / 2.f, scale.y / 2.f, scale.z / 2.f));
+
+		mRigidBody->addCollider(boxShape, Transform::identity());
+		reset(owner->getLocalPosition(), owner->getLocalRotation());
+	}
 }
 
 void PhysicsComponent::setStatic(bool is_static) {
