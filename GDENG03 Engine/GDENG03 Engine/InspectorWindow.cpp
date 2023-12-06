@@ -77,14 +77,14 @@ void InspectorWindow::draw() {
 			if (ImGui::Checkbox("Gravity Enabled", &mGravityBody))
 				mCurrentPhysicsComponent->enableGravity(mGravityBody);
 			
-			if (ImGui::InputFloat("Mass", &mBodyMass))
+			if (ImGui::InputFloat("Mass (kg)", &mBodyMass))
 				mCurrentPhysicsComponent->setMass(mBodyMass);
 
 			if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::EndDisabled();
 			
 			ImGui::DragFloat3("Applied Force Vector Components", mAppliedForce);
 			
-			if (ImGui::Button("Apply Force"))
+			if (ImGui::Button("Apply Force (N)"))
 				mCurrentPhysicsComponent->applyForce(mAppliedForce[0], mAppliedForce[1], mAppliedForce[2]);
 		}
 

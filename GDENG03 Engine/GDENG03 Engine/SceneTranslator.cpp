@@ -3,6 +3,7 @@
 #include"StringUtilities.h"
 #include"PhysicsComponent.h"
 #include"UnityObject.h"
+#include"AngleConverter.h"
 
 void SceneTranslator::saveScene(std::string file_path) {
 	std::string filePath = "";
@@ -266,6 +267,11 @@ void SceneTranslator::openUnityScene(std::string file_path) {
 			}
 		}
 
+		Vector3D rotation = transform->getRotation();
+		rotation.x = AngleConverter::toRadians(rotation.x);
+		rotation.y = AngleConverter::toRadians(rotation.y);
+		rotation.z = AngleConverter::toRadians(rotation.z);
+
 		Vector3D scale = transform->getScale();
 		if (meshList[i]->getGameObjectType() == 2) {
 			scale.x *= 10.f;
@@ -281,7 +287,7 @@ void SceneTranslator::openUnityScene(std::string file_path) {
 			gameObject->getGameObjectName(),
 			(AGameObject::ObjectType)meshList[i]->getGameObjectType(),
 			transform->getPosition(),
-			transform->getRotation(),
+			rotation,
 			scale,
 			gameObject->isActive(),
 			hasPhysics,
