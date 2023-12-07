@@ -82,9 +82,9 @@ void InspectorWindow::draw() {
 
 			if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::EndDisabled();
 			
-			ImGui::DragFloat3("Applied Force Vector Components", mAppliedForce);
+			ImGui::DragFloat3("Force (N)", mAppliedForce);
 			
-			if (ImGui::Button("Apply Force (N)"))
+			if (ImGui::Button("Apply Force"))
 				mCurrentPhysicsComponent->applyForce(mAppliedForce[0], mAppliedForce[1], mAppliedForce[2]);
 		}
 
@@ -108,21 +108,10 @@ void InspectorWindow::draw() {
 			// Add drawMaterialsTab() section here.
 
 			/*
-			ImGui::Image();
-			ImGui::TextWrapped("Material: " + ().c_str());
-
 			if (ImGui::Button("Add Material")) {
-				mIsPopupEnabled = !mIsPopupEnabled;
-				if (mIsPopupEnabled) mMaterialPanel->openExplorer();
-				else mMaterialPanel->closeExplorer();
+				if (!mMaterialPanel->isEnabled()) mMaterialPanel->openExplorer();
 			}
 			*/
-		}
-
-		ImGui::TextWrapped("Material Test");
-
-		if (ImGui::Button("Add Material")) {
-			if (!mMaterialPanel->isEnabled()) mMaterialPanel->openExplorer();
 		}
 
 		if (ImGui::Button("Delete Object")) {
