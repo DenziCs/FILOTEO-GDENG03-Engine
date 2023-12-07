@@ -5,6 +5,7 @@
 #include"AConstantBuffer.h"
 #include"AVertexShader.h"
 #include"APixelShader.h"
+#include"ATexture.h"
 
 ADeviceContext::ADeviceContext(ID3D11DeviceContext* device_context) {
 	mDeviceContext = device_context;
@@ -53,6 +54,12 @@ void ADeviceContext::setConstantBuffer(AConstantBuffer* constant_buffer, AVertex
 
 void ADeviceContext::setConstantBuffer(AConstantBuffer* constant_buffer, APixelShader* pixel_shader) {
 	mDeviceContext->PSSetConstantBuffers(0, 1, &constant_buffer->mBuffer);
+}
+
+void ADeviceContext::setTexture(ATexture* texture) {
+	ID3D11ShaderResourceView* shaderResource = texture->getShaderResource();
+	mDeviceContext->VSSetShaderResources(0, 1, &shaderResource);
+	mDeviceContext->PSSetShaderResources(0, 1, &shaderResource);
 }
 
 ID3D11DeviceContext* ADeviceContext::getD3DDeviceContext() {

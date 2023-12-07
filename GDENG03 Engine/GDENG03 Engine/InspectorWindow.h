@@ -2,6 +2,7 @@
 #include"AUIPanel.h"
 #include"AGameObject.h"
 #include"PhysicsComponent.h"
+#include"TexturedCube.h"
 
 class MaterialPanel;
 
@@ -13,6 +14,7 @@ public:
 
 	void draw() override;
 	void setMaterialPanel(MaterialPanel* material_panel);
+	void setTexture(std::wstring material_path);
 
 private:
 	void updatePanelInfo(AGameObject* selected_object);
@@ -32,4 +34,5 @@ private:
 	float mAppliedForce[3] = {};
 
 	MaterialPanel* mMaterialPanel = nullptr;
+	TexturedCube* mSelectedCube = nullptr;
 };

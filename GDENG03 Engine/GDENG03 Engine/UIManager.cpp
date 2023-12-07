@@ -74,6 +74,7 @@ UIManager::UIManager(HWND window_handle) {
     MaterialPanel* material = new MaterialPanel("Material Panel");
     mListUI.push_back(material);
     inspectorWindow->setMaterialPanel(material);
+    material->setInspectorWindow(inspectorWindow);
 
     FileSavePanel* save = new FileSavePanel("Save Panel");
     mListUI.push_back(save);

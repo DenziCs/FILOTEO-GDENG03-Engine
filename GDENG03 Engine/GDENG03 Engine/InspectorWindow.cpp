@@ -7,6 +7,7 @@
 #include"SystemManager.h"
 #include"PhysicsSystem.h"
 #include"MaterialPanel.h"
+#include"StringUtilities.h"
 #include<iostream>
 
 InspectorWindow::InspectorWindow(std::string name) : AUIPanel::AUIPanel(name) {}
@@ -105,25 +106,16 @@ void InspectorWindow::draw() {
 		if (BackendManager::getInstance()->getEditorMode() != BackendManager::EDIT) ImGui::BeginDisabled();
 
 		if (selectedObject->getObjectType() == AGameObject::TEXTURED_CUBE) {
-			// Add drawMaterialsTab() section here.
+			mSelectedCube = static_cast<TexturedCube*>(selectedObject);
 
-			/*
-			ImGui::Image();
-			ImGui::TextWrapped("Material: " + ().c_str());
+			// ImGui::Image();
 
 			if (ImGui::Button("Add Material")) {
-				mIsPopupEnabled = !mIsPopupEnabled;
-				if (mIsPopupEnabled) mMaterialPanel->openExplorer();
-				else mMaterialPanel->closeExplorer();
+				if (!mMaterialPanel->isEnabled()) mMaterialPanel->openExplorer();
 			}
-			*/
 		}
 
-		ImGui::TextWrapped("Material Test");
-
-		if (ImGui::Button("Add Material")) {
-			if (!mMaterialPanel->isEnabled()) mMaterialPanel->openExplorer();
-		}
+		else mSelectedCube = nullptr;
 
 		if (ImGui::Button("Delete Object")) {
 			GameObjectManager::getInstance()->deleteObject(selectedObject);
@@ -138,6 +130,11 @@ void InspectorWindow::draw() {
 
 void InspectorWindow::setMaterialPanel(MaterialPanel* material_panel) {
 	mMaterialPanel = material_panel;
+}
+
+void InspectorWindow::setTexture(std::wstring material_path) {
+	if (!mSelectedCube) return;
+	mSelectedCube->setTexture(material_path);
 }
 
 void InspectorWindow::updatePanelInfo(AGameObject* selected_object) {

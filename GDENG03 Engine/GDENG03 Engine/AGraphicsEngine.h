@@ -5,6 +5,7 @@
 class ASwapChain;
 class ADeviceContext;
 class AVertexBuffer;
+class TexturedVertexBuffer;
 class AIndexBuffer;
 class AConstantBuffer;
 class AVertexShader;
@@ -21,6 +22,7 @@ public:
 
 	ASwapChain* createSwapChain();
 	AVertexBuffer* createVertexBuffer();
+	TexturedVertexBuffer* createTexturedVertexBuffer();
 	AIndexBuffer* createIndexBuffer();
 	AConstantBuffer* createConstantBuffer();
 	AVertexShader* createVertexShader(const void* shader_byte_code, size_t byte_code_size);

@@ -1,4 +1,7 @@
 #include"MaterialPanel.h"
+#include"InspectorWindow.h"
+#include"TextureManager.h"
+#include"ATexture.h"
 #include<iostream>
 
 MaterialPanel::MaterialPanel(std::string name) : AUIPanel::AUIPanel(name) {
@@ -16,6 +19,8 @@ void MaterialPanel::draw() {
 
 	if (mBrowser->HasSelected()) {
 		std::cout << mBrowser->GetSelected().string() << std::endl;
+		mInspector->setTexture(mBrowser->GetSelected().wstring());
+
 		mBrowser->Close();
 	}
 }
@@ -26,6 +31,10 @@ void MaterialPanel::openExplorer() {
 
 void MaterialPanel::closeExplorer() {
 	mBrowser->Close();
+}
+
+void MaterialPanel::setInspectorWindow(InspectorWindow* inspector_window) {
+	mInspector = inspector_window;
 }
 
 bool MaterialPanel::isEnabled() {

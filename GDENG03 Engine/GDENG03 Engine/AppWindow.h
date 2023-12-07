@@ -8,6 +8,7 @@
 #include"SystemManager.h"
 #include"BackendManager.h"
 #include"ActionHistoryManager.h"
+#include"TextureManager.h"
 
 #include"ASwapChain.h"
 #include"ADeviceContext.h"

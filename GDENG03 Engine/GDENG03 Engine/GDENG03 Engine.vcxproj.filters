@@ -70,6 +70,9 @@
     <Filter Include="Engine\Editor">
       <UniqueIdentifier>{fbc7b40e-400d-4dd7-a8e7-6997e546835b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Graphics\Resources">
+      <UniqueIdentifier>{8ff5ebff-5261-4c96-bd95-235ebbc6b5d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -241,6 +244,27 @@
       <Filter>Engine\Misc</Filter>
     </ClCompile>
     <ClCompile Include="UnityObject.cpp">
+      <Filter>Engine\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="AResource.cpp">
+      <Filter>Engine\Graphics\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ATexture.cpp">
+      <Filter>Engine\Graphics\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Engine\Graphics\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedVertexBuffer.cpp">
+      <Filter>Engine\Graphics\VertexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedCube.cpp">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderNames.cpp">
       <Filter>Engine\Misc</Filter>
     </ClCompile>
   </ItemGroup>
@@ -740,13 +764,34 @@
     <ClInclude Include="UnityObject.h">
       <Filter>Engine\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="AResource.h">
+      <Filter>Engine\Graphics\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ATexture.h">
+      <Filter>Engine\Graphics\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Engine\Graphics\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedVertexBuffer.h">
+      <Filter>Engine\Graphics\VertexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedCube.h">
+      <Filter>Engine\Graphics\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderNames.h">
+      <Filter>Engine\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
-      <Filter>App</Filter>
+      <Filter>Engine\Graphics\VertexShader</Filter>
     </FxCompile>
     <FxCompile Include="PixelShader.hlsl">
-      <Filter>App</Filter>
+      <Filter>Engine\Graphics\PixelShader</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

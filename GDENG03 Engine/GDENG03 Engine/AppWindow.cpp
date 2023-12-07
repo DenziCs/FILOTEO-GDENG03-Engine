@@ -26,6 +26,7 @@ void AppWindow::onCreate() {
 	SystemManager::initialize();
 	BackendManager::initialize();
 	ActionHistoryManager::initialize();
+	TextureManager::initialize();
 
 	ACamera* sceneCamera = new ACamera("UnregisteredHyperCam2");
 	sceneCamera->setPosition(0.f, 1.f, -2.f);
@@ -93,5 +94,6 @@ void AppWindow::onDestroy() {
 	SceneCameraManager::destroy();
 	GameObjectManager::destroy();
 	UIManager::destroy();
+	TextureManager::destroy();
 	AGraphicsEngine::getInstance()->release();
 }
